@@ -6,10 +6,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.net.Uri;
 import android.os.Bundle;
+
+import com.github.barteksc.pdfviewer.PDFView;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawer;
+    private PDFView pdfView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        // TODO: CHANGE PDF
+        try {
+            pdfView = (PDFView) findViewById(R.id.pdfView);
+            pdfView.fromAsset("skripta.pdf").load();
+        } catch (Exception ex) {}
     }
 
     @Override
