@@ -3,4 +3,34 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <!-->COLORS FOR APP</!-->
+    <!-->Colors for app light</!-->
+    <color name="colorPrimaryLight">#F0EAD9</color>
+    <color name="colorAccentLight">#3F8C7B</color>
+    <!-->Colors for app dark</!-->
+    <color name="colorPrimaryDark1">#242226</color>
+    <color name="colorAccentDark">#8C8C8C</color>
+
+    <!-->COLORS FOR TOKENS</!-->
+    <!-->Colors for tokens light</!-->
+    <color name="lightVariableNames">#383a42</color>
+    <color name="lightKeywords">#a626a4</color>
+    <color name="lightStrings">#50a14f</color>
+    <color name="lightBID">#986801</color>
+    <color name="lightMethods">#4078f2</color>
+    <color name="lightSigns">#0184bc</color>
+    <color name="lightBP">#383a42</color>
+    <color name="lightComments">#ccdf32</color>
+    <color name="lightBackground">#fafafa</color>
+    <!-->Colors for tokens dark</!-->
+    <color name="darkVariableNames">#79aaff</color>
+    <color name="darkKeywords">#ffffff</color>
+    <color name="darkStrings">#ffc600</color>
+    <color name="darkBID">#7fb347</color>
+    <color name="darkMethods">#bed6ff</color>
+    <color name="darkSigns">#d8d8d8</color>
+    <color name="darkComments">#ccdf32</color>
+    <color name="darkBackground">#1e1e1e</color>
+
 </resources>
