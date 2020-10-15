@@ -1,8 +1,7 @@
 package com.devoFikiCar.fclang.lexer;
 
 
-
-import com.devoFikiCar.fclang.Main;
+import com.devoFikiCar.fclang.StartFClang;
 import com.devoFikiCar.fclang.Token;
 
 import java.util.ArrayList;
@@ -19,9 +18,9 @@ public class Lexer {
      */
     public static ArrayList<Token> lexer() {
         ArrayList<Token> tokens = new ArrayList<>();
-        for (int line = 0; line < Main.code.size(); line++) {
+        for (int line = 0; line < StartFClang.getCode().size(); line++) {
             lineNumber++;
-            String currentLine = Main.code.get(line) + " ";
+            String currentLine = StartFClang.getCode().get(line) + " ";
             StringBuilder temp = new StringBuilder();
             boolean skip;
             oldSum = tokens.size();

@@ -2,6 +2,7 @@ package com.devoFikiCar.fclang.error;
 
 
 import com.devoFikiCar.fclang.Main;
+import com.devoFikiCar.fclang.StartFClang;
 import com.devoFikiCar.fclang.parser.Parser;
 
 public class Error {
@@ -16,67 +17,67 @@ public class Error {
         switch (code) {
             case 1: {
                 printError(index);
-                System.out.println("After print method you need to use a string, int, decimal or valid variable name.");
+                StartFClang.getOutput().add("After print method you need to use a string, int, decimal or valid variable name.");
                 break;
             }
             case 2: {
                 printError(index);
-                System.out.println("Wrong int declaration.");
+                StartFClang.getOutput().add("Wrong int declaration.");
                 break;
             }
             case 3: {
                 printError(index);
-                System.out.println("Wrong string declaration.");
+                StartFClang.getOutput().add("Wrong string declaration.");
                 break;
             }
             case 4: {
                 printError(index);
-                System.out.println("Wrong decimal declaration.");
+                StartFClang.getOutput().add("Wrong decimal declaration.");
                 break;
             }
             case 5: {
                 printError(index);
-                System.out.println("Wrong expression.");
+                StartFClang.getOutput().add("Wrong expression.");
                 break;
             }
             case 6: {
                 printError(index);
-                System.out.println("Wrong bool expression.");
+                StartFClang.getOutput().add("Wrong bool expression.");
                 break;
             }
             case 7: {
                 printError(index);
-                System.out.println("Wrong if statement.");
+                StartFClang.getOutput().add("Wrong if statement.");
                 break;
             }
             case 8: {
                 printError(index);
-                System.out.println("Wrong logical expression.");
+                StartFClang.getOutput().add("Wrong logical expression.");
                 break;
             }
             case 9: {
                 printError(index);
-                System.out.println("Wrong for loop.");
+                StartFClang.getOutput().add("Wrong for loop.");
                 break;
             }
             case 10: {
                 printError(index);
-                System.out.println("Wrong goto statement");
+                StartFClang.getOutput().add("Wrong goto statement");
                 break;
             }
             case 11: {
                 printError(index);
-                System.out.println("Wrong array declaration.");
+                StartFClang.getOutput().add("Wrong array declaration.");
                 break;
             }
             case 12: {
                 printError(index);
-                System.out.println("Wrong matrix declaration.");
+                StartFClang.getOutput().add("Wrong matrix declaration.");
                 break;
             }
             case 13: {
                 printError(index);
-                System.out.println("Wrong name usage.");
+                StartFClang.getOutput().add("Wrong name usage.");
             }
         }
     }
@@ -89,13 +90,15 @@ public class Error {
      */
     private static void printError(int index) {
         int line = Parser.tokens.get(index).lineNumber;
-        int lineSize = Main.code.get(line).length();
-        System.out.println(Main.code.get(line));
+        int lineSize = StartFClang.getCode().get(line).length();
+        StartFClang.getOutput().add(Main.code.get(line));
+        String tmp = "";
         for (int i = 0; i < lineSize; i++) {
-            System.out.print("-");
+            tmp += "-";
         }
-        System.out.println();
-        System.out.println("At the line above you made mistake!");
-        System.out.println("Possible reason:");
+        StartFClang.getOutput().add(tmp);
+        StartFClang.getOutput().add("");
+        StartFClang.getOutput().add("At the line above you made mistake!");
+        StartFClang.getOutput().add("Possible reason:");
     }
 }

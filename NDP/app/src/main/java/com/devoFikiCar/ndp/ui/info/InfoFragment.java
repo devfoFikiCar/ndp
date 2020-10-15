@@ -16,11 +16,11 @@ import com.devoFikiCar.ndp.R;
 import com.github.barteksc.pdfviewer.PDFView;
 
 /*
-* TODO:
-*  - add two pdfs one for students one for techers
-*  - add title eg. Info for students
-*  - fix layout
-* */
+ * TODO:
+ *  - add two pdfs one for students one for techers
+ *  - add title eg. Info for students
+ *  - fix layout
+ * */
 
 public class InfoFragment extends Fragment {
     private PDFView pdfView;

@@ -1,7 +1,7 @@
 package com.devoFikiCar.fclang.parser.IO;
 
 
-
+import com.devoFikiCar.fclang.StartFClang;
 import com.devoFikiCar.fclang.parser.Parser;
 
 import java.util.Scanner;
@@ -17,8 +17,7 @@ public class GetInput {
      */
     public static int getInputInt(int index) {
         if (index + 1 < Parser.tokens.size() && Parser.tokens.get(index).key.equals("GET_INT") && Parser.tokens.get(index + 1).key.equals("LESS_THAN")) {
-            int input = scanner.nextInt();
-            Parser.intStore.put(Parser.tokens.get(index - 2).value, input);
+            Parser.intStore.put(Parser.tokens.get(index - 2).value, Integer.parseInt((String) StartFClang.getInput().poll()));
             return ++index;
         }
         return 0;
@@ -32,8 +31,7 @@ public class GetInput {
      */
     public static int getInputDecimal(int index) {
         if (index + 1 < Parser.tokens.size() && Parser.tokens.get(index).key.equals("GET_DECIMAL") && Parser.tokens.get(index + 1).key.equals("LESS_THAN")) {
-            double input = scanner.nextDouble();
-            Parser.decimalStore.put(Parser.tokens.get(index - 2).value, input);
+            Parser.decimalStore.put(Parser.tokens.get(index - 2).value, Double.parseDouble((String) StartFClang.getInput().poll()));
             return ++index;
         }
         return 0;
@@ -47,7 +45,7 @@ public class GetInput {
      */
     public static int getInputString(int index) {
         if (index + 1 < Parser.tokens.size() && Parser.tokens.get(index).key.equals("GET_STRING") && Parser.tokens.get(index + 1).key.equals("LESS_THAN")) {
-            String input = scanner.nextLine();
+            String input = (String) StartFClang.getInput().poll();
             String ret = "\"" + input + "\"";
             Parser.stringStore.put(Parser.tokens.get(index - 2).value, ret);
             return ++index;
@@ -63,8 +61,7 @@ public class GetInput {
      */
     public static int getInputBool(int index) {
         if (index + 1 < Parser.tokens.size() && Parser.tokens.get(index).key.equals("GET_BOOL") && Parser.tokens.get(index + 1).key.equals("LESS_THAN")) {
-            boolean input = scanner.nextBoolean();
-            Parser.boolStore.put(Parser.tokens.get(index - 2).value, input);
+            Parser.boolStore.put(Parser.tokens.get(index - 2).value, Boolean.parseBoolean((String) StartFClang.getInput().poll()));
             return ++index;
         }
         return 0;
