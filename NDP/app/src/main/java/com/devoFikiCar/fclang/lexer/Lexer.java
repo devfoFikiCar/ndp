@@ -195,7 +195,7 @@ public class Lexer {
                             skip = true;
                         } else {
                             tokens.add(lexTemp(temp.toString()));
-                            tokens.add(new Token("SPLIT", "|", Token.lineNumber));
+                            tokens.add(new Token("SPLIT", "|", lineNumber));
                             temp = new StringBuilder();
                             skip = true;
                         }

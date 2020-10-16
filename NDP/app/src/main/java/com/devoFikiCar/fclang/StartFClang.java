@@ -16,7 +16,6 @@ public class StartFClang {
         try {
             setCode(code);
             setInput(input);
-            setTokens();
             Parser.parse(tokens, 0, tokens.size());
             clearLists();
         } catch (Exception ex) {
@@ -47,12 +46,6 @@ public class StartFClang {
 
     public static ArrayList<Token> getTokens() {
         return tokens;
-    }
-
-    public static void setTokens() {
-        Lexer.setCode(code);
-        StartFClang.tokens = Lexer.lexer();
-        Lexer.clearCode();
     }
 
     private static void clearLists() {
