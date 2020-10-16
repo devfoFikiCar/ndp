@@ -50,7 +50,9 @@ public class StartFClang {
     }
 
     public static void setTokens() {
+        Lexer.setCode(code);
         StartFClang.tokens = Lexer.lexer();
+        Lexer.clearCode();
     }
 
     private static void clearLists() {

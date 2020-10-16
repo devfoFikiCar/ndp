@@ -34,6 +34,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new InfoFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_info);
+        }
     }
 
     @Override

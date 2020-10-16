@@ -27,8 +27,8 @@ public class Token {
     public String value;
     public Color colorLight;
     public Color colorDark;
-    public static int posInLine = -1;
-    public static int lineNumber = -1;
+    public int posInLine = -1;
+    public int lineNumber = -1;
 
 
     public Token(String Key, String Value) {
