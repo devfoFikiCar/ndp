@@ -43,35 +43,10 @@ import java.util.Queue;
 public class PlaygroundLFragment extends Fragment {
 
     private PlaygroundLViewModel mViewModel;
-    private LogInViewModel mViewModelUser;
     private Button btInput;
     private Button btRun;
     private EditText etCode;
     private EditText etOutput;
-    private ArrayList<String> inputCode = new ArrayList<>();
-    private ArrayList<String> output = new ArrayList<>();
-    private Queue<Object> inputData = new LinkedList<>();
-    private ArrayList<Token> tokens = new ArrayList<>();
-    private ArrayList<String> tmpCode = new ArrayList<>();
-    private User user;
-    private int sLength = 0;
-
-    private ForegroundColorSpan lightName = new ForegroundColorSpan(Color.rgb(56, 58, 66));         // default
-    private ForegroundColorSpan lightKeywords = new ForegroundColorSpan(Color.rgb(166, 38, 164));
-    private ForegroundColorSpan lightStrings = new ForegroundColorSpan(Color.rgb(80, 161, 79));
-    private ForegroundColorSpan lightBID = new ForegroundColorSpan(Color.rgb(152, 104, 1));
-    private ForegroundColorSpan lightMethods = new ForegroundColorSpan(Color.rgb(64, 120, 242));
-    private ForegroundColorSpan lightSigns = new ForegroundColorSpan(Color.rgb(1, 132, 188));
-    private ForegroundColorSpan lightBP = new ForegroundColorSpan(Color.rgb(56, 58, 66));
-    private ForegroundColorSpan lightComments = new ForegroundColorSpan(Color.rgb(204, 223, 50));
-
-    private ForegroundColorSpan darkName = new ForegroundColorSpan(Color.rgb(121, 171, 255));           // default
-    private ForegroundColorSpan darkKeywords = new ForegroundColorSpan(Color.rgb(255, 255, 255));
-    private ForegroundColorSpan darkStrings = new ForegroundColorSpan(Color.rgb(255, 198, 0));
-    private ForegroundColorSpan darkBID = new ForegroundColorSpan(Color.rgb(127, 179, 71));
-    private ForegroundColorSpan darkMethods = new ForegroundColorSpan(Color.rgb(190, 214, 255));
-    private ForegroundColorSpan darkSigns = new ForegroundColorSpan(Color.rgb(216, 216, 216));
-    private ForegroundColorSpan darkComments = new ForegroundColorSpan(Color.rgb(204, 223, 50));
 
     public static PlaygroundLFragment newInstance() {
         return new PlaygroundLFragment();
@@ -82,17 +57,17 @@ public class PlaygroundLFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.playgroundl_fragment, container, false);
-        mViewModelUser = new ViewModelProvider(this).get(LogInViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(PlaygroundLViewModel.class);
         btInput = (Button) root.findViewById(R.id.btInput);
         btRun = (Button) root.findViewById(R.id.btRun);
 
         etCode = (EditText) root.findViewById(R.id.etCode);
         etOutput = (EditText) root.findViewById(R.id.etOutput);
 
-        user = new User(mViewModelUser.getUser());
-        System.out.println(user.toString());
+        mViewModel.setUser();
+        System.out.println(mViewModel.getUser().toString());
 
-        if(user.isLight()) {
+        if(mViewModel.getUser().isLight()) {
             // TODO: add light
         } else {
             etCode.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkBackground));
@@ -112,28 +87,18 @@ public class PlaygroundLFragment extends Fragment {
                 input.setMaxLines(5);
                 alert.setView(input);
 
-                String inputText = "";
-
-
-                for (Object o : inputData) {
-                    inputText += (String) o;
-                    inputText += "\n";
-                }
-
-                input.setText(inputText);
+                input.setText(mViewModel.setInputText());
 
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        inputData.clear();
-                        for (String s1 : input.getText().toString().split("\n"))
-                            inputData.add((Object) s1);
+                    mViewModel.setInputData(input.getText().toString());
                         Toast.makeText(getActivity(), "Input saved", Toast.LENGTH_SHORT).show();
                     }
                 });
 
                 alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        inputData.clear();
+                        mViewModel.getInputData().clear();
                         Toast.makeText(getActivity(), "Input deleted", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -145,15 +110,8 @@ public class PlaygroundLFragment extends Fragment {
         btRun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clearPlaygroundL();
-                inputCode.addAll(Arrays.asList(etCode.getText().toString().split("\n")));
-                output = StartFClang.startFClang(inputCode, new LinkedList<>(inputData));
-                String out = "";
-                for (String s : output) {
-                    out += s;
-                    out += "\n";
-                }
-                etOutput.setText(out);
+                etOutput.setText("");
+                etOutput.setText(mViewModel.runCode(etCode.getText().toString()));
                 System.out.println(etCode.getText());
             }
         });
@@ -161,19 +119,7 @@ public class PlaygroundLFragment extends Fragment {
         return root;
     }
 
-    private void clearPlaygroundL() {
-        etOutput.setText("");
-        inputCode.clear();
-        output.clear();
-    }
 
-    private ArrayList<Integer> findNewLine(String text) {
-        ArrayList<Integer> positions = new ArrayList<>();
-        for(int i = 0; i < text.length(); i++){
-            if(text.charAt(i) == '\n') positions.add(i - 1);
-        }
-        return positions;
-    }
 }
 
 /*
