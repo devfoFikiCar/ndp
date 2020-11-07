@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.devoFikiCar.ndp.LogIn;
 import com.devoFikiCar.ndp.MainActivity;
@@ -52,12 +55,53 @@ public class LogInFragment extends Fragment {
         btLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mViewModel.setUser(cbTeacher.isChecked(), etUser.getText().toString(), false);
-                Intent intent = new Intent(view.getContext(), MainActivity.class);
-                root.getContext().startActivity(intent);
+                boolean flagUser = false;
+                boolean flagPassword = false;
+
+                if (etPassword.getText().length() >= 4) {
+                    flagPassword = true;
+                } else {
+                    flagPassword = false;
+                    wrongPassword();
+                }
+
+                if (etUser.getText().length() >= 4) {
+                    flagUser = true;
+                } else {
+                    flagUser = false;
+                    wrongUser();
+                }
+
+                if (flagPassword && flagUser) {
+                    if(CheckUserDB.checkCredentials(etUser.getText().toString(), etPassword.getText().toString(), cbTeacher.isChecked())) {
+                        mViewModel.setUser(cbTeacher.isChecked(), etUser.getText().toString(), false);
+                        Intent intent = new Intent(view.getContext(), MainActivity.class);
+                        root.getContext().startActivity(intent);
+                    } else {
+                        wrongUserPassword();
+                        Toast.makeText(getContext(), "Wrong credentials", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Wrong credentials", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         return root;
+    }
+
+    private void wrongPassword(){
+        etPassword.setText("");
+        etPassword.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+    }
+
+    private void wrongUser(){
+        etUser.setText("");
+        etUser.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+    }
+
+    private void wrongUserPassword(){
+        wrongPassword();
+        wrongUser();
     }
 }
