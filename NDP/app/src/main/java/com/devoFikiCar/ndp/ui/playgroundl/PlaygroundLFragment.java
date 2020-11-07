@@ -67,15 +67,15 @@ public class PlaygroundLFragment extends Fragment {
         mViewModel.setUser();
         System.out.println(mViewModel.getUser().toString());
 
-        if(mViewModel.getUser().isLight()) {
-            // TODO: add light
+        /*if(mViewModel.getUser().isLight()) {
+            //
         } else {
             etCode.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkBackground));
             etCode.setTextColor(ContextCompat.getColor(getContext(), R.color.darkVariableNames));
             etOutput.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkBackground));
             etOutput.setTextColor(ContextCompat.getColor(getContext(), R.color.darkVariableNames));
             root.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccentDark));
-        }
+        }*/
 
         btInput.setOnClickListener(new View.OnClickListener() {
             @Override
