@@ -3,11 +3,15 @@ package com.devoFikiCar.ndp.ui.playgroundl;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,7 +19,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.devoFikiCar.ndp.PlaygroundL;
 import com.devoFikiCar.ndp.R;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class PlaygroundLFragment extends Fragment {
 
@@ -24,6 +32,9 @@ public class PlaygroundLFragment extends Fragment {
     private Button btRun;
     private EditText etCode;
     private EditText etOutput;
+    private Spinner spLanguages;
+    private String options[] = {"fclang", "python", "java"};
+    private static final String TAG = PlaygroundL.class.getSimpleName();
 
     public static PlaygroundLFragment newInstance() {
         return new PlaygroundLFragment();
@@ -40,6 +51,12 @@ public class PlaygroundLFragment extends Fragment {
 
         etCode = (EditText) root.findViewById(R.id.etCode);
         etOutput = (EditText) root.findViewById(R.id.etOutput);
+
+        spLanguages = (Spinner) root.findViewById(R.id.spLanguages);
+        ArrayAdapter spinnerAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item,  options);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spLanguages.setAdapter(spinnerAdapter);
+        spLanguages.setSelection(0);
 
         mViewModel.setUser();
         System.out.println(mViewModel.getUser().toString());
@@ -90,6 +107,43 @@ public class PlaygroundLFragment extends Fragment {
                 etOutput.setText("");
                 etOutput.setText(mViewModel.runCode(etCode.getText().toString()));
                 System.out.println(etCode.getText());
+            }
+        });
+
+        /*spLanguages.setOnItemSelectedListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });*/
+
+        spLanguages.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0: {
+                        Log.i(TAG, "fclang chosen");
+                        break;
+                    }
+                    case 1: {
+                        Log.i(TAG, "python chosen");
+                        break;
+                    }
+                    case 2: {
+                        Log.i(TAG, "java chosen");
+                        break;
+                    }
+                    default: {
+                        Log.e(TAG, "Abnormal value");
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.i(TAG, "Nothing selected");
+                spLanguages.setSelection(0);
             }
         });
 
