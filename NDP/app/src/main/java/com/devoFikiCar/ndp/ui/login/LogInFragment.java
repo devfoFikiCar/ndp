@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class LogInFragment extends Fragment {
     private EditText etPassword;
     private CheckBox cbTeacher;
     private TextView tvPlayInPlaygroundNL;
+    private static final String TAG = LogIn.class.getSimpleName();
 
     public static LogInFragment newInstance() {
         return new LogInFragment();
@@ -55,33 +57,41 @@ public class LogInFragment extends Fragment {
         btLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i(TAG, "Login button clicked");
                 boolean flagUser = false;
                 boolean flagPassword = false;
 
                 if (etPassword.getText().length() >= 4) {
                     flagPassword = true;
+                    Log.i(TAG, "Correct password format");
                 } else {
                     flagPassword = false;
+                    Log.e(TAG, "Incorrect password format");
                     wrongPassword();
                 }
 
                 if (etUser.getText().length() >= 4) {
                     flagUser = true;
+                    Log.i(TAG, "Correct user format");
                 } else {
                     flagUser = false;
+                    Log.e(TAG, "Incorrect user format");
                     wrongUser();
                 }
 
                 if (flagPassword && flagUser) {
                     if(CheckUserDB.checkCredentials(etUser.getText().toString(), etPassword.getText().toString(), cbTeacher.isChecked())) {
+                        Log.i(TAG, "Correct credentials");
                         mViewModel.setUser(cbTeacher.isChecked(), etUser.getText().toString(), false);
                         Intent intent = new Intent(view.getContext(), MainActivity.class);
                         root.getContext().startActivity(intent);
                     } else {
+                        Log.e(TAG, "Wrong credentials");
                         wrongUserPassword();
                         Toast.makeText(getContext(), "Wrong credentials", Toast.LENGTH_SHORT).show();
                     }
                 } else {
+                    Log.e(TAG, "Wrong input format");
                     Toast.makeText(getContext(), "Wrong credentials", Toast.LENGTH_SHORT).show();
                 }
             }
