@@ -27,6 +27,7 @@ import java.util.List;
 
 public class PlaygroundLFragment extends Fragment {
 
+    //region Values
     private PlaygroundLViewModel mViewModel;
     private Button btInput;
     private Button btRun;
@@ -35,6 +36,7 @@ public class PlaygroundLFragment extends Fragment {
     private Spinner spLanguages;
     private String options[] = {"fclang", "python", "java"};
     private static final String TAG = PlaygroundL.class.getSimpleName();
+    //endregion
 
     public static PlaygroundLFragment newInstance() {
         return new PlaygroundLFragment();
@@ -44,6 +46,7 @@ public class PlaygroundLFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        //region Initialization
         View root = inflater.inflate(R.layout.playgroundl_fragment, container, false);
         mViewModel = new ViewModelProvider(this).get(PlaygroundLViewModel.class);
         btInput = (Button) root.findViewById(R.id.btInput);
@@ -53,24 +56,18 @@ public class PlaygroundLFragment extends Fragment {
         etOutput = (EditText) root.findViewById(R.id.etOutput);
 
         spLanguages = (Spinner) root.findViewById(R.id.spLanguages);
+        //endregion
+        //region Spinner
         ArrayAdapter spinnerAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item,  options);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spLanguages.setAdapter(spinnerAdapter);
         spLanguages.setSelection(0);
-
+        //endregion
+        //region User data
         mViewModel.setUser();
         System.out.println(mViewModel.getUser().toString());
-
-        /*if(mViewModel.getUser().isLight()) {
-            //
-        } else {
-            etCode.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkBackground));
-            etCode.setTextColor(ContextCompat.getColor(getContext(), R.color.darkVariableNames));
-            etOutput.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkBackground));
-            etOutput.setTextColor(ContextCompat.getColor(getContext(), R.color.darkVariableNames));
-            root.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccentDark));
-        }*/
-
+        //endregion
+        //region Listeners
         btInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,13 +107,6 @@ public class PlaygroundLFragment extends Fragment {
             }
         });
 
-        /*spLanguages.setOnItemSelectedListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });*/
-
         spLanguages.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -146,175 +136,10 @@ public class PlaygroundLFragment extends Fragment {
                 spLanguages.setSelection(0);
             }
         });
+        //endregion
 
         return root;
     }
 
 
 }
-
-/*
-* etCode.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String s = editable.toString();
-                System.out.println("sL " + sLength + " sl " + s.length());
-                if (sLength - s.length() != 0) {
-                    System.out.println(s);
-
-                    tmpCode.clear();
-                    tokens.clear();
-                    // todo: remove split
-                    tmpCode.add(editable.toString());
-                    Lexer.setCode(tmpCode);
-                    tokens = Lexer.lexer();
-                    Lexer.clearCode();
-
-                    ArrayList<Integer> newLinePositions = findNewLine(editable.toString());
-
-                    //ForegroundColorSpan red = new ForegroundColorSpan(Color.RED);
-                    //SpannableStringBuilder ss = new SpannableStringBuilder(s);
-
-                    //ss.setSpan(red,1,1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-                    /*
-                     * fgcs ....
-                     * ....
-                     * s += tokens.value
-                     *
-                     *
-                     *
-SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder("");
-                    for (Token t : tokens) {
-                            System.out.println(t.toString());
-                            switch (t.key) {
-                            case "EQUAL_TO":
-                            case "EQUALS":
-                            case "ADDITION":
-                            case "SUBTRACTION":
-                            case "MULTIPLICATION":
-                            case "DIVISION":
-                            case "DOT":
-                            case "AND":
-                            case "COMMA":
-                            case "GREATER_EQUAL":
-                            case "GREATER_THAN":
-                            case "LESS_EQUAL":
-                            case "LESS_THAN":
-                            case "NOT_EQUAL":
-                            case "NOT":
-                            case "OR":
-                            case "SPLIT":
-                            // TODO: SIGNS
-                            //sLength += t.value.length();
-                            //sLength++;
-                            spannableStringBuilder.append(t.value);
-                            spannableStringBuilder.setSpan(darkSigns, spannableStringBuilder.length() - t.value.length(), spannableStringBuilder.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-                            if(spannableStringBuilder.length() < editable.toString().length() && editable.toString().charAt(spannableStringBuilder.length()) == '\n') spannableStringBuilder.append("\n");
-        break;
-        case "COMMENT":
-        // TODO: COMMENT
-        spannableStringBuilder.append(t.value);
-        spannableStringBuilder.setSpan(darkComments, spannableStringBuilder.length() - t.value.length(), spannableStringBuilder.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        if(spannableStringBuilder.length() < editable.toString().length() && editable.toString().charAt(spannableStringBuilder.length()) == '\n') spannableStringBuilder.append("\n");
-        break;
-        case "PRINT":
-        case "INT_T":
-        case "DECIMAL_T":
-        case "STRING_T":
-        case "BOOL_T":
-        case "IF":
-        case "ELSE":
-        case "GOTO":
-        case "FOR":
-        case "INT_MATRIX":
-        case "DECIMAL_MATRIX":
-        case "STRING_MATRIX":
-        case "BOOL_MATRIX":
-        case "INT_ARRAY":
-        case "DECIMAL_ARRAY":
-        case "STRING_ARRAY":
-        case "BOOL_ARRAY":
-        case "NEW":
-        case "L_GOTO":
-        // TODO: KEYWORDS
-        spannableStringBuilder.append(t.value);
-        spannableStringBuilder.setSpan(darkKeywords, spannableStringBuilder.length() - t.value.length(), spannableStringBuilder.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        if(spannableStringBuilder.length() < editable.toString().length() && editable.toString().charAt(spannableStringBuilder.length()) == '\n') spannableStringBuilder.append("\n");
-        break;
-        case "MAX":
-        case "MIN":
-        case "GET":
-        case "POW":
-        case "SQRT":
-        case "SIZE":
-        case "SET":
-        case "SORT":
-        case "GET_INT":
-        case "GET_DECIMAL":
-        case "ROW_SIZE":
-        case "COLUMN_SIZE":
-        case "ABS":
-        case "GET_STRING":
-        case "GET_BOOL":
-        // TODO: METHODS
-        spannableStringBuilder.append(t.value);
-        spannableStringBuilder.setSpan(darkMethods, spannableStringBuilder.length() - t.value.length(), spannableStringBuilder.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        if(spannableStringBuilder.length() < editable.toString().length() && editable.toString().charAt(spannableStringBuilder.length()) == '\n') spannableStringBuilder.append("\n");
-        break;
-        case "STRING":
-        // TODO: STRING
-        spannableStringBuilder.append(t.value);
-        spannableStringBuilder.setSpan(darkStrings, spannableStringBuilder.length() - t.value.length(), spannableStringBuilder.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        if(spannableStringBuilder.length() < editable.toString().length() && editable.toString().charAt(spannableStringBuilder.length()) == '\n') spannableStringBuilder.append("\n");
-        break;
-        case "NAME":
-        // TODO: NAME
-        spannableStringBuilder.append(t.value);
-        spannableStringBuilder.setSpan(darkName, spannableStringBuilder.length() - t.value.length(), spannableStringBuilder.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        if(spannableStringBuilder.length() < editable.toString().length() && editable.toString().charAt(spannableStringBuilder.length()) == '\n') spannableStringBuilder.append("\n");
-        break;
-        case "BOOL":
-        case "INT":
-        case "DECIMAL":
-        // TODO: BID
-        spannableStringBuilder.append(t.value);
-        spannableStringBuilder.setSpan(darkBID, spannableStringBuilder.length() - t.value.length(), spannableStringBuilder.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        if(spannableStringBuilder.length() < editable.toString().length() && editable.toString().charAt(spannableStringBuilder.length()) == '\n') spannableStringBuilder.append("\n");
-        break;
-        case "L_PARENTHESES":
-        case "R_PARENTHESES":
-        case "L_BRACES":
-        case "R_BRACES":
-        if (user.isLight()) {
-        // TODO: BP
-        } else {
-        // TODO: SIGNS
-        spannableStringBuilder.append(t.value);
-        spannableStringBuilder.setSpan(darkSigns, spannableStringBuilder.length() - t.value.length(), spannableStringBuilder.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        if(spannableStringBuilder.length() < editable.toString().length() && editable.toString().charAt(spannableStringBuilder.length()) == '\n') spannableStringBuilder.append("\n");
-        }
-        break;
-        case "SPACE":
-        // FIX SPACE
-        spannableStringBuilder.append(" ");
-        break;
-        }
-        System.out.println(t.toString());
-        sLength = spannableStringBuilder.length();
-        etCode.setText(spannableStringBuilder, TextView.BufferType.EDITABLE);
-        etCode.setSelection(etCode.getText().length());
-        }
-        }
-        }
-        });
-* */
