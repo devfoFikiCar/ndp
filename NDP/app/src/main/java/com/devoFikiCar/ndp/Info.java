@@ -1,8 +1,8 @@
 package com.devoFikiCar.ndp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.devoFikiCar.ndp.ui.info.InfoFragment;
 

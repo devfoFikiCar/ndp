@@ -6,7 +6,6 @@ import android.text.style.ForegroundColorSpan;
 import androidx.lifecycle.ViewModel;
 
 import com.devoFikiCar.fclang.StartFClang;
-import com.devoFikiCar.fclang.Token;
 import com.devoFikiCar.ndp.User;
 import com.devoFikiCar.ndp.ui.login.LogInViewModel;
 
@@ -47,14 +46,14 @@ public class PlaygroundLViewModel extends ViewModel {
         this.user = LogInViewModel.getUser();
     }
 
+    public Queue<Object> getInputData() {
+        return inputData;
+    }
+
     public void setInputData(String text) {
         inputData.clear();
         for (String s1 : text.split("\n"))
             inputData.add((Object) s1);
-    }
-
-    public Queue<Object> getInputData() {
-        return inputData;
     }
 
     public void clearPlaygroundL() {
@@ -74,7 +73,7 @@ public class PlaygroundLViewModel extends ViewModel {
         this.output = output;
     }
 
-    public String runCode(String text){
+    public String runCode(String text) {
         clearPlaygroundL();
         setText(text);
         setInputCode();
@@ -87,7 +86,7 @@ public class PlaygroundLViewModel extends ViewModel {
         return out;
     }
 
-    public String setInputText(){
+    public String setInputText() {
         String inputText = "";
 
         for (Object o : inputData) {

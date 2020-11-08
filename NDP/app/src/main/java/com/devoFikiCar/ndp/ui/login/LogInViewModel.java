@@ -1,6 +1,5 @@
 package com.devoFikiCar.ndp.ui.login;
 
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.devoFikiCar.ndp.User;

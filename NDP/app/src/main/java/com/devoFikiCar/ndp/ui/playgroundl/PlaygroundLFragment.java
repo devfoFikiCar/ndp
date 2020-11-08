@@ -2,43 +2,20 @@ package com.devoFikiCar.ndp.ui.playgroundl;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
-import android.text.Editable;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.TextWatcher;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.devoFikiCar.fclang.StartFClang;
-import com.devoFikiCar.fclang.Token;
-import com.devoFikiCar.fclang.lexer.Lexer;
-import com.devoFikiCar.ndp.R;
-import com.devoFikiCar.ndp.User;
-import com.devoFikiCar.ndp.ui.login.LogInFragment;
-import com.devoFikiCar.ndp.ui.login.LogInViewModel;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
+import com.devoFikiCar.ndp.R;
 
 public class PlaygroundLFragment extends Fragment {
 
@@ -91,7 +68,7 @@ public class PlaygroundLFragment extends Fragment {
 
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                    mViewModel.setInputData(input.getText().toString());
+                        mViewModel.setInputData(input.getText().toString());
                         Toast.makeText(getActivity(), "Input saved", Toast.LENGTH_SHORT).show();
                     }
                 });

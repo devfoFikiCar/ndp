@@ -1,6 +1,5 @@
 package com.devoFikiCar.fclang;
 
-import com.devoFikiCar.fclang.lexer.Lexer;
 import com.devoFikiCar.fclang.parser.Parser;
 
 import java.util.ArrayList;
@@ -24,14 +23,6 @@ public class StartFClang {
         return output;
     }
 
-    public static void setCode(ArrayList<String> code) {
-        StartFClang.code = code;
-    }
-
-    public static void setInput(Queue<Object> input) {
-        StartFClang.input = input;
-    }
-
     public static ArrayList<String> getOutput() {
         return output;
     }
@@ -40,8 +31,16 @@ public class StartFClang {
         return code;
     }
 
+    public static void setCode(ArrayList<String> code) {
+        StartFClang.code = code;
+    }
+
     public static Queue<Object> getInput() {
         return input;
+    }
+
+    public static void setInput(Queue<Object> input) {
+        StartFClang.input = input;
     }
 
     public static ArrayList<Token> getTokens() {

@@ -1,17 +1,9 @@
 package com.devoFikiCar.ndp.ui.login;
 
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,20 +14,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.devoFikiCar.ndp.LogIn;
 import com.devoFikiCar.ndp.MainActivity;
 import com.devoFikiCar.ndp.R;
-import com.devoFikiCar.ndp.User;
 
 public class LogInFragment extends Fragment {
 
+    private static final String TAG = LogIn.class.getSimpleName();
     private LogInViewModel mViewModel;
     private Button btLogIn;
     private EditText etUser;
     private EditText etPassword;
     private CheckBox cbTeacher;
     private TextView tvPlayInPlaygroundNL;
-    private static final String TAG = LogIn.class.getSimpleName();
 
     public static LogInFragment newInstance() {
         return new LogInFragment();
@@ -80,7 +76,7 @@ public class LogInFragment extends Fragment {
                 }
 
                 if (flagPassword && flagUser) {
-                    if(CheckUserDB.checkCredentials(etUser.getText().toString(), etPassword.getText().toString(), cbTeacher.isChecked())) {
+                    if (CheckUserDB.checkCredentials(etUser.getText().toString(), etPassword.getText().toString(), cbTeacher.isChecked())) {
                         Log.i(TAG, "Correct credentials");
                         mViewModel.setUser(cbTeacher.isChecked(), etUser.getText().toString(), false);
                         Intent intent = new Intent(view.getContext(), MainActivity.class);
@@ -100,17 +96,17 @@ public class LogInFragment extends Fragment {
         return root;
     }
 
-    private void wrongPassword(){
+    private void wrongPassword() {
         etPassword.setText("");
         etPassword.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
     }
 
-    private void wrongUser(){
+    private void wrongUser() {
         etUser.setText("");
         etUser.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
     }
 
-    private void wrongUserPassword(){
+    private void wrongUserPassword() {
         wrongPassword();
         wrongUser();
     }
