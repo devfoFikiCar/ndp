@@ -27,7 +27,6 @@ import java.util.List;
 
 public class PlaygroundLFragment extends Fragment {
 
-    //region Values
     private PlaygroundLViewModel mViewModel;
     private Button btInput;
     private Button btRun;
@@ -36,7 +35,6 @@ public class PlaygroundLFragment extends Fragment {
     private Spinner spLanguages;
     private String options[] = {"fclang", "python", "java"};
     private static final String TAG = PlaygroundL.class.getSimpleName();
-    //endregion
 
     public static PlaygroundLFragment newInstance() {
         return new PlaygroundLFragment();
@@ -46,7 +44,7 @@ public class PlaygroundLFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        //region Initialization
+
         View root = inflater.inflate(R.layout.playgroundl_fragment, container, false);
         mViewModel = new ViewModelProvider(this).get(PlaygroundLViewModel.class);
         btInput = (Button) root.findViewById(R.id.btInput);
@@ -56,18 +54,16 @@ public class PlaygroundLFragment extends Fragment {
         etOutput = (EditText) root.findViewById(R.id.etOutput);
 
         spLanguages = (Spinner) root.findViewById(R.id.spLanguages);
-        //endregion
-        //region Spinner
+
         ArrayAdapter spinnerAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item,  options);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spLanguages.setAdapter(spinnerAdapter);
         spLanguages.setSelection(0);
-        //endregion
-        //region User data
+
         mViewModel.setUser();
         System.out.println(mViewModel.getUser().toString());
-        //endregion
-        //region Listeners
+
+
         btInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,7 +132,6 @@ public class PlaygroundLFragment extends Fragment {
                 spLanguages.setSelection(0);
             }
         });
-        //endregion
 
         return root;
     }
