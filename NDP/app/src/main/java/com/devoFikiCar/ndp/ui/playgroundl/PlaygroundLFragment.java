@@ -22,11 +22,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.devoFikiCar.ndp.PlaygroundL;
 import com.devoFikiCar.ndp.R;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class PlaygroundLFragment extends Fragment {
 
+    private static final String TAG = PlaygroundL.class.getSimpleName();
+    private static int LANGUAGE = 71;
     private PlaygroundLViewModel mViewModel;
     private Button btInput;
     private Button btRun;
@@ -34,7 +33,6 @@ public class PlaygroundLFragment extends Fragment {
     private EditText etOutput;
     private Spinner spLanguages;
     private String options[] = {"fclang", "python", "java"};
-    private static final String TAG = PlaygroundL.class.getSimpleName();
 
     public static PlaygroundLFragment newInstance() {
         return new PlaygroundLFragment();
@@ -55,7 +53,7 @@ public class PlaygroundLFragment extends Fragment {
 
         spLanguages = (Spinner) root.findViewById(R.id.spLanguages);
 
-        ArrayAdapter spinnerAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item,  options);
+        ArrayAdapter spinnerAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, options);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spLanguages.setAdapter(spinnerAdapter);
         spLanguages.setSelection(0);
@@ -98,29 +96,51 @@ public class PlaygroundLFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 etOutput.setText("");
-                etOutput.setText(mViewModel.runCode(etCode.getText().toString()));
-                System.out.println(etCode.getText());
+                switch (LANGUAGE) {
+                    case 0: {
+                        etOutput.setText(mViewModel.runCode(etCode.getText().toString()));
+                        System.out.println(etCode.getText());
+                        break;
+                    }
+                    case 71: {
+                        // PYTHON
+                        /* Make class that extends AsyncTask<Void, Void, Void> */
+                        break;
+                    }
+                    case 62: {
+                        // JAVA
+                    }
+                    default: {
+                        etOutput.setText(mViewModel.runCode(etCode.getText().toString()));
+                        System.out.println(etCode.getText());
+                        break;
+                    }
+                }
             }
         });
 
         spLanguages.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+                switch (position) {
                     case 0: {
                         Log.i(TAG, "fclang chosen");
+                        LANGUAGE = 0;
                         break;
                     }
                     case 1: {
                         Log.i(TAG, "python chosen");
+                        LANGUAGE = 71;
                         break;
                     }
                     case 2: {
                         Log.i(TAG, "java chosen");
+                        LANGUAGE = 62;
                         break;
                     }
                     default: {
                         Log.e(TAG, "Abnormal value");
+                        LANGUAGE = 0;
                         break;
                     }
                 }
@@ -135,6 +155,4 @@ public class PlaygroundLFragment extends Fragment {
 
         return root;
     }
-
-
 }
