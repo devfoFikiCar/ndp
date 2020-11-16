@@ -18,7 +18,6 @@ public abstract class AsyncTask<INPUT, PROGRESS, OUTPUT> {
                 AsyncWorker.getInstance().getHandler().post(() -> onPostExecute(output));
             } catch (final Exception e) {
                 e.printStackTrace();
-
                 AsyncWorker.getInstance().getHandler().post(() -> onBackgroundError(e));
             }
         });

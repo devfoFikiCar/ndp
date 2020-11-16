@@ -2,43 +2,39 @@ package com.devoFikiCar.ndp.api;
 
 import android.util.Log;
 
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
+import okhttp3.*;
 
 public class SubmitCode {
     public static String requestToken(String code, int languageID) {
-        final String[] token = {""};
+        final String token = "";
 
         try {
-            System.out.println("here1");
             OkHttpClient client = new OkHttpClient();
             MediaType mediaType = MediaType.parse("application/json");
-            RequestBody requestBody = RequestBody.create(mediaType, "{\n" +
+            RequestBody requestBody = RequestBody.create("{\n" +
                     "\"language_id\":" + languageID + ",\n" +
                     "\"source_code\":\"" + parseCode(code) + "\",\n" +
-                    "}");
-            System.out.println("here2");
+                    "}", mediaType);
             Request request = new Request.Builder()
                     .url("https://judge0.p.rapidapi.com/submissions")
                     .post(requestBody)
                     .addHeader("content-type", "application/json")
                     .addHeader("x-rapidapi-key", "12bc36a072msh7fbc668fb4575d0p14dc53jsn8776abdff029")
                     .addHeader("x-rapidapi-host", "judge0.p.rapidapi.com")
+                    .addHeader("wait", "true")
                     .build();
             Response response = client.newCall(request).execute();
-            System.out.println("here3");
             String rd = response.body().string();
             Log.i("POST - API", rd);
-            token[0] = rd.split("\"")[3];
-            Log.i("POST - API", token[0]);
+            //token[0] = rd.split("\"")[3];
+            //Log.i("POST - API", token[0]);
+            System.out.println("rd" + " " + rd);
         } catch (Exception ex) {
+            ex.printStackTrace();
             Log.e("POST - API", ex.toString());
         }
 
-        return token[0];
+        return token;
     }
 
     private static String parseCode(String code) {

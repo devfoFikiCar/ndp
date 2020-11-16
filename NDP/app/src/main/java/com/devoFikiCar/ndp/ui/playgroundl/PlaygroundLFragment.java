@@ -21,11 +21,16 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.devoFikiCar.ndp.PlaygroundL;
 import com.devoFikiCar.ndp.R;
+import com.devoFikiCar.ndp.api.RetrieveOutput;
+import com.devoFikiCar.ndp.api.SubmitCode;
+import com.devoFikiCar.ndp.async.AsyncTask;
+
+import dmax.dialog.SpotsDialog;
 
 public class PlaygroundLFragment extends Fragment {
 
     private static final String TAG = PlaygroundL.class.getSimpleName();
-    private static int LANGUAGE = 71;
+    private static int LANGUAGE = 0;
     private PlaygroundLViewModel mViewModel;
     private Button btInput;
     private Button btRun;
@@ -33,6 +38,7 @@ public class PlaygroundLFragment extends Fragment {
     private EditText etOutput;
     private Spinner spLanguages;
     private String options[] = {"fclang", "python", "java"};
+    private AlertDialog alertDialog;
 
     public static PlaygroundLFragment newInstance() {
         return new PlaygroundLFragment();
@@ -105,10 +111,15 @@ public class PlaygroundLFragment extends Fragment {
                     case 71: {
                         // PYTHON
                         /* Make class that extends AsyncTask<Void, Void, Void> */
+                        //APITask apiTask = new APITask();
+                        //apiTask.execute(etCode.getText().toString());
+                        test test = new test();
+                        test.execute(etCode.getText().toString());
                         break;
                     }
                     case 62: {
                         // JAVA
+                        //break;
                     }
                     default: {
                         etOutput.setText(mViewModel.runCode(etCode.getText().toString()));
@@ -154,5 +165,68 @@ public class PlaygroundLFragment extends Fragment {
         });
 
         return root;
+    }
+
+    // Rewrite it properly
+    public class APITask extends AsyncTask<String, Integer, String> {
+        @Override
+        protected void onPreExecute() {
+            // Do something in UI thread
+            alertDialog = new SpotsDialog.Builder()
+                    .setContext(getContext())
+                    .setMessage("Executing code")
+                    .setCancelable(false)
+                    .build();
+            alertDialog.show();
+            btRun.setEnabled(false);
+        }
+
+        @Override
+        protected String doInBackground(String s) throws Exception {
+            // Do in background
+            String token = SubmitCode.requestToken(s, LANGUAGE);
+            String out = RetrieveOutput.getOutput(token);
+            return out;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            // Do something after doInBackground() on UI thread
+            alertDialog.dismiss();
+            btRun.setEnabled(true);
+        }
+
+        @Override
+        protected void onBackgroundError(Exception e) {
+            // Handle exceptions in doInBackground
+            // Also executes on UI thread
+            e.printStackTrace();
+        }
+    }
+
+    public class test extends android.os.AsyncTask<String, Integer, String> {
+        @Override
+        protected void onPreExecute() {
+            alertDialog = new SpotsDialog.Builder()
+                    .setContext(getContext())
+                    .setMessage("Executing code")
+                    .setCancelable(false)
+                    .build();
+            alertDialog.show();
+            btRun.setEnabled(false);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            alertDialog.dismiss();
+            btRun.setEnabled(true);
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String token = SubmitCode.requestToken(strings[0], LANGUAGE);
+            String out = RetrieveOutput.getOutput(token);
+            return out;
+        }
     }
 }

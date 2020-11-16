@@ -2,9 +2,7 @@ package com.devoFikiCar.ndp.api;
 
 import android.util.Log;
 
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import okhttp3.*;
 
 public class RetrieveOutput {
     public static String getOutput(String token) {
