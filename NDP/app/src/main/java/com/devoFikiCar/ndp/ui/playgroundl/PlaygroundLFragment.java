@@ -110,11 +110,8 @@ public class PlaygroundLFragment extends Fragment {
                     }
                     case 71: {
                         // PYTHON
-                        /* Make class that extends AsyncTask<Void, Void, Void> */
-                        //APITask apiTask = new APITask();
-                        //apiTask.execute(etCode.getText().toString());
-                        test test = new test();
-                        test.execute(etCode.getText().toString());
+                        APITask apiTask = new APITask();
+                        apiTask.execute(etCode.getText().toString());
                         break;
                     }
                     case 62: {
@@ -201,32 +198,6 @@ public class PlaygroundLFragment extends Fragment {
             // Handle exceptions in doInBackground
             // Also executes on UI thread
             e.printStackTrace();
-        }
-    }
-
-    public class test extends android.os.AsyncTask<String, Integer, String> {
-        @Override
-        protected void onPreExecute() {
-            alertDialog = new SpotsDialog.Builder()
-                    .setContext(getContext())
-                    .setMessage("Executing code")
-                    .setCancelable(false)
-                    .build();
-            alertDialog.show();
-            btRun.setEnabled(false);
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            alertDialog.dismiss();
-            btRun.setEnabled(true);
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-            String token = SubmitCode.requestToken(strings[0], LANGUAGE);
-            String out = RetrieveOutput.getOutput(token);
-            return out;
         }
     }
 }
