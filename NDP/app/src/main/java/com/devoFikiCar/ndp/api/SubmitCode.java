@@ -7,18 +7,19 @@ import okhttp3.*;
 public class SubmitCode {
     public static String requestToken(String code, int languageID) {
         final String token = "";
+        System.out.println(parseCode(code));
 
         try {
             OkHttpClient client = new OkHttpClient();
             MediaType mediaType = MediaType.parse("application/json");
             RequestBody requestBody = RequestBody.create("{\n" +
                     "\"language_id\":" + languageID + ",\n" +
-                    "\"source_code\":\"" + parseCode(code) + "\",\n" +
+                    "\"source_code\":\"" + parseCode(code) + "\"\n" +
                     "}", mediaType);
             Request request = new Request.Builder()
                     .url("https://judge0.p.rapidapi.com/submissions")
                     .post(requestBody)
-                    .addHeader("content-type", "application/json")
+                    .addHeader("accept", "application/json")
                     .addHeader("x-rapidapi-key", "12bc36a072msh7fbc668fb4575d0p14dc53jsn8776abdff029")
                     .addHeader("x-rapidapi-host", "judge0.p.rapidapi.com")
                     .addHeader("wait", "true")
@@ -38,14 +39,14 @@ public class SubmitCode {
     }
 
     private static String parseCode(String code) {
-        String parsed = "";
         for (int i = 0; i < code.length(); i++) {
-            if (code.charAt(i) == '\\' || code.charAt(i) == '"') {
+            if ((code.charAt(i) == '\\' && !(code.charAt(i + 1) == 'n')) || code.charAt(i) == '"') {
                 code = addChar(code, '\\', i - 1);
                 i++;
             }
         }
-        return parsed;
+        code += "\n";
+        return code;
     }
 
     private static String addChar(String str, char ch, int position) {
