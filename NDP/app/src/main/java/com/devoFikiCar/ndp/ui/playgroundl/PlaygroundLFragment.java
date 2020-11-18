@@ -179,18 +179,20 @@ public class PlaygroundLFragment extends Fragment {
         }
 
         @Override
-        protected String doInBackground(String s) throws Exception {
+        protected String doInBackground(String input) throws Exception {
             // Do in background
-            String token = SubmitCode.requestToken(s, LANGUAGE);
+            String token = SubmitCode.requestToken(input, LANGUAGE);
+            System.out.println(token);
             String out = RetrieveOutput.getOutput(token);
             return out;
         }
 
         @Override
-        protected void onPostExecute(String s) {
+        protected void onPostExecute(String output) {
             // Do something after doInBackground() on UI thread
             alertDialog.dismiss();
             btRun.setEnabled(true);
+            etOutput.setText(output);
         }
 
         @Override
