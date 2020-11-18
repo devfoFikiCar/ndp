@@ -34,12 +34,7 @@ public class RetrieveOutput {
                 count++;
             } while (status.equals("In Queue"));
 
-            if (!jsonObject.getString("stdout").equals("null")) {
-                return jsonObject.getString("stdout");
-            } else {
-                return jsonObject.getString("stderr");
-            }
-
+            return jsonObject.getString("stdout");
         } catch (Exception ex) {
             Log.e("API - GET", ex.getMessage());
         }

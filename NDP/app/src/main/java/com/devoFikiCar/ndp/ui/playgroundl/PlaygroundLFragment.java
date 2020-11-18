@@ -111,7 +111,7 @@ public class PlaygroundLFragment extends Fragment {
                     case 71: {
                         // PYTHON
                         APITask apiTask = new APITask();
-                        apiTask.execute(etCode.getText().toString());
+                        apiTask.execute(new String[]{etCode.getText().toString(), mViewModel.getStdin()});
                         break;
                     }
                     case 62: {
@@ -164,11 +164,9 @@ public class PlaygroundLFragment extends Fragment {
         return root;
     }
 
-    // Rewrite it properly
-    public class APITask extends AsyncTask<String, Integer, String> {
+    public class APITask extends AsyncTask<String[], Integer, String> {
         @Override
         protected void onPreExecute() {
-            // Do something in UI thread
             alertDialog = new SpotsDialog.Builder()
                     .setContext(getContext())
                     .setMessage("Executing code")
@@ -179,9 +177,8 @@ public class PlaygroundLFragment extends Fragment {
         }
 
         @Override
-        protected String doInBackground(String input) throws Exception {
-            // Do in background
-            String token = SubmitCode.requestToken(input, LANGUAGE);
+        protected String doInBackground(String[] input) throws Exception {
+            String token = SubmitCode.requestToken(input[0], LANGUAGE, input[1]);
             System.out.println(token);
             String out = RetrieveOutput.getOutput(token);
             return out;
@@ -189,7 +186,6 @@ public class PlaygroundLFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String output) {
-            // Do something after doInBackground() on UI thread
             alertDialog.dismiss();
             btRun.setEnabled(true);
             etOutput.setText(output);
@@ -197,8 +193,6 @@ public class PlaygroundLFragment extends Fragment {
 
         @Override
         protected void onBackgroundError(Exception e) {
-            // Handle exceptions in doInBackground
-            // Also executes on UI thread
             e.printStackTrace();
         }
     }

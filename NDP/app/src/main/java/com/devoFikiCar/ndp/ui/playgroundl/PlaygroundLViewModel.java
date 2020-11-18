@@ -20,6 +20,7 @@ public class PlaygroundLViewModel extends ViewModel {
     private Queue<Object> inputData = new LinkedList<>();
     private User user;
     private String text = "";
+    private String stdin = "";
 
     private ForegroundColorSpan lightName = new ForegroundColorSpan(Color.rgb(56, 58, 66));         // default
     private ForegroundColorSpan lightKeywords = new ForegroundColorSpan(Color.rgb(166, 38, 164));
@@ -52,8 +53,17 @@ public class PlaygroundLViewModel extends ViewModel {
 
     public void setInputData(String text) {
         inputData.clear();
+        setStdin(text);
         for (String s1 : text.split("\n"))
             inputData.add((Object) s1);
+    }
+
+    private void setStdin(String stdin) {
+        this.stdin = stdin;
+    }
+
+    public String getStdin() {
+        return stdin;
     }
 
     public void clearPlaygroundL() {
