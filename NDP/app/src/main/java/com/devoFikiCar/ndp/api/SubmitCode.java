@@ -2,11 +2,13 @@ package com.devoFikiCar.ndp.api;
 
 import android.util.Log;
 
+import org.json.JSONObject;
+
 import okhttp3.*;
 
 public class SubmitCode {
     public static String requestToken(String code, int languageID) {
-        final String token = "";
+        String token = "";
         System.out.println(parseCode(code));
 
         try {
@@ -30,6 +32,9 @@ public class SubmitCode {
             //token[0] = rd.split("\"")[3];
             //Log.i("POST - API", token[0]);
             System.out.println("rd" + " " + rd);
+            //token = rd.split(":")[1].substring(1, rd.split(":").length - 2);
+            JSONObject jsonObject = new JSONObject(rd);
+            token = jsonObject.getString("token");
         } catch (Exception ex) {
             ex.printStackTrace();
             Log.e("POST - API", ex.toString());
@@ -40,12 +45,11 @@ public class SubmitCode {
 
     private static String parseCode(String code) {
         for (int i = 0; i < code.length(); i++) {
-            if ((code.charAt(i) == '\\' && !(code.charAt(i + 1) == 'n')) || code.charAt(i) == '"') {
-                code = addChar(code, '\\', i - 1);
-                i++;
+            if (code.charAt(i) == '"') {
+                code = addChar(code, '\\', i);
+                i += 2;
             }
         }
-        code += "\n";
         return code;
     }
 
