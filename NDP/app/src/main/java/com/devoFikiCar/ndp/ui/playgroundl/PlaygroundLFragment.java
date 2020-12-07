@@ -25,6 +25,8 @@ import com.devoFikiCar.ndp.api.RetrieveOutput;
 import com.devoFikiCar.ndp.api.SubmitCode;
 import com.devoFikiCar.ndp.async.AsyncTask;
 
+import net.cryptobrewery.syntaxview.SyntaxView;
+
 import dmax.dialog.SpotsDialog;
 
 public class PlaygroundLFragment extends Fragment {
@@ -34,7 +36,7 @@ public class PlaygroundLFragment extends Fragment {
     private PlaygroundLViewModel mViewModel;
     private Button btInput;
     private Button btRun;
-    private EditText etCode;
+    private SyntaxView etCode;
     private EditText etOutput;
     private Spinner spLanguages;
     private String options[] = {"fclang", "python", "java"};
@@ -54,7 +56,7 @@ public class PlaygroundLFragment extends Fragment {
         btInput = (Button) root.findViewById(R.id.btInput);
         btRun = (Button) root.findViewById(R.id.btRun);
 
-        etCode = (EditText) root.findViewById(R.id.etCode);
+        etCode = (SyntaxView) root.findViewById(R.id.etCode);
         etOutput = (EditText) root.findViewById(R.id.etOutput);
 
         spLanguages = (Spinner) root.findViewById(R.id.spLanguages);
@@ -66,6 +68,25 @@ public class PlaygroundLFragment extends Fragment {
 
         mViewModel.setUser();
         System.out.println(mViewModel.getUser().toString());
+
+        etCode.setBgColor("#2b2b2b");
+        //this will set the color of strings between " "
+        etCode.setPrintStatmentsColor("#6a8759");
+        //this will set the default code text color other than programming keywords!
+        etCode.setCodeTextColor("#ffffff");
+        //this will set programming keywords color like String,int,for,etc...
+        etCode.setKeywordsColor("#cc7832");
+        //this will set the numbers color in code | ex: return 0; 0 will be colored
+        etCode.setNumbersColor("#4a85a3");
+        //this will set the line number view background color at left
+        etCode.setRowNumbersBgColor("#2b2b2b");
+        //this will set the color of numbers in the line number view at left
+        etCode.setRowNumbersColor("#cc7832");
+        //this will set color of Annotations like super,@Nullable,etc ....
+        etCode.setAnnotationsColor("#1932F3");
+        //this will set special characters color like ;
+        etCode.setSpecialCharsColor("#cc7832");
+        etCode.setAutoIndent(false);
 
 
         btInput.setOnClickListener(new View.OnClickListener() {
@@ -104,14 +125,14 @@ public class PlaygroundLFragment extends Fragment {
                 etOutput.setText("");
                 switch (LANGUAGE) {
                     case 0: {
-                        etOutput.setText(mViewModel.runCode(etCode.getText().toString()));
-                        System.out.println(etCode.getText());
+                        etOutput.setText(mViewModel.runCode(etCode.getCode().getText().toString()));
+                        System.out.println(etCode.getCode().getText().toString());
                         break;
                     }
                     case 71: {
                         // PYTHON
                         APITask apiTask = new APITask();
-                        apiTask.execute(new String[]{etCode.getText().toString(), mViewModel.getStdin()});
+                        apiTask.execute(new String[]{etCode.getCode().getText().toString(), mViewModel.getStdin()});
                         break;
                     }
                     case 62: {
@@ -119,8 +140,8 @@ public class PlaygroundLFragment extends Fragment {
                         //break;
                     }
                     default: {
-                        etOutput.setText(mViewModel.runCode(etCode.getText().toString()));
-                        System.out.println(etCode.getText());
+                        etOutput.setText(mViewModel.runCode(etCode.getCode().getText().toString().toString()));
+                        System.out.println(etCode.getCode().getText().toString());
                         break;
                     }
                 }
@@ -160,6 +181,8 @@ public class PlaygroundLFragment extends Fragment {
                 spLanguages.setSelection(0);
             }
         });
+
+        etCode.checkMyCode();
 
         return root;
     }
