@@ -78,7 +78,7 @@ public class LogInFragment extends Fragment {
                 if (flagPassword && flagUser) {
                     if (CheckUserDB.checkCredentials(etUser.getText().toString(), etPassword.getText().toString(), cbTeacher.isChecked())) {
                         Log.i(TAG, "Correct credentials");
-                        mViewModel.setUser(cbTeacher.isChecked(), etUser.getText().toString(), false);
+                        mViewModel.setUser( etUser.getText().toString(), cbTeacher.isChecked());
                         Intent intent = new Intent(view.getContext(), MainActivity.class);
                         root.getContext().startActivity(intent);
                     } else {

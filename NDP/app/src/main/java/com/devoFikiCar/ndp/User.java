@@ -1,30 +1,26 @@
 package com.devoFikiCar.ndp;
 
 public class User {
-    private String id = "";
     private String schoolCode = "";
     private String name = "";
     private String fullName = "";
     private boolean teacher = false;
 
     public User(User user) {
-        this.id = user.id;
         this.schoolCode = user.schoolCode;
         this.name = user.name;
         this.fullName = user.fullName;
         this.teacher = user.teacher;
     }
 
-    public User(String id, String schoolCode, String name, String fullName, boolean teacher) {
-        this.id = id;
+    public User(String schoolCode, String name, String fullName, boolean teacher) {
         this.schoolCode = schoolCode;
         this.name = name;
         this.fullName = fullName;
         this.teacher = teacher;
     }
 
-    public User(String id, String fullName, boolean teacher) {
-        this.id = id;
+    public User(String fullName, boolean teacher) {
         this.fullName = fullName;
         this.teacher = teacher;
         if (fullName != null) {
@@ -36,20 +32,11 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id='" + id + '\'' +
                 ", schoolCode='" + schoolCode + '\'' +
                 ", name='" + name + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", teacher=" + teacher +
                 '}';
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getSchoolCode() {
