@@ -1,0 +1,153 @@
+Top level collections:
+- Users
+- Classes
+
+Sub-like collections:
+- Assignments
+- Lectures
+
+Sub-collections:
+- Sections
+- Tasks
+
+Users:
+{
+  id: 1 {
+    username: ASDFnneko01
+    password: asdfghjkl
+    fullName: Neko Neko
+    schoolCode: ASDF
+    teacher: false
+    enrolledIn: [
+      classID1,
+      classID2,
+      classID3,
+      classID4
+    ]
+  }
+}
+
+Classes:
+{
+  id: 1 {
+    classTitle: "Beginners"
+    schoolCode: ASDF
+    teacherName: Neki Neki
+    students: [
+      Neko Neko,
+      Sta Sta,
+      Sto sto
+    ]
+    lectures: [
+      lectureID1,
+      lectureID2,
+      lectureID3,
+      lectureID4
+    ]
+    assignments: [
+      assignmentID1,
+      assignmentID2,
+      assignmentID3,
+      assignmentID4
+    ]
+  }
+}
+
+Lectures:
+{
+  id: 1 {
+    lectureTitle: "Welcome lecture"
+    Sections:
+    {
+      sectionTitle: "Hello" {
+        sectionText: "Bla bla bla Markdown"
+      }
+      sectionTitle: "Hello1" {
+        sectionText: "Bla bla bla Markdown1"
+      }
+      sectionTitle: "Hello2" {
+        sectionText: "Bla bla bla Markdown2"
+      }
+    }
+  }
+}
+
+Assignments:
+{
+  id: 1 {
+    assignmentTitle: "Test1"
+    test: true
+    timeStart: date1
+    timeEnd: date2
+    Tasks:
+    {
+      taskTitle: "Apples" {
+        taskText: "Bla bla bla Markdown"
+        taskInput: "1 2 3"
+        taskOuput: "6"
+        language: python
+      }
+      taskTitle: "Banana" {
+        taskText: "Bla bla bla Markdown1"
+        taskInput: "1 2 3"
+        taskOuput: "6"
+        language: java
+      }
+    }
+    Submissions:
+    {
+      users: "Neko Neko" {
+        assignmentScore: 100
+        Submission:
+        {
+          taskTitle: "Apples" {
+            userCode: "Bla bla bla"
+            codeOutput: "OK or NOT OK"
+          }
+          taskTitle: "Banana" {
+            userCode: "Bla bla bla1"
+            codeOutput: "OK or NOT OK"
+          }
+        } 
+      }
+    }
+  }
+  id: 2 {
+    assignmentTitle: "Test1"
+    test: false
+    timeStart: date1
+    timeEnd: date2
+    Tasks:
+    {
+      taskTitle: "Apples" {
+        taskText: "Bla bla bla Markdown"
+        taskInput: "1 2 3"
+        taskOuput: "6"
+        language: python
+      }
+      taskTitle: "Banana" {
+        taskText: "Bla bla bla Markdown1"
+        taskInput: "1 2 3"
+        taskOuput: "6"
+        language: java
+      }
+    }
+    Submissions:
+    {
+      users: "Neko Neko" {
+        assignmentScore: +
+        Submission:
+        {
+          taskTitle: "Apples" {
+            userCode: "Bla bla bla"
+            codeOutput: "OK or NOT OK"
+          }
+          taskTitle: "Banana" {
+            userCode: "Bla bla bla1"
+            codeOutput: "OK or NOT OK"
+          }
+        }
+      }
+    }
+  }
+}
