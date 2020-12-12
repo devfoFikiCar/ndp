@@ -9,6 +9,8 @@ Sub-like collections:
 Sub-collections:
 - Sections
 - Tasks
+- Submissions
+- Submission
 
 Users:
 {
@@ -108,7 +110,7 @@ Assignments:
             userCode: "Bla bla bla1"
             codeOutput: "OK or NOT OK"
           }
-        } 
+        }
       }
     }
   }
