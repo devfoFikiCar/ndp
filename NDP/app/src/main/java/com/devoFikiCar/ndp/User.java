@@ -1,73 +1,71 @@
 package com.devoFikiCar.ndp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
-    private String schoolCode = "";
-    private String name = "";
-    private String fullName = "";
-    private boolean teacher = false;
+    private String username;
+    private String password;
+    private String fullName;
+    private String schoolCode;
+    private boolean teacher;
+    private ArrayList<Integer> enrolledIn;
 
     public User(User user) {
-        this.schoolCode = user.schoolCode;
-        this.name = user.name;
+        this.username = user.username;
+        this.password = user.password;
         this.fullName = user.fullName;
+        this.schoolCode = user.schoolCode;
         this.teacher = user.teacher;
+        this.enrolledIn = user.enrolledIn;
     }
 
-    public User(String schoolCode, String name, String fullName, boolean teacher) {
-        this.schoolCode = schoolCode;
-        this.name = name;
+    public User(String username, String password, String fullName, String schoolCode, boolean teacher, ArrayList<Integer> enrolledIn) {
+        this.username = username;
+        this.password = password;
         this.fullName = fullName;
-        this.teacher = teacher;
-    }
-
-    public User(String fullName, boolean teacher) {
-        this.fullName = fullName;
-        this.teacher = teacher;
-        if (fullName != null) {
-            this.schoolCode = fullName.substring(0, 4);
-            this.name = fullName.substring(4);
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                ", schoolCode='" + schoolCode + '\'' +
-                ", name='" + name + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", teacher=" + teacher +
-                '}';
-    }
-
-    public String getSchoolCode() {
-        return schoolCode;
-    }
-
-    public void setSchoolCode(String schoolCode) {
         this.schoolCode = schoolCode;
+        this.teacher = teacher;
+        this.enrolledIn = enrolledIn;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getPassword() {
+        return password;
     }
 
     public String getFullName() {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public String getSchoolCode() {
+        return schoolCode;
     }
 
     public boolean isTeacher() {
         return teacher;
     }
 
-    public void setTeacher(boolean teacher) {
-        this.teacher = teacher;
+    public ArrayList<Integer> getEnrolledIn() {
+        return enrolledIn;
+    }
+
+    public void setEnrolledIn(ArrayList<Integer> enrolledIn) {
+        this.enrolledIn = enrolledIn;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", schoolCode='" + schoolCode + '\'' +
+                ", teacher=" + teacher +
+                ", enrolledIn=" + enrolledIn.toString() +
+                '}';
     }
 }

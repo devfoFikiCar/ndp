@@ -11,7 +11,7 @@ public class LogInViewModel extends ViewModel {
         return user;
     }
 
-    public static void setUser(String fullName, boolean teacher) {
-        user = new User(fullName, teacher);
+    public static void setUser(User user) {
+        user = new User(user);
     }
 }

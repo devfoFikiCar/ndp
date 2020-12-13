@@ -1,5 +1,6 @@
 package com.devoFikiCar.ndp.ui.login;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -22,6 +23,17 @@ import androidx.lifecycle.ViewModelProvider;
 import com.devoFikiCar.ndp.LogIn;
 import com.devoFikiCar.ndp.MainActivity;
 import com.devoFikiCar.ndp.R;
+import com.devoFikiCar.ndp.User;
+import com.devoFikiCar.ndp.async.AsyncTask;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+
+import dmax.dialog.SpotsDialog;
 
 public class LogInFragment extends Fragment {
 
@@ -32,6 +44,8 @@ public class LogInFragment extends Fragment {
     private EditText etPassword;
     private CheckBox cbTeacher;
     private TextView tvPlayInPlaygroundNL;
+    private FirebaseFirestore firestore;
+    private AlertDialog alertDialog;
 
     public static LogInFragment newInstance() {
         return new LogInFragment();
@@ -49,6 +63,7 @@ public class LogInFragment extends Fragment {
         etPassword = (EditText) root.findViewById(R.id.etPassword);
         cbTeacher = (CheckBox) root.findViewById(R.id.cbTeacher);
         tvPlayInPlaygroundNL = (TextView) root.findViewById(R.id.tvPlayInPlaygroundNL);
+        firestore = FirebaseFirestore.getInstance();
 
         btLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,16 +91,42 @@ public class LogInFragment extends Fragment {
                 }
 
                 if (flagPassword && flagUser) {
-                    if (CheckUserDB.checkCredentials(etUser.getText().toString(), etPassword.getText().toString(), cbTeacher.isChecked())) {
-                        Log.i(TAG, "Correct credentials");
-                        mViewModel.setUser( etUser.getText().toString(), cbTeacher.isChecked());
-                        Intent intent = new Intent(view.getContext(), MainActivity.class);
-                        root.getContext().startActivity(intent);
-                    } else {
-                        Log.e(TAG, "Wrong credentials");
-                        wrongUserPassword();
-                        Toast.makeText(getContext(), "Wrong credentials", Toast.LENGTH_SHORT).show();
-                    }
+                    alertDialog = new SpotsDialog.Builder()
+                            .setContext(getContext())
+                            .setMessage("Executing code")
+                            .setCancelable(false)
+                            .build();
+                    alertDialog.show();
+
+                    firestore = FirebaseFirestore.getInstance();
+
+                    firestore.collection("users")
+                            .whereEqualTo("username", etUser.getText().toString())
+                            .whereEqualTo("password", etPassword.getText().toString())
+                            .whereEqualTo("teacher", cbTeacher.isChecked())
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            Log.d(TAG, document.getId() + " => " + document.getData());
+                                            mViewModel.setUser(new User(document.get("username").toString(), document.get("password").toString(), document.get("fullName").toString(),
+                                                    document.get("schoolCode").toString(), (boolean) document.get("teacher"), (ArrayList<Integer>) document.get("enrolledIn")));
+                                        }
+                                        Log.i(TAG, "Correct credentials");
+                                        alertDialog.dismiss();
+                                        Intent intent = new Intent(view.getContext(), MainActivity.class);
+                                        root.getContext().startActivity(intent);
+                                    } else {
+                                        Log.d(TAG, "Error getting documents: ", task.getException());
+                                        alertDialog.dismiss();
+                                        Log.e(TAG, "Wrong credentials");
+                                        wrongUserPassword();
+                                        Toast.makeText(getContext(), "Wrong credentials", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
                 } else {
                     Log.e(TAG, "Wrong input format");
                     Toast.makeText(getContext(), "Wrong credentials", Toast.LENGTH_SHORT).show();
