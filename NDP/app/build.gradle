@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
@@ -6,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.devoFikiCar.ndp"
-        minSdkVersion 29
+        minSdkVersion 28
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -41,4 +42,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     implementation 'com.github.Badranh:Syntax-View-Android:0.1.5'
     compile group: 'org.json', name: 'json', version: '20090211'
+    implementation platform('com.google.firebase:firebase-bom:26.1.1')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-firestore'
 }

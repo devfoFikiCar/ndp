@@ -1,3 +1,6 @@
+ideas:
+fullName to be username without schoolCode
+
 Top level collections:
 - Users
 - Classes

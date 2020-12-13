@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "473153018996",
+    "project_id": "ndp1-bdfc3",
+    "storage_bucket": "ndp1-bdfc3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473153018996:android:b8d20bc8c5e30590100521",
+        "android_client_info": {
+          "package_name": "com.devoFikiCar.ndp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473153018996-723jn5aaru4geim60gkr1l509h8geq6k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLNvVqztjgYTHDTbI5LFoMdR8vSJq6SN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473153018996-723jn5aaru4geim60gkr1l509h8geq6k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
