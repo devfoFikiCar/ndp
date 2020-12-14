@@ -113,7 +113,8 @@ public class LogInFragment extends Fragment {
                                         for (QueryDocumentSnapshot document : task.getResult()) {
                                             Log.d(TAG, document.getId() + " => " + document.getData());
                                             mViewModel.setUser(new User(document.get("username").toString(), document.get("password").toString(), document.get("fullName").toString(),
-                                                    document.get("schoolCode").toString(), (boolean) document.get("teacher"), (ArrayList<Integer>) document.get("enrolledIn")));
+                                                    document.get("schoolCode").toString(), (boolean) document.get("teacher"), (ArrayList<String>) document.get("enrolledIn")));
+                                            mViewModel.getUser().setId(document.getId());
                                         }
                                         Log.i(TAG, "Correct credentials");
                                         System.out.println(mViewModel.getUser().toString());

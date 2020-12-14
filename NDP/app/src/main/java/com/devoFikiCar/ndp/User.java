@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+    private String id;
     private String username;
     private String password;
     private String fullName;
     private String schoolCode;
     private boolean teacher;
-    private ArrayList<Integer> enrolledIn;
+    private ArrayList<String> enrolledIn;
 
     public User(User user) {
         this.username = user.username;
@@ -19,15 +20,24 @@ public class User {
         this.schoolCode = user.schoolCode;
         this.teacher = user.teacher;
         this.enrolledIn = user.enrolledIn;
+        this.id = user.id;
     }
 
-    public User(String username, String password, String fullName, String schoolCode, boolean teacher, ArrayList<Integer> enrolledIn) {
+    public User(String username, String password, String fullName, String schoolCode, boolean teacher, ArrayList<String> enrolledIn) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
         this.schoolCode = schoolCode;
         this.teacher = teacher;
         this.enrolledIn = enrolledIn;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -50,12 +60,16 @@ public class User {
         return teacher;
     }
 
-    public ArrayList<Integer> getEnrolledIn() {
+    public ArrayList<String> getEnrolledIn() {
         return enrolledIn;
     }
 
-    public void setEnrolledIn(ArrayList<Integer> enrolledIn) {
+    public void setEnrolledIn(ArrayList<String> enrolledIn) {
         this.enrolledIn = enrolledIn;
+    }
+
+    public void addEnrolledIn(String id) {
+        this.enrolledIn.add(id);
     }
 
     @Override
