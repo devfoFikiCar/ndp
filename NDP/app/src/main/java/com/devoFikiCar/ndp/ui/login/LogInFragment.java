@@ -25,6 +25,7 @@ import com.devoFikiCar.ndp.MainActivity;
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.User;
 import com.devoFikiCar.ndp.async.AsyncTask;
+import com.devoFikiCar.ndp.helper.userSave;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -93,7 +94,7 @@ public class LogInFragment extends Fragment {
                 if (flagPassword && flagUser) {
                     alertDialog = new SpotsDialog.Builder()
                             .setContext(getContext())
-                            .setMessage("Executing code")
+                            .setMessage("Checking credentials")
                             .setCancelable(false)
                             .build();
                     alertDialog.show();
@@ -115,6 +116,8 @@ public class LogInFragment extends Fragment {
                                                     document.get("schoolCode").toString(), (boolean) document.get("teacher"), (ArrayList<Integer>) document.get("enrolledIn")));
                                         }
                                         Log.i(TAG, "Correct credentials");
+                                        System.out.println(mViewModel.getUser().toString());
+                                        userSave.user = new User(mViewModel.getUser());
                                         alertDialog.dismiss();
                                         Intent intent = new Intent(view.getContext(), MainActivity.class);
                                         root.getContext().startActivity(intent);

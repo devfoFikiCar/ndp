@@ -5,13 +5,13 @@ import androidx.lifecycle.ViewModel;
 import com.devoFikiCar.ndp.User;
 
 public class LogInViewModel extends ViewModel {
-    private static User user;
+    private User user;
 
-    public static User getUser() {
-        return user;
+    public User getUser() {
+        return this.user;
     }
 
-    public static void setUser(User user) {
-        user = new User(user);
+    public void setUser(User user) {
+        this.user = new User(user);
     }
 }
