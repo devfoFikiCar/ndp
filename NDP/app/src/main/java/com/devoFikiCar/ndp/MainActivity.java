@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.devoFikiCar.ndp.ui.classes.teacher.ClassesTeacherFragment;
 import com.devoFikiCar.ndp.ui.info.InfoFragment;
 import com.devoFikiCar.ndp.ui.playgroundl.PlaygroundLFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -50,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_playground:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PlaygroundLFragment()).commit();
+                break;
+            case R.id.nav_class:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ClassesTeacherFragment()).commit();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
