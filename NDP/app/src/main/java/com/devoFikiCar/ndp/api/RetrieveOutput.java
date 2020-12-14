@@ -8,6 +8,12 @@ import org.json.JSONObject;
 import okhttp3.*;
 
 public class RetrieveOutput {
+    private static final int LEVEL_1 = 1000;
+    private static final int LEVEL_2 = 2000;
+    private static final int LEVEL_3 = 3000;
+    private static final int LEVEL_4 = 4000;
+    private static final int LEVEL_5 = 5000;
+
     public static String getOutput(String token) {
         try {
             OkHttpClient client = new OkHttpClient();
@@ -28,8 +34,25 @@ public class RetrieveOutput {
                 JSONObject jsonStatus = new JSONObject(jsonObject.getString("status"));
                 status = jsonStatus.getString("description");
                 System.out.println(status);
-                if (count != 0) {
-                    SystemClock.sleep(1000);
+                switch (count) {
+                    case 0:
+                    case 1:
+                        SystemClock.sleep(LEVEL_1);
+                        break;
+                    case 2:
+                        SystemClock.sleep(LEVEL_2);
+                        break;
+                    case 3:
+                        SystemClock.sleep(LEVEL_3);
+                        break;
+                    case 4:
+                        SystemClock.sleep(LEVEL_4);
+                        break;
+                    case 5:
+                        SystemClock.sleep(LEVEL_5);
+                        break;
+                    default:
+                        return "Network error";
                 }
                 count++;
             } while (status.equals("In Queue"));

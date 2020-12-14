@@ -21,7 +21,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.brackeys.ui.editorkit.theme.EditorTheme;
 import com.brackeys.ui.editorkit.widget.TextProcessor;
-import com.brackeys.ui.language.base.Language;
 import com.brackeys.ui.language.java.JavaLanguage;
 import com.brackeys.ui.language.python.PythonLanguage;
 import com.devoFikiCar.ndp.PlaygroundL;
@@ -29,8 +28,6 @@ import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.api.RetrieveOutput;
 import com.devoFikiCar.ndp.api.SubmitCode;
 import com.devoFikiCar.ndp.async.AsyncTask;
-
-import net.cryptobrewery.syntaxview.SyntaxView;
 
 import dmax.dialog.SpotsDialog;
 
