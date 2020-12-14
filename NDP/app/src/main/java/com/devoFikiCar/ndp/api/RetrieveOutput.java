@@ -55,7 +55,7 @@ public class RetrieveOutput {
                         return "Network error";
                 }
                 count++;
-            } while (status.equals("In Queue"));
+            } while (!status.equals("Accepted"));
 
             return jsonObject.getString("stdout");
         } catch (Exception ex) {
