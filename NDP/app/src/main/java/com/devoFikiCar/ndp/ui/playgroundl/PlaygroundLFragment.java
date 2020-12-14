@@ -19,6 +19,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.brackeys.ui.editorkit.theme.EditorTheme;
+import com.brackeys.ui.editorkit.widget.TextProcessor;
+import com.brackeys.ui.language.base.Language;
+import com.brackeys.ui.language.java.JavaLanguage;
+import com.brackeys.ui.language.python.PythonLanguage;
 import com.devoFikiCar.ndp.PlaygroundL;
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.api.RetrieveOutput;
@@ -31,12 +36,19 @@ import dmax.dialog.SpotsDialog;
 
 public class PlaygroundLFragment extends Fragment {
 
+    private static final String PYTHON_CODE_START = "# code";
+    private static final String FCLANG_CODE_START = "// code";
+    private static final String JAVA_CODE_START = "public class Program {\n"
+                                                + "\t\t\t\tpublic static void main(String []args){\n"
+                                                + "\t\t\t\t\t\t\t\t// code\n"
+                                                + "\t\t\t\t}\n"
+                                                + "}\n";
     private static final String TAG = PlaygroundL.class.getSimpleName();
     private static int LANGUAGE = 0;
     private PlaygroundLViewModel mViewModel;
     private Button btInput;
     private Button btRun;
-    private EditText etCode;
+    private TextProcessor etCode;
     private EditText etOutput;
     private Spinner spLanguages;
     private String options[] = {"fclang", "python", "java"};
@@ -56,7 +68,7 @@ public class PlaygroundLFragment extends Fragment {
         btInput = (Button) root.findViewById(R.id.btInput);
         btRun = (Button) root.findViewById(R.id.btRun);
 
-        etCode = (EditText) root.findViewById(R.id.etCode);
+        etCode = (TextProcessor) root.findViewById(R.id.etCode);
         etOutput = (EditText) root.findViewById(R.id.etOutput);
 
         spLanguages = (Spinner) root.findViewById(R.id.spLanguages);
@@ -69,6 +81,9 @@ public class PlaygroundLFragment extends Fragment {
         mViewModel.setUser();
         System.out.println(mViewModel.getUser().toString());
 
+        etCode.setTextContent(FCLANG_CODE_START);
+        etCode.setLanguage(new JavaLanguage());
+        etCode.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
 
         btInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,20 +151,28 @@ public class PlaygroundLFragment extends Fragment {
                     case 0: {
                         Log.i(TAG, "fclang chosen");
                         LANGUAGE = 0;
+                        etCode.setTextContent(FCLANG_CODE_START);
+                        etCode.setLanguage(new JavaLanguage());
                         break;
                     }
                     case 1: {
                         Log.i(TAG, "python chosen");
+                        etCode.setTextContent(PYTHON_CODE_START);
+                        etCode.setLanguage(new PythonLanguage());
                         LANGUAGE = 71;
                         break;
                     }
                     case 2: {
                         Log.i(TAG, "java chosen");
+                        etCode.setTextContent(JAVA_CODE_START);
+                        etCode.setLanguage(new JavaLanguage());
                         LANGUAGE = 62;
                         break;
                     }
                     default: {
                         Log.e(TAG, "Abnormal value");
+                        etCode.setTextContent(FCLANG_CODE_START);
+                        etCode.setLanguage(new JavaLanguage());
                         LANGUAGE = 0;
                         break;
                     }

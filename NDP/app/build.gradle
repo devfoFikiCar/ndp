@@ -45,4 +45,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.1.1')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.brackeys.ui:editorkit:1.0.1'
+    implementation 'com.brackeys.ui:language-java:1.0.1'
+    implementation 'com.brackeys.ui:language-python:1.0.1'
 }
