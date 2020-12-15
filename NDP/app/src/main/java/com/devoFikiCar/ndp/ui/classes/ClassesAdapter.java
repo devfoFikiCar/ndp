@@ -14,16 +14,37 @@ import java.util.ArrayList;
 
 public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.ClassesViewHolder> {
     ArrayList<ClassItem> arrayList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener (OnItemClickListener listener) {
+        mListener = listener;
+    }
 
     public static class ClassesViewHolder extends RecyclerView.ViewHolder {
         public TextView tvTitle;
         public TextView tvID;
 
 
-        public ClassesViewHolder(@NonNull View itemView) {
+        public ClassesViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvTitleLineClass);
             tvID = itemView.findViewById(R.id.tvIDLineClass);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -35,7 +56,7 @@ public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.ClassesV
     @Override
     public ClassesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.class_item, parent, false);
-        ClassesViewHolder classesViewHolder = new ClassesViewHolder(view);
+        ClassesViewHolder classesViewHolder = new ClassesViewHolder(view, mListener);
         return classesViewHolder;
     }
 

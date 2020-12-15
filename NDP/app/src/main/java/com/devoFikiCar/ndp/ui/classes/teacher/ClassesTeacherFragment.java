@@ -36,7 +36,7 @@ public class ClassesTeacherFragment extends Fragment {
     private FloatingActionButton btCreateClass;
     private FirebaseFirestore firestore;
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    private ClassesAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<ClassItem> classItems = new ArrayList<>();
 
@@ -55,12 +55,7 @@ public class ClassesTeacherFragment extends Fragment {
 
         firestore = FirebaseFirestore.getInstance();
 
-        recyclerView = root.findViewById(R.id.rvClassesTeacher);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getContext());
-        adapter = new ClassesAdapter(classItems);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        buildRecyclerView(root);
 
         btCreateClass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +88,22 @@ public class ClassesTeacherFragment extends Fragment {
         mViewModel.getIdTitles().observe(getViewLifecycleOwner(), classesList);
 
         return root;
+    }
+
+    private void buildRecyclerView(View root) {
+        recyclerView = root.findViewById(R.id.rvClassesTeacher);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getContext());
+        adapter = new ClassesAdapter(classItems);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new ClassesAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                System.out.println("Clicked: " + position);
+            }
+        });
     }
 
     final Observer<ArrayList<HashMap<String, String>>> classesList = new Observer<ArrayList<HashMap<String, String>>>() {
