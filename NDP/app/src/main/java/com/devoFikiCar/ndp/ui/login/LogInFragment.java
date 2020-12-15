@@ -111,18 +111,27 @@ public class LogInFragment extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                     if (task.isSuccessful()) {
+                                        boolean flag = true;
                                         for (QueryDocumentSnapshot document : task.getResult()) {
                                             Log.d(TAG, document.getId() + " => " + document.getData());
                                             mViewModel.setUser(new User(document.get("username").toString(), document.get("password").toString(), document.get("fullName").toString(),
                                                     document.get("schoolCode").toString(), (boolean) document.get("teacher"), (ArrayList<HashMap<String, String>>) document.get("enrolledIn")));
                                             mViewModel.getUser().setId(document.getId());
+                                            flag = false;
                                         }
-                                        Log.i(TAG, "Correct credentials");
-                                        System.out.println(mViewModel.getUser().toString());
-                                        userSave.user = new User(mViewModel.getUser());
-                                        alertDialog.dismiss();
-                                        Intent intent = new Intent(view.getContext(), MainActivity.class);
-                                        root.getContext().startActivity(intent);
+                                        if (flag) {
+                                            alertDialog.dismiss();
+                                            Log.e(TAG, "Wrong credentials");
+                                            wrongUserPassword();
+                                            Toast.makeText(getContext(), "Wrong credentials", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Log.i(TAG, "Correct credentials");
+                                            System.out.println(mViewModel.getUser().toString());
+                                            userSave.user = new User(mViewModel.getUser());
+                                            alertDialog.dismiss();
+                                            Intent intent = new Intent(view.getContext(), MainActivity.class);
+                                            root.getContext().startActivity(intent);
+                                        }
                                     } else {
                                         Log.d(TAG, "Error getting documents: ", task.getException());
                                         alertDialog.dismiss();

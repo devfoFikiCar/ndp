@@ -11,6 +11,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.devoFikiCar.ndp.helper.userSave;
+import com.devoFikiCar.ndp.ui.classes.student.ClassesStudentFragment;
 import com.devoFikiCar.ndp.ui.classes.teacher.ClassesTeacherFragment;
 import com.devoFikiCar.ndp.ui.info.InfoFragment;
 import com.devoFikiCar.ndp.ui.playgroundl.PlaygroundLFragment;
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_class:
                 if (userSave.user.isTeacher())
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ClassesTeacherFragment()).commit();
+                else
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ClassesStudentFragment()).commit();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);

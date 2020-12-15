@@ -1,4 +1,4 @@
-package com.devoFikiCar.ndp.ui.classes.teacher;
+package com.devoFikiCar.ndp.ui.classes.student;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -16,73 +16,71 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.devoFikiCar.ndp.R;
-import com.devoFikiCar.ndp.User;
-import com.devoFikiCar.ndp.helper.userSave;
 import com.devoFikiCar.ndp.ui.classes.ClassItem;
 import com.devoFikiCar.ndp.ui.classes.ClassesAdapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ClassesTeacherFragment extends Fragment {
+public class ClassesStudentFragment extends Fragment {
 
-    private ClassesTeacherViewModel mViewModel;
-    private FloatingActionButton btCreateClass;
+    private ClassesStudentViewModel mViewModel;
+    private Button btJoinClass;
     private FirebaseFirestore firestore;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<ClassItem> classItems = new ArrayList<>();
 
-    public static ClassesTeacherFragment newInstance() {
-        return new ClassesTeacherFragment();
+    public static ClassesStudentFragment newInstance() {
+        return new ClassesStudentFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.classes_teacher_fragment, container, false);
-        mViewModel = new ViewModelProvider(this).get(ClassesTeacherViewModel.class);
+        View root = inflater.inflate(R.layout.classes_student_fragment, container, false);
+        mViewModel = new ViewModelProvider(this).get(ClassesStudentViewModel.class);
 
-        btCreateClass = (FloatingActionButton) root.findViewById(R.id.createClass);
+        btJoinClass = (Button) root.findViewById(R.id.btJoinClass);
 
         firestore = FirebaseFirestore.getInstance();
 
-        recyclerView = root.findViewById(R.id.rvClassesTeacher);
+        recyclerView = root.findViewById(R.id.rvClassesStudent);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         adapter = new ClassesAdapter(classItems);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        btCreateClass.setOnClickListener(new View.OnClickListener() {
+        btJoinClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-                alertDialog.setTitle("Creating new class");
+                alertDialog.setTitle("Join class");
 
-                final EditText classTitle = new EditText(getActivity());
-                classTitle.setMaxLines(1);
-                alertDialog.setView(classTitle);
+                final EditText classID = new EditText(getActivity());
+                classID.setMaxLines(1);
+                alertDialog.setView(classID);
 
-                alertDialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                alertDialog.setPositiveButton("Join", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mViewModel.createClass(firestore, classTitle.getText().toString(), getContext());
+                        mViewModel.joinClass(firestore, classID.getText().toString(), getContext());
                     }
                 });
 
                 alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Cancel class creation", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Cancel joining class", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -96,13 +94,15 @@ public class ClassesTeacherFragment extends Fragment {
     }
 
     final Observer<ArrayList<HashMap<String, String>>> classesList = new Observer<ArrayList<HashMap<String, String>>>() {
+
         @Override
-        public void onChanged(ArrayList<HashMap<String, String>> strings) {
+        public void onChanged(ArrayList<HashMap<String, String>> hashMaps) {
             if (classItems != null) {
                 classItems.clear();
             }
-            for (int i = 0; i < strings.size(); i++) {
-                classItems.add(new ClassItem(strings.get(i).get("classTitle"), strings.get(i).get("classID")));
+            for (int i = 0; i < hashMaps.size(); i++) {
+                classItems.add(new ClassItem(hashMaps.get(i).get("classTitle"), hashMaps.get(i).get("classID")));
+
             }
             adapter.notifyDataSetChanged();
         }
