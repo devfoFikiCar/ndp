@@ -28,6 +28,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ClassesTeacherFragment extends Fragment {
 
@@ -93,19 +94,19 @@ public class ClassesTeacherFragment extends Fragment {
             }
         });
 
-        mViewModel.getIds().observe(getViewLifecycleOwner(), classesList);
+        mViewModel.getIdTitles().observe(getViewLifecycleOwner(), classesList);
 
         return root;
     }
 
-    final Observer<ArrayList<String>> classesList = new Observer<ArrayList<String>>() {
+    final Observer<ArrayList<HashMap<String, String>>> classesList = new Observer<ArrayList<HashMap<String, String>>>() {
         @Override
-        public void onChanged(ArrayList<String> strings) {
+        public void onChanged(ArrayList<HashMap<String, String>> strings) {
             if (classItems != null) {
                 classItems.clear();
             }
             for (int i = 0; i < strings.size(); i++)
-                classItems.add(new ClassItem("1", strings.get(i)));
+                classItems.add(new ClassItem(strings.get(i).get("classTitle"), strings.get(i).get("classID")));
             adapter.notifyDataSetChanged();
             System.out.println("test");
         }

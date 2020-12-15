@@ -33,6 +33,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import dmax.dialog.SpotsDialog;
 
@@ -113,7 +114,7 @@ public class LogInFragment extends Fragment {
                                         for (QueryDocumentSnapshot document : task.getResult()) {
                                             Log.d(TAG, document.getId() + " => " + document.getData());
                                             mViewModel.setUser(new User(document.get("username").toString(), document.get("password").toString(), document.get("fullName").toString(),
-                                                    document.get("schoolCode").toString(), (boolean) document.get("teacher"), (ArrayList<String>) document.get("enrolledIn")));
+                                                    document.get("schoolCode").toString(), (boolean) document.get("teacher"), (ArrayList<HashMap<String, String>>) document.get("enrolledIn")));
                                             mViewModel.getUser().setId(document.getId());
                                         }
                                         Log.i(TAG, "Correct credentials");

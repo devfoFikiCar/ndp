@@ -29,7 +29,7 @@ import dmax.dialog.SpotsDialog;
 
 public class ClassesTeacherViewModel extends ViewModel {
     private User user;
-    private MutableLiveData<ArrayList<String>> ids = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<HashMap<String, String>>> idTitles = new MutableLiveData<>();
 
     public User getUser() {
         return user;
@@ -40,7 +40,7 @@ public class ClassesTeacherViewModel extends ViewModel {
     }
 
     public void loadClassesOnStart() {
-        setIds(this.user.getEnrolledIn());
+        setIdTitles(this.user.getEnrolledIn());
     }
 
     public void createClass(FirebaseFirestore db, String title, Context context) {
@@ -66,9 +66,10 @@ public class ClassesTeacherViewModel extends ViewModel {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         System.out.println("DONE");
-                        user.addEnrolledIn(documentReference.getId());
+                        user.addEnrolledIn(documentReference.getId(), title);
                         userSave.user = new User(user);
 
+                        // TODO: don't over ride
                         Map<String, Object> newEnroll = new HashMap<>();
                         newEnroll.put("enrolledIn", Arrays.asList(user.getEnrolledIn()));
                         db.document("users/" + user.getId())
@@ -76,7 +77,7 @@ public class ClassesTeacherViewModel extends ViewModel {
 
                         alertDialog.dismiss();
                         System.out.println(user.toString());
-                        setIds(user.getEnrolledIn());
+                        setIdTitles(user.getEnrolledIn());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -89,18 +90,14 @@ public class ClassesTeacherViewModel extends ViewModel {
                 });
     }
 
-    public MutableLiveData<ArrayList<String>> getIds() {
-        if (ids == null) {
+    public MutableLiveData<ArrayList<HashMap<String, String>>> getIdTitles() {
+        if (idTitles == null) {
             return new MutableLiveData<>();
         }
-        return ids;
+        return idTitles;
     }
 
-    public void setIds(ArrayList<String> ids) {
-        if (ids != null) {
-            this.ids.postValue(ids);
-        } else {
-            System.out.println("LOL"); // error handling at its finest
-        }
+    public void setIdTitles(ArrayList<HashMap<String, String>> idTitles) {
+        this.idTitles.postValue(idTitles);
     }
 }

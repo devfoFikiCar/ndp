@@ -2,6 +2,7 @@ package com.devoFikiCar.ndp;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class User {
@@ -11,7 +12,7 @@ public class User {
     private String fullName;
     private String schoolCode;
     private boolean teacher;
-    private ArrayList<String> enrolledIn;
+    private ArrayList<HashMap<String, String>> enrolledIn;
 
     public User(User user) {
         this.username = user.username;
@@ -27,7 +28,7 @@ public class User {
         this.id = user.id;
     }
 
-    public User(String username, String password, String fullName, String schoolCode, boolean teacher, ArrayList<String> enrolledIn) {
+    public User(String username, String password, String fullName, String schoolCode, boolean teacher, ArrayList<HashMap<String, String>> enrolledIn) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
@@ -64,19 +65,21 @@ public class User {
         return teacher;
     }
 
-    public ArrayList<String> getEnrolledIn() {
+    public ArrayList<HashMap<String, String>> getEnrolledIn() {
         return new ArrayList(this.enrolledIn);
     }
 
-    public void setEnrolledIn(ArrayList<String> enrolledIn) {
+    public void setEnrolledIn(ArrayList<HashMap<String, String>> enrolledIn) {
         this.enrolledIn = enrolledIn;
     }
 
-    public void addEnrolledIn(String id) {
+    public void addEnrolledIn(String id, String title) {
         if (this.enrolledIn == null) {
             this.enrolledIn = new ArrayList<>();
         }
-        this.enrolledIn.add(id);
+        this.enrolledIn.add(new HashMap<>());
+        this.enrolledIn.get(enrolledIn.size() - 1).put("classID", id);
+        this.enrolledIn.get(enrolledIn.size() - 1).put("classTitle", title);
     }
 
     @Override
