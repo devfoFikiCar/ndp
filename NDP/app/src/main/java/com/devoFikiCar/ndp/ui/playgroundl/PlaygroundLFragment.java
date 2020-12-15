@@ -75,7 +75,6 @@ public class PlaygroundLFragment extends Fragment {
         spLanguages.setAdapter(spinnerAdapter);
         spLanguages.setSelection(0);
 
-        mViewModel.setUser();
         System.out.println(mViewModel.getUser().toString());
 
         etCode.setTextContent(FCLANG_CODE_START);

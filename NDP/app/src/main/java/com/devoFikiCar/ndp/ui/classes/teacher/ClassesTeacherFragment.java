@@ -53,9 +53,6 @@ public class ClassesTeacherFragment extends Fragment {
 
         btCreateClass = (FloatingActionButton) root.findViewById(R.id.createClass);
 
-        mViewModel.setUser(userSave.user);
-        mViewModel.loadClassesOnStart();
-
         firestore = FirebaseFirestore.getInstance();
 
         recyclerView = root.findViewById(R.id.rvClassesTeacher);

@@ -19,6 +19,14 @@ public class PlaygroundLViewModel extends ViewModel {
     private String text = "";
     private String stdin = "";
 
+    public PlaygroundLViewModel() {
+        init();
+    }
+
+    private void init() {
+        setUser();
+    }
+
     public User getUser() {
         return this.user;
     }

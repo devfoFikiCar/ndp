@@ -31,6 +31,15 @@ public class ClassesTeacherViewModel extends ViewModel {
     private User user;
     private MutableLiveData<ArrayList<HashMap<String, String>>> idTitles = new MutableLiveData<>();
 
+    public ClassesTeacherViewModel() {
+        init();
+    }
+
+    private void init() {
+        setUser(userSave.user);
+        loadClassesOnStart();
+    }
+
     public User getUser() {
         return user;
     }
@@ -69,7 +78,6 @@ public class ClassesTeacherViewModel extends ViewModel {
                         user.addEnrolledIn(documentReference.getId(), title);
                         userSave.user = new User(user);
 
-                        // TODO: don't over ride
                         Map<String, Object> newEnroll = new HashMap<>();
                         newEnroll.put("enrolledIn", Arrays.asList(user.getEnrolledIn()));
                         db.document("users/" + user.getId())
