@@ -2,9 +2,11 @@ package com.devoFikiCar.ndp.ui.classes.teacher;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.devoFikiCar.ndp.User;
@@ -17,6 +19,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,8 +27,9 @@ import java.util.Map;
 
 import dmax.dialog.SpotsDialog;
 
-public class MainViewModel extends ViewModel {
+public class ClassesTeacherViewModel extends ViewModel {
     private User user;
+    private MutableLiveData<ArrayList<String>> ids = new MutableLiveData<>();
 
     public User getUser() {
         return user;
@@ -33,6 +37,10 @@ public class MainViewModel extends ViewModel {
 
     public void setUser(User user) {
         this.user = new User(user);
+    }
+
+    public void loadClassesOnStart() {
+        setIds(this.user.getEnrolledIn());
     }
 
     public void createClass(FirebaseFirestore db, String title, Context context) {
@@ -67,6 +75,8 @@ public class MainViewModel extends ViewModel {
                                 .update("enrolledIn", user.getEnrolledIn());
 
                         alertDialog.dismiss();
+                        System.out.println(user.toString());
+                        setIds(user.getEnrolledIn());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -77,5 +87,20 @@ public class MainViewModel extends ViewModel {
                         alertDialog.dismiss();
                     }
                 });
+    }
+
+    public MutableLiveData<ArrayList<String>> getIds() {
+        if (ids == null) {
+            return new MutableLiveData<>();
+        }
+        return ids;
+    }
+
+    public void setIds(ArrayList<String> ids) {
+        if (ids != null) {
+            this.ids.postValue(ids);
+        } else {
+            System.out.println("LOL"); // error handling at its finest
+        }
     }
 }

@@ -19,7 +19,11 @@ public class User {
         this.fullName = user.fullName;
         this.schoolCode = user.schoolCode;
         this.teacher = user.teacher;
-        this.enrolledIn = user.enrolledIn;
+        if (user.enrolledIn == null) {
+            this.enrolledIn = new ArrayList<>();
+        } else {
+            this.enrolledIn = user.enrolledIn;
+        }
         this.id = user.id;
     }
 
@@ -61,7 +65,7 @@ public class User {
     }
 
     public ArrayList<String> getEnrolledIn() {
-        return enrolledIn;
+        return new ArrayList(this.enrolledIn);
     }
 
     public void setEnrolledIn(ArrayList<String> enrolledIn) {
@@ -69,6 +73,9 @@ public class User {
     }
 
     public void addEnrolledIn(String id) {
+        if (this.enrolledIn == null) {
+            this.enrolledIn = new ArrayList<>();
+        }
         this.enrolledIn.add(id);
     }
 
