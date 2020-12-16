@@ -1,0 +1,64 @@
+package com.devoFikiCar.ndp.util;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Classes {
+    private ArrayList<HashMap<String, String>> lectureIDs;
+    private ArrayList<HashMap<String, String>> assignmentsIDs;
+
+    public Classes() {
+        lectureIDs = new ArrayList<>();
+        assignmentsIDs = new ArrayList<>();
+    }
+
+    public Classes(ArrayList<HashMap<String, String>> lectureIDs, ArrayList<HashMap<String, String>> assignmentsIDs) {
+        this.lectureIDs = new ArrayList(lectureIDs);
+        this.assignmentsIDs = new ArrayList(assignmentsIDs);
+    }
+
+    public Classes(Classes classes) {
+        this.lectureIDs = new ArrayList(classes.lectureIDs);
+        this.assignmentsIDs = new ArrayList(classes.assignmentsIDs);
+    }
+
+    public ArrayList<HashMap<String, String>> getLectureIDs() {
+        return lectureIDs;
+    }
+
+    public void setLectureIDs(ArrayList<HashMap<String, String>> lectureIDs) {
+        this.lectureIDs = lectureIDs;
+    }
+
+    public ArrayList<HashMap<String, String>> getAssignmentsIDs() {
+        return assignmentsIDs;
+    }
+
+    public void setAssignmentsIDs(ArrayList<HashMap<String, String>> assignmentsIDs) {
+        this.assignmentsIDs = assignmentsIDs;
+    }
+
+    public void addAssignmentID(String id) {
+        if (this.assignmentsIDs == null) {
+            this.assignmentsIDs = new ArrayList<>();
+        }
+        assignmentsIDs.add(new HashMap<>());
+        assignmentsIDs.get(assignmentsIDs.size() - 1).put("assignmentID", id);
+    }
+
+    public void addLectureID(String id) {
+        if (this.lectureIDs == null) {
+            this.lectureIDs = new ArrayList<>();
+        }
+        lectureIDs.add(new HashMap<>());
+        lectureIDs.get(lectureIDs.size() - 1).put("lectureID", id);
+    }
+
+    @Override
+    public String toString() {
+        return "Classes{" +
+                "lectureIDs=" + lectureIDs.toString() +
+                ", assignmentsIDs=" + assignmentsIDs.toString() +
+                '}';
+    }
+}

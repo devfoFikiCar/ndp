@@ -20,10 +20,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.devoFikiCar.ndp.R;
-import com.devoFikiCar.ndp.User;
-import com.devoFikiCar.ndp.helper.userSave;
 import com.devoFikiCar.ndp.ui.classes.ClassItem;
 import com.devoFikiCar.ndp.ui.classes.ClassesAdapter;
+import com.devoFikiCar.ndp.ui.lectureassignment.LectureAssignmentFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -87,6 +86,8 @@ public class ClassesTeacherFragment extends Fragment {
 
         mViewModel.getIdTitles().observe(getViewLifecycleOwner(), classesList);
 
+        mViewModel.getChange().observe(getViewLifecycleOwner(), change);
+
         return root;
     }
 
@@ -116,6 +117,17 @@ public class ClassesTeacherFragment extends Fragment {
                 classItems.add(new ClassItem(strings.get(i).get("classTitle"), strings.get(i).get("classID")));
             }
             adapter.notifyDataSetChanged();
+        }
+    };
+
+    final Observer<Integer> change = new Observer<Integer>() {
+        @Override
+        public void onChanged(Integer integer) {
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new LectureAssignmentFragment())
+                    .addToBackStack(null)
+                    .commit();
         }
     };
 }

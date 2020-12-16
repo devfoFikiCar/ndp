@@ -1,18 +1,8 @@
 package com.devoFikiCar.ndp.ui.classes.student;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +10,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.ui.classes.ClassItem;
 import com.devoFikiCar.ndp.ui.classes.ClassesAdapter;
+import com.devoFikiCar.ndp.ui.lectureassignment.LectureAssignmentFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -85,6 +84,8 @@ public class ClassesStudentFragment extends Fragment {
 
         mViewModel.getIdTitles().observe(getViewLifecycleOwner(), classesList);
 
+        mViewModel.getChange().observe(getViewLifecycleOwner(), change);
+
         return root;
     }
 
@@ -99,6 +100,7 @@ public class ClassesStudentFragment extends Fragment {
         adapter.setOnItemClickListener(new ClassesAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                mViewModel.loadClass(firestore, position, getContext());
                 System.out.println("Clicked: " + position);
             }
         });
@@ -116,6 +118,17 @@ public class ClassesStudentFragment extends Fragment {
 
             }
             adapter.notifyDataSetChanged();
+        }
+    };
+
+    final Observer<Integer> change = new Observer<Integer>() {
+        @Override
+        public void onChanged(Integer integer) {
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new LectureAssignmentFragment())
+                    .addToBackStack(null)
+                    .commit();
         }
     };
 }

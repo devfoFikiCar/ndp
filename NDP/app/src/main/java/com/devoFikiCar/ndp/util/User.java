@@ -1,9 +1,7 @@
-package com.devoFikiCar.ndp;
+package com.devoFikiCar.ndp.util;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class User {
     private String id;

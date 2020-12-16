@@ -12,4 +12,6 @@
     <string name="tv_password">Password</string>
     <string name="cb_teacher">Teacher</string>
     <string name="btJoinClassTXT">Join</string>
+    <string name="lectures">Lectures</string>
+    <string name="assignments">Assignments</string>
 </resources>

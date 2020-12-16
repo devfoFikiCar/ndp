@@ -2,22 +2,24 @@ package com.devoFikiCar.ndp.ui.classes.teacher;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.devoFikiCar.ndp.User;
+import com.devoFikiCar.ndp.helper.classSave;
+import com.devoFikiCar.ndp.util.Classes;
+import com.devoFikiCar.ndp.util.User;
 import com.devoFikiCar.ndp.helper.userSave;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +32,7 @@ import dmax.dialog.SpotsDialog;
 public class ClassesTeacherViewModel extends ViewModel {
     private User user;
     private MutableLiveData<ArrayList<HashMap<String, String>>> idTitles = new MutableLiveData<>();
+    private MutableLiveData<Integer> change = new MutableLiveData<>();
 
     public ClassesTeacherViewModel() {
         init();
@@ -107,5 +110,51 @@ public class ClassesTeacherViewModel extends ViewModel {
 
     public void setIdTitles(ArrayList<HashMap<String, String>> idTitles) {
         this.idTitles.postValue(idTitles);
+    }
+
+    public void loadClass(FirebaseFirestore db, int position, Context context) {
+        AlertDialog alertDialog = new SpotsDialog.Builder()
+                .setContext(context)
+                .setMessage("Loading data")
+                .setCancelable(false)
+                .build();
+
+        alertDialog.show();
+
+        DocumentReference docRef = db.collection("classes").document(getIdTitles().getValue().get(position).get("classID"));
+        Source source = Source.CACHE;
+
+        docRef.get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if (documentSnapshot != null) {
+                        classSave.classes = new Classes((ArrayList<HashMap<String, String>>) documentSnapshot.get("lectures"), (ArrayList<HashMap<String, String>>) documentSnapshot.get("assignments"));
+                        alertDialog.dismiss();
+                        System.out.println(classSave.classes.toString());
+                        setChange();
+                    } else {
+                        Toast.makeText(context, "Error has occurred.", Toast.LENGTH_SHORT);
+                        alertDialog.dismiss();
+                    }
+                } else {
+                    Toast.makeText(context, "Network error has occurred", Toast.LENGTH_SHORT);
+                    alertDialog.dismiss();
+                }
+            }
+        });
+    }
+
+    public MutableLiveData<Integer> getChange() {
+        return change;
+    }
+
+    public void setChange() {
+        int c = 0;
+        if (getChange().getValue() != null) {
+            c = getChange().getValue();
+        }
+        this.change.postValue(c++);
     }
 }

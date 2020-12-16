@@ -2,7 +2,7 @@ package com.devoFikiCar.ndp.ui.login;
 
 import androidx.lifecycle.ViewModel;
 
-import com.devoFikiCar.ndp.User;
+import com.devoFikiCar.ndp.util.User;
 
 public class LogInViewModel extends ViewModel {
     private User user;
