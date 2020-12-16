@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Classes {
+    private String id;
     private ArrayList<HashMap<String, String>> lectureIDs;
     private ArrayList<HashMap<String, String>> assignmentsIDs;
 
@@ -20,6 +21,7 @@ public class Classes {
     public Classes(Classes classes) {
         this.lectureIDs = new ArrayList(classes.lectureIDs);
         this.assignmentsIDs = new ArrayList(classes.assignmentsIDs);
+        this.id = classes.id;
     }
 
     public ArrayList<HashMap<String, String>> getLectureIDs() {
@@ -52,6 +54,14 @@ public class Classes {
         }
         lectureIDs.add(new HashMap<>());
         lectureIDs.get(lectureIDs.size() - 1).put("lectureID", id);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

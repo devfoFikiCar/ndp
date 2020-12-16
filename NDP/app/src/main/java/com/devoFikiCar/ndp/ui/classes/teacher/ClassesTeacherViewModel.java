@@ -131,6 +131,7 @@ public class ClassesTeacherViewModel extends ViewModel {
                     DocumentSnapshot documentSnapshot = task.getResult();
                     if (documentSnapshot != null) {
                         classSave.classes = new Classes((ArrayList<HashMap<String, String>>) documentSnapshot.get("lectures"), (ArrayList<HashMap<String, String>>) documentSnapshot.get("assignments"));
+                        classSave.classes.setId(getIdTitles().getValue().get(position).get("classID"));
                         alertDialog.dismiss();
                         System.out.println(classSave.classes.toString());
                         setChange();

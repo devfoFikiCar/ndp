@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.ui.lecture.LectureItem;
 import com.devoFikiCar.ndp.ui.lecture.LecturesAdapter;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +30,7 @@ public class LecturesStudentsFragment extends Fragment {
     private LecturesAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<LectureItem> lectureItems = new ArrayList<>();
+    private FirebaseFirestore firestore;
 
     public static LecturesStudentsFragment newInstance() {
         return new LecturesStudentsFragment();
@@ -41,6 +43,8 @@ public class LecturesStudentsFragment extends Fragment {
         View root = inflater.inflate(R.layout.lectures_students_fragment, container, false);
 
         mViewModel = new ViewModelProvider(this).get(LectureStudentsViewModel.class);
+        firestore = FirebaseFirestore.getInstance();
+        mViewModel.lectureUpdate(firestore);
 
         buildRecyclerView(root);
 
