@@ -70,7 +70,7 @@ public class ClassesStudentViewModel extends ViewModel {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
+                    if (document.exists() && user.getSchoolCode().equals((String)document.get("schoolCode"))) {
                         System.out.println(document.getData());
                         user.addEnrolledIn(id, document.get("classTitle").toString());
                         userSave.user = new User(user);
