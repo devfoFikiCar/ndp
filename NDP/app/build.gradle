@@ -50,5 +50,5 @@ dependencies {
     implementation 'com.brackeys.ui:language-java:1.0.1'
     implementation 'com.brackeys.ui:language-python:1.0.1'
     implementation 'com.brackeys.ui:language-markdown:1.1.0'
-    implementation 'us.feras.mdv:markdownview:1.1.0'
+    implementation 'com.github.tiagohm.MarkdownView:library:0.19.0'
 }

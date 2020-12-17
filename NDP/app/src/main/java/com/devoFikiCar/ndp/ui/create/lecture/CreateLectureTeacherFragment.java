@@ -2,6 +2,8 @@ package com.devoFikiCar.ndp.ui.create.lecture;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,13 +23,15 @@ import com.brackeys.ui.language.java.JavaLanguage;
 import com.brackeys.ui.language.markdown.MarkdownLanguage;
 import com.devoFikiCar.ndp.R;
 
-import us.feras.mdv.MarkdownView;
+import br.tiagohm.markdownview.MarkdownView;
+import br.tiagohm.markdownview.css.styles.Github;
 
 public class CreateLectureTeacherFragment extends Fragment {
 
     private CreateLectureTeacherViewModel mViewModel;
     private TextProcessor etMarkdown;
     private Button btHelp;
+    private Button btPreview;
 
     public static CreateLectureTeacherFragment newInstance() {
         return new CreateLectureTeacherFragment();
@@ -54,6 +58,29 @@ public class CreateLectureTeacherFragment extends Fragment {
                 intent.addCategory(Intent.CATEGORY_BROWSABLE);
                 intent.setData(Uri.parse("https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"));
                 startActivity(intent);
+            }
+        });
+
+        btPreview = (Button) root.findViewById(R.id.btPreview);
+        btPreview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                alert.setTitle("Preview");
+
+                final MarkdownView markdownView = new MarkdownView(getContext());
+                markdownView.addStyleSheet(new Github());
+                markdownView.loadMarkdown(etMarkdown.getText().toString());
+                alert.setView(markdownView);
+
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Nothing
+                    }
+                });
+
+                alert.show();
             }
         });
 
