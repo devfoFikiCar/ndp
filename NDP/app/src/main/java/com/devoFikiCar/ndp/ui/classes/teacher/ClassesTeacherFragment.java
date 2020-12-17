@@ -103,6 +103,7 @@ public class ClassesTeacherFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 System.out.println("Clicked: " + position);
+                mViewModel.loadClass(firestore, position, getContext());
             }
         });
     }

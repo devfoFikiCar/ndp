@@ -16,6 +16,7 @@ import android.widget.Button;
 import com.devoFikiCar.ndp.LecturesStudents;
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.ui.lecture.student.LecturesStudentsFragment;
+import com.devoFikiCar.ndp.ui.lecture.teacher.LecturesTeacherFragment;
 
 public class LectureAssignmentFragment extends Fragment {
 
@@ -42,7 +43,10 @@ public class LectureAssignmentFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (mViewModel.getUser().isTeacher()) {
-
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, new LecturesTeacherFragment())
+                            .commit();
                 } else {
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()

@@ -14,4 +14,5 @@
     <string name="btJoinClassTXT">Join</string>
     <string name="lectures">Lectures</string>
     <string name="assignments">Assignments</string>
+    <string name="create_class">Create class</string>
 </resources>
