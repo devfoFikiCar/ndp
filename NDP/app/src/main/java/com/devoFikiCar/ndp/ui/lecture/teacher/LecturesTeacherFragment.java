@@ -17,8 +17,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.devoFikiCar.ndp.R;
+import com.devoFikiCar.ndp.ui.create.lecture.CreateLectureTeacherFragment;
 import com.devoFikiCar.ndp.ui.lecture.LectureItem;
 import com.devoFikiCar.ndp.ui.lecture.LecturesAdapter;
+import com.devoFikiCar.ndp.ui.lecture.student.LecturesStudentsFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -63,6 +65,11 @@ public class LecturesTeacherFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println("Clicked");
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new CreateLectureTeacherFragment())
+                        .addToBackStack(null)
+                        .commit();
             }
         });
     }
