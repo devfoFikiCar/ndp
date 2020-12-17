@@ -49,4 +49,5 @@ dependencies {
     implementation 'com.brackeys.ui:editorkit:1.0.1'
     implementation 'com.brackeys.ui:language-java:1.0.1'
     implementation 'com.brackeys.ui:language-python:1.0.1'
+    implementation 'us.feras.mdv:markdownview:1.1.0'
 }

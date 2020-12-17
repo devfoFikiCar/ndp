@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.ui.lecture.LectureItem;
@@ -31,6 +32,7 @@ public class LecturesTeacherFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<LectureItem> lectureItems = new ArrayList<>();
     private FirebaseFirestore firestore;
+    private Button btCreateLecture;
 
     public static LecturesTeacherFragment newInstance() {
         return new LecturesTeacherFragment();
@@ -48,9 +50,21 @@ public class LecturesTeacherFragment extends Fragment {
 
         buildRecyclerView(root);
 
+        setUpButton(root);
+
         mViewModel.getLectureIDs().observe(getViewLifecycleOwner(), lecturesList);
 
         return root;
+    }
+
+    private void setUpButton(View root) {
+        btCreateLecture = (Button) root.findViewById(R.id.btLecturesListTeacher);
+        btCreateLecture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Clicked");
+            }
+        });
     }
 
     private void buildRecyclerView(View root) {
