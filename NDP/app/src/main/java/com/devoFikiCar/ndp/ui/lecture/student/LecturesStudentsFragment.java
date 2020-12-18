@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.ui.lecture.LectureItem;
 import com.devoFikiCar.ndp.ui.lecture.LecturesAdapter;
+import com.devoFikiCar.ndp.ui.viewLecture.StudentViewLectureFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -65,6 +66,14 @@ public class LecturesStudentsFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 System.out.println("clicked");
+                Bundle bundle = new Bundle();
+                bundle.putInt("position", position);
+
+                StudentViewLectureFragment studentViewLectureFragment = new StudentViewLectureFragment();
+                studentViewLectureFragment.setArguments(bundle);
+
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction().replace(R.id.fragment_container, studentViewLectureFragment).commit();
             }
         });
     }
