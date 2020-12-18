@@ -16,12 +16,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.brackeys.ui.editorkit.theme.EditorTheme;
 import com.brackeys.ui.editorkit.widget.TextProcessor;
 import com.brackeys.ui.language.java.JavaLanguage;
 import com.brackeys.ui.language.markdown.MarkdownLanguage;
 import com.devoFikiCar.ndp.R;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import br.tiagohm.markdownview.MarkdownView;
 import br.tiagohm.markdownview.css.styles.Github;
@@ -32,6 +34,9 @@ public class CreateLectureTeacherFragment extends Fragment {
     private TextProcessor etMarkdown;
     private Button btHelp;
     private Button btPreview;
+    private Button btDone;
+    private FirebaseFirestore firestore;
+    private EditText etTitle;
 
     public static CreateLectureTeacherFragment newInstance() {
         return new CreateLectureTeacherFragment();
@@ -48,6 +53,11 @@ public class CreateLectureTeacherFragment extends Fragment {
         etMarkdown = (TextProcessor) root.findViewById(R.id.etMarkdown);
         etMarkdown.setLanguage(new MarkdownLanguage());
         etMarkdown.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
+        etMarkdown.setTextContent("# Title");
+
+        firestore = FirebaseFirestore.getInstance();
+
+        etTitle = (EditText) root.findViewById(R.id.etTitleLecture);
 
         btHelp = (Button) root.findViewById(R.id.btHelp);
         btHelp.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +91,14 @@ public class CreateLectureTeacherFragment extends Fragment {
                 });
 
                 alert.show();
+            }
+        });
+
+        btDone = (Button) root.findViewById(R.id.btCreateLectureDone);
+        btDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewModel.createLecture(firestore, getContext(), etTitle.getText().toString(), etMarkdown.getText().toString(), getActivity());
             }
         });
 
