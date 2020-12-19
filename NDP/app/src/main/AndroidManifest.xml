@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-        <activity android:name=".studentViewLecture"></activity>
+        <activity android:name=".StudentViewLecture"></activity>
         <activity android:name=".CreateLectureTeacher" />
         <activity android:name=".LecturesTeacher" />
         <activity android:name=".LecturesStudents" />

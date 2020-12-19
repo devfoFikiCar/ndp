@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.devoFikiCar.ndp.ui.viewLecture.StudentViewLectureFragment;
 
-public class studentViewLecture extends AppCompatActivity {
+public class StudentViewLecture extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

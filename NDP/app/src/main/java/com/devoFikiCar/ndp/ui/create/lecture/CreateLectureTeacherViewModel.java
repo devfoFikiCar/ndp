@@ -39,10 +39,6 @@ public class CreateLectureTeacherViewModel extends ViewModel {
         this.classes = new Classes(classSave.classes);
     }
 
-    // make new lecture
-    // update lectures in class
-
-
     public void createLecture(FirebaseFirestore db, Context context, String title, String lecture, FragmentActivity activity) {
         AlertDialog alertDialog = new SpotsDialog.Builder()
                 .setContext(context)
