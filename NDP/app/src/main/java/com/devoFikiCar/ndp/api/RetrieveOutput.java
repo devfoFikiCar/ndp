@@ -22,6 +22,7 @@ public class RetrieveOutput {
     private static final int LEVEL_5 = 5000;
 
     public static String getOutput(String token) {
+        boolean flag = true;
         try {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
@@ -43,9 +44,9 @@ public class RetrieveOutput {
                 System.out.println(status);
                 switch (count) {
                     case 0:
-                    case 1:
                         SystemClock.sleep(LEVEL_1);
                         break;
+                    case 1:
                     case 2:
                         SystemClock.sleep(LEVEL_2);
                         break;
@@ -62,9 +63,17 @@ public class RetrieveOutput {
                         return "Network error";
                 }
                 count++;
-            } while (!status.equals("Accepted"));
+                if (status.equals("Accepted") || status.equals("Compilation Error")) {
+                    flag = false;
+                }
+            } while (flag);
 
-            return jsonObject.getString("stdout");
+            String out = jsonObject.getString("stdout");
+            if (out.equals("null") && !jsonObject.getString("compile_output").equals("null")) {
+                out = jsonObject.getString("compile_output");
+            }
+
+            return out;
         } catch (Exception ex) {
             Log.e("API - GET", ex.getMessage());
         }

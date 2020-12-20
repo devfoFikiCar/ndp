@@ -42,8 +42,8 @@ public class PlaygroundLFragment extends Fragment {
 
     private static final String PYTHON_CODE_START = "# code";
     private static final String FCLANG_CODE_START = "// code";
-    private static final String JAVA_CODE_START = "public class Program {\n"
-                                                + "\t\t\t\tpublic static void main(String []args){\n"
+    private static final String JAVA_CODE_START = "public class Main {\n"
+                                                + "\t\t\t\tpublic static void main(String[] args){\n"
                                                 + "\t\t\t\t\t\t\t\t// code\n"
                                                 + "\t\t\t\t}\n"
                                                 + "}\n";
@@ -124,23 +124,16 @@ public class PlaygroundLFragment extends Fragment {
                 etOutput.setText("");
                 switch (LANGUAGE) {
                     case 0: {
+                        // fclang
                         etOutput.setText(mViewModel.runCode(etCode.getText().toString()));
                         System.out.println(etCode.getText().toString());
                         break;
                     }
-                    case 71: {
-                        // PYTHON
+                    case 71:
+                    case 62: {
+                        // java and python
                         APITask apiTask = new APITask();
                         apiTask.execute(new String[]{etCode.getText().toString(), mViewModel.getStdin()});
-                        break;
-                    }
-                    case 62: {
-                        // JAVA
-                        //break;
-                    }
-                    default: {
-                        etOutput.setText(mViewModel.runCode(etCode.getText().toString()));
-                        System.out.println(etCode.getText().toString());
                         break;
                     }
                 }

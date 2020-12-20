@@ -33,6 +33,7 @@ public class SubmitCode {
                     .addHeader("x-rapidapi-key", "12bc36a072msh7fbc668fb4575d0p14dc53jsn8776abdff029")
                     .addHeader("x-rapidapi-host", "judge0.p.rapidapi.com")
                     .addHeader("wait", "true")
+                    .addHeader("redirect_stderr_to_stdout", "true")
                     .build();
             Response response = client.newCall(request).execute();
             String rd = response.body().string();
