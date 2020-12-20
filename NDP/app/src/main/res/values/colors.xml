@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) devfoFikiCar - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Filip Obradović <fiki.obradovic@gmail.com> 2020
+  ~
+  -->
+
 <resources>
     <color name="colorPrimary">#D9D2D0</color>
     <color name="colorPrimaryDark">#3B403F</color>
