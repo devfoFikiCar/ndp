@@ -7,6 +7,7 @@
 
 package com.devoFikiCar.fclang;
 
+import com.devoFikiCar.fclang.lexer.Lexer;
 import com.devoFikiCar.fclang.parser.Parser;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class StartFClang {
         try {
             setCode(code);
             setInput(input);
+            setTokens();
             Parser.parse(tokens, 0, tokens.size());
             clearLists();
         } catch (Exception ex) {
@@ -52,6 +54,10 @@ public class StartFClang {
 
     public static ArrayList<Token> getTokens() {
         return tokens;
+    }
+
+    public static void setTokens() {
+        StartFClang.tokens = Lexer.lexer();
     }
 
     private static void clearLists() {
