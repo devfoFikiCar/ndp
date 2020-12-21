@@ -36,6 +36,8 @@ import com.devoFikiCar.ndp.api.RetrieveOutput;
 import com.devoFikiCar.ndp.api.SubmitCode;
 import com.devoFikiCar.ndp.async.AsyncTask;
 
+import java.util.ArrayList;
+
 import dmax.dialog.SpotsDialog;
 
 public class PlaygroundLFragment extends Fragment {
@@ -57,6 +59,8 @@ public class PlaygroundLFragment extends Fragment {
     private Spinner spLanguages;
     private String options[] = {"fclang", "python", "java"};
     private AlertDialog alertDialog;
+    private ArrayList<LanguageItem> languageItems;
+    private LanguageAdapter languageAdapter;
 
     public static PlaygroundLFragment newInstance() {
         return new PlaygroundLFragment();
@@ -75,11 +79,10 @@ public class PlaygroundLFragment extends Fragment {
         etCode = (TextProcessor) root.findViewById(R.id.etCode);
         etOutput = (EditText) root.findViewById(R.id.etOutput);
 
+        initList();
         spLanguages = (Spinner) root.findViewById(R.id.spLanguages);
-
-        ArrayAdapter spinnerAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, options);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spLanguages.setAdapter(spinnerAdapter);
+        languageAdapter = new LanguageAdapter(getContext(), languageItems);
+        spLanguages.setAdapter(languageAdapter);
         spLanguages.setSelection(0);
 
         System.out.println(mViewModel.getUser().toString());
@@ -183,6 +186,13 @@ public class PlaygroundLFragment extends Fragment {
         });
 
         return root;
+    }
+
+    private void initList() {
+        languageItems = new ArrayList<>();
+        languageItems.add(new LanguageItem("Fclang", R.drawable.ic_fclang));
+        languageItems.add(new LanguageItem("Python", R.drawable.ic_python));
+        languageItems.add(new LanguageItem("Java", R.drawable.ic_java));
     }
 
     public class APITask extends AsyncTask<String[], Integer, String> {
