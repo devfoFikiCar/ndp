@@ -10,6 +10,8 @@ package com.devoFikiCar.ndp.ui.lecture.teacher;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,6 +34,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import br.tiagohm.markdownview.MarkdownView;
+import br.tiagohm.markdownview.css.styles.Github;
 
 public class LecturesTeacherFragment extends Fragment {
 
@@ -62,6 +67,7 @@ public class LecturesTeacherFragment extends Fragment {
         setUpButton(root);
 
         mViewModel.getLectureIDs().observe(getViewLifecycleOwner(), lecturesList);
+        mViewModel.getContent().observe(getViewLifecycleOwner(), lectureContent);
 
         return root;
     }
@@ -93,6 +99,7 @@ public class LecturesTeacherFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 System.out.println("clicked");
+                mViewModel.displayPreview(firestore, position, getContext(), getActivity());
             }
         });
     }
@@ -107,6 +114,28 @@ public class LecturesTeacherFragment extends Fragment {
                 lectureItems.add(new LectureItem(hashMaps.get(i).get("lectureTitle")));
             }
             adapter.notifyDataSetChanged();
+        }
+    };
+
+    final Observer<String> lectureContent = new Observer<String>() {
+        @Override
+        public void onChanged(String s) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+            alert.setTitle("Preview");
+
+            final MarkdownView markdownView = new MarkdownView(getContext());
+            markdownView.addStyleSheet(new Github());
+            markdownView.loadMarkdown(s);
+            alert.setView(markdownView);
+
+            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // Nothing
+                }
+            });
+
+            alert.show();
         }
     };
 }
