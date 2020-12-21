@@ -122,7 +122,7 @@ public class ClassesTeacherFragment extends Fragment {
                 classItems.clear();
             }
             for (int i = 0; i < strings.size(); i++) {
-                classItems.add(new ClassItem(strings.get(i).get("classTitle"), strings.get(i).get("classID")));
+                classItems.add(new ClassItem(strings.get(i).get("classTitle"), "Class code: " + strings.get(i).get("classID")));
             }
             adapter.notifyDataSetChanged();
         }

@@ -35,7 +35,6 @@ public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.ClassesV
         public TextView tvTitle;
         public TextView tvID;
 
-
         public ClassesViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvTitleLineClass);
