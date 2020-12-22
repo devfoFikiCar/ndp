@@ -25,4 +25,5 @@
     <string name="preview">PREVIEW</string>
     <string name="help">HELP</string>
     <string name="done">DONE</string>
+    <string name="create_assignment">Create Assignment</string>
 </resources>

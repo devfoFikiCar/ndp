@@ -19,28 +19,28 @@
         android:layout_margin="4dp">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageViewAssignment"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_baseline_class_24"
+            android:src="@drawable/ic_baseline_assignment_24"
             android:padding="2dp" />
         <TextView
-            android:id="@+id/tvTitleLineClass"
+            android:id="@+id/tvTitleLineAssignment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/imageView"
+            android:layout_toEndOf="@+id/imageViewAssignment"
             android:text="Line 1"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
         <TextView
-            android:id="@+id/tvIDLineClass"
+            android:id="@+id/tvIDLineAssignment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvTitleLineClass"
+            android:layout_below="@+id/tvTitleLineAssignment"
             android:layout_marginStart="8dp"
-            android:layout_toEndOf="@+id/imageView"
+            android:layout_toEndOf="@+id/imageViewAssignment"
             android:text="Line 2"
             android:textSize="15sp" />
     </RelativeLayout>
