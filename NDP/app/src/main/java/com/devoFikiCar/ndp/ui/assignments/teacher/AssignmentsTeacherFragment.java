@@ -26,6 +26,8 @@ import android.widget.Button;
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.ui.assignments.AssignmentItem;
 import com.devoFikiCar.ndp.ui.assignments.AssignmentsAdapter;
+import com.devoFikiCar.ndp.ui.create.assignment.CreateAssignmentTeacherFragment;
+import com.devoFikiCar.ndp.ui.create.lecture.CreateLectureTeacherFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -86,6 +88,11 @@ public class AssignmentsTeacherFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println("clicked");
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new CreateAssignmentTeacherFragment())
+                        .addToBackStack("AssignmentTeacherFragment")
+                        .commit();
             }
         });
     }
