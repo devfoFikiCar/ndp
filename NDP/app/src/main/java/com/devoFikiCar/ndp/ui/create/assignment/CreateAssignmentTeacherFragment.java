@@ -9,6 +9,8 @@ package com.devoFikiCar.ndp.ui.create.assignment;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,16 +23,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.brackeys.ui.editorkit.theme.EditorTheme;
 import com.brackeys.ui.editorkit.widget.TextProcessor;
+import com.brackeys.ui.language.markdown.MarkdownLanguage;
 import com.devoFikiCar.ndp.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import br.tiagohm.markdownview.MarkdownView;
+import br.tiagohm.markdownview.css.styles.Github;
 
 public class CreateAssignmentTeacherFragment extends Fragment {
 
     private CreateAssignmentTeacherViewModel mViewModel;
-    private static final String ASSIGNMENT_TEXT = "Text:\"Here goes task text\"\nExample input:\"Here goes input\"\nExample output:\"\"" +
+    private static final String ASSIGNMENT_TEXT = "Text:\"Here goes task text\"\nExample input:\"Here goes input\"\nExample output:\"Example output\"\n" +
             "Task input:\"Here goes test input\"\nTask output:\"Here goes expected output to task input\"";
     private TextProcessor etMarkdown;
     private Button btHelp;
@@ -53,10 +58,11 @@ public class CreateAssignmentTeacherFragment extends Fragment {
         firestore = FirebaseFirestore.getInstance();
 
         etMarkdown = (TextProcessor) root.findViewById(R.id.etMarkdownAssignment);
+        etMarkdown.setLanguage(new MarkdownLanguage());
+        etMarkdown.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
         etMarkdown.setTextContent(ASSIGNMENT_TEXT);
 
         btHelp = (Button) root.findViewById(R.id.btHelpAssignment);
-        btPreview = (Button) root.findViewById(R.id.btPreviewAssignment);
         etTitle = (EditText) root.findViewById(R.id.etTitleLectureAssignment);
 
         btDone = (Button) root.findViewById(R.id.btCreateLectureDoneAssignment);
@@ -67,6 +73,62 @@ public class CreateAssignmentTeacherFragment extends Fragment {
             }
         });
 
+        btPreview = (Button) root.findViewById(R.id.btPreviewAssignment);
+        btPreview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                alert.setTitle("Preview");
+
+                final MarkdownView markdownView = new MarkdownView(getContext());
+                markdownView.addStyleSheet(new Github());
+                markdownView.loadMarkdown(formatAssignment(etMarkdown.getText().toString()));
+                alert.setView(markdownView);
+
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Nothing
+                    }
+                });
+
+                alert.show();
+            }
+        });
+
         return root;
+    }
+
+    public String formatAssignment(String text) {
+        String[] sections = text.split("Text");
+        StringBuilder output = new StringBuilder();
+
+        for (int i = 1; i < sections.length; i++) {
+            sections[i] = sections[i].replace("\n", "");
+            String[] parts = sections[i].split("\"");
+            for (int j = 0; j < parts.length; j++) System.out.println(j + " " + parts[j]);
+            output.append("## Task ").append(i).append("\n");
+            output.append("***\n");
+            for (int j = 1; j < parts.length; j+=2) {
+                switch (j) {
+                    case 1: {
+                        output.append(parts[j]).append("\n");
+                        break;
+                    }
+                    case 3: {
+                        output.append("\n### Example input\n***\n");
+                        output.append(parts[j]).append("\n");
+                        break;
+                    }
+                    case 5: {
+                        output.append("\n### Example output\n***\n");
+                        output.append(parts[j]).append("\n");
+                        break;
+                    }
+                }
+            }
+        }
+
+        return output.toString();
     }
 }
