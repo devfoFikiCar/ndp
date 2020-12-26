@@ -69,7 +69,7 @@ public class CreateAssignmentTeacherFragment extends Fragment {
         btDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().popBackStack();
+                mViewModel.createAssignment(firestore, getContext(), etTitle.getText().toString(), etMarkdown.getText().toString(), getActivity());
             }
         });
 
@@ -82,7 +82,11 @@ public class CreateAssignmentTeacherFragment extends Fragment {
 
                 final MarkdownView markdownView = new MarkdownView(getContext());
                 markdownView.addStyleSheet(new Github());
-                markdownView.loadMarkdown(formatAssignment(etMarkdown.getText().toString()));
+                String tmp = formatAssignment(etMarkdown.getText().toString());
+                if (tmp.equals("ERROR_CODE")) {
+                    tmp = "Formatting error.";
+                }
+                markdownView.loadMarkdown(tmp);
                 alert.setView(markdownView);
 
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -103,30 +107,35 @@ public class CreateAssignmentTeacherFragment extends Fragment {
         String[] sections = text.split("Text");
         StringBuilder output = new StringBuilder();
 
-        for (int i = 1; i < sections.length; i++) {
-            sections[i] = sections[i].replace("\n", "");
-            String[] parts = sections[i].split("\"");
-            for (int j = 0; j < parts.length; j++) System.out.println(j + " " + parts[j]);
-            output.append("## Task ").append(i).append("\n");
-            output.append("***\n");
-            for (int j = 1; j < parts.length; j+=2) {
-                switch (j) {
-                    case 1: {
-                        output.append(parts[j]).append("\n");
-                        break;
-                    }
-                    case 3: {
-                        output.append("\n### Example input\n***\n");
-                        output.append(parts[j]).append("\n");
-                        break;
-                    }
-                    case 5: {
-                        output.append("\n### Example output\n***\n");
-                        output.append(parts[j]).append("\n");
-                        break;
+        try {
+            for (int i = 1; i < sections.length; i++) {
+                sections[i] = sections[i].replace("\n", "");
+                String[] parts = sections[i].split("\"");
+                for (int j = 0; j < parts.length; j++) System.out.println(j + " " + parts[j]);
+                output.append("## Task ").append(i).append("\n");
+                output.append("***\n");
+                for (int j = 1; j < parts.length; j += 2) {
+                    switch (j) {
+                        case 1: {
+                            output.append(parts[j]).append("\n");
+                            break;
+                        }
+                        case 3: {
+                            output.append("\n### Example input\n***\n");
+                            output.append(parts[j]).append("\n");
+                            break;
+                        }
+                        case 5: {
+                            output.append("\n### Example output\n***\n");
+                            output.append(parts[j]).append("\n");
+                            break;
+                        }
                     }
                 }
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            output.append("ERROR_CODE");
         }
 
         return output.toString();
