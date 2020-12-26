@@ -47,12 +47,13 @@ public class Classes {
         this.assignmentsIDs = assignmentsIDs;
     }
 
-    public void addAssignmentID(String id) {
+    public void addAssignmentID(String id, String title) {
         if (this.assignmentsIDs == null) {
             this.assignmentsIDs = new ArrayList<>();
         }
         assignmentsIDs.add(new HashMap<>());
         assignmentsIDs.get(assignmentsIDs.size() - 1).put("assignmentID", id);
+        assignmentsIDs.get(assignmentsIDs.size() - 1).put("assignmentTitle", title);
     }
 
     public void addLectureID(String id, String title) {
