@@ -73,7 +73,7 @@ public class CreateAssignmentTeacherFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (TimeStorage.wrongDate()) {
-                    Toast.makeText(getContext(), "Wrong date format", Toast.LENGTH_SHORT);
+                    Toast.makeText(getContext(), "Wrong date format", Toast.LENGTH_SHORT).show();
                 } else {
                     mViewModel.createAssignment(firestore, getContext(), etTitle.getText().toString(), etMarkdown.getText().toString(), getActivity());
                 }

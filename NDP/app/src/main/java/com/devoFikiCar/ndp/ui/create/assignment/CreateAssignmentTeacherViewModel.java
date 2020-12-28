@@ -95,7 +95,7 @@ public class CreateAssignmentTeacherViewModel extends ViewModel {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         System.out.println("ERROR");
-                        Toast.makeText(context, "Network error has occurred", Toast.LENGTH_SHORT);
+                        Toast.makeText(context, "Network error has occurred", Toast.LENGTH_SHORT).show();
                         alertDialog.dismiss();
                     }
                 });

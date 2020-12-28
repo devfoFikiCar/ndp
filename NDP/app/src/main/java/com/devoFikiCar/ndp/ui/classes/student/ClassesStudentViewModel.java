@@ -98,12 +98,12 @@ public class ClassesStudentViewModel extends ViewModel {
                         setIdTitles(user.getEnrolledIn());
                     } else {
                         System.out.println("Wrong id");
-                        Toast.makeText(context, "Wrong id", Toast.LENGTH_SHORT);
+                        Toast.makeText(context, "Wrong id", Toast.LENGTH_SHORT).show();
                         alertDialog.dismiss();
                     }
                 } else {
                     System.out.println("ERROR");
-                    Toast.makeText(context, "Network error has occurred", Toast.LENGTH_SHORT);
+                    Toast.makeText(context, "Network error has occurred", Toast.LENGTH_SHORT).show();
                     alertDialog.dismiss();
                 }
             }
@@ -145,11 +145,11 @@ public class ClassesStudentViewModel extends ViewModel {
                         System.out.println(classSave.classes.toString());
                         setChange();
                     } else {
-                        Toast.makeText(context, "Error has occurred.", Toast.LENGTH_SHORT);
+                        Toast.makeText(context, "Error has occurred.", Toast.LENGTH_SHORT).show();
                         alertDialog.dismiss();
                     }
                 } else {
-                    Toast.makeText(context, "Network error has occurred", Toast.LENGTH_SHORT);
+                    Toast.makeText(context, "Network error has occurred", Toast.LENGTH_SHORT).show();
                     alertDialog.dismiss();
                 }
             }

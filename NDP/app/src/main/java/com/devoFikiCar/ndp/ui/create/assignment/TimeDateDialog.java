@@ -58,7 +58,7 @@ public class TimeDateDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (TimeStorage.wrongDate()) {
-                            Toast.makeText(getContext(), "Wrong date format", Toast.LENGTH_SHORT);
+                            Toast.makeText(getContext(), "Wrong date format", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
