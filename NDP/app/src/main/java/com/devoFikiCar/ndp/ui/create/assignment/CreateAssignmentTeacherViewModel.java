@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModel;
 import com.devoFikiCar.ndp.helper.classSave;
 import com.devoFikiCar.ndp.util.AssignmentSection;
 import com.devoFikiCar.ndp.util.Classes;
+import com.devoFikiCar.ndp.util.TimeStorage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -69,6 +70,8 @@ public class CreateAssignmentTeacherViewModel extends ViewModel {
         for (int i = 0; i < assignmentSectionArrayList.size(); i++) {
             docData.put("taskNumber" + i, assignmentSectionArrayList.get(i).toString());
         }
+        docData.put("timeStart", TimeStorage.toString1());
+        docData.put("timeEnd", TimeStorage.toString2());
 
         db.collection("assignments")
                 .add(docData)

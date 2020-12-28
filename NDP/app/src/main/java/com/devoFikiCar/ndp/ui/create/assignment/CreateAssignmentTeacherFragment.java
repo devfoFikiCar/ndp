@@ -22,11 +22,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.brackeys.ui.editorkit.theme.EditorTheme;
 import com.brackeys.ui.editorkit.widget.TextProcessor;
 import com.brackeys.ui.language.markdown.MarkdownLanguage;
 import com.devoFikiCar.ndp.R;
+import com.devoFikiCar.ndp.util.TimeStorage;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import br.tiagohm.markdownview.MarkdownView;
@@ -41,6 +43,7 @@ public class CreateAssignmentTeacherFragment extends Fragment {
     private Button btHelp;
     private Button btPreview;
     private Button btDone;
+    private Button btTime;
     private FirebaseFirestore firestore;
     private EditText etTitle;
 
@@ -69,7 +72,11 @@ public class CreateAssignmentTeacherFragment extends Fragment {
         btDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mViewModel.createAssignment(firestore, getContext(), etTitle.getText().toString(), etMarkdown.getText().toString(), getActivity());
+                if (TimeStorage.wrongDate()) {
+                    Toast.makeText(getContext(), "Wrong date format", Toast.LENGTH_SHORT);
+                } else {
+                    mViewModel.createAssignment(firestore, getContext(), etTitle.getText().toString(), etMarkdown.getText().toString(), getActivity());
+                }
             }
         });
 
@@ -97,6 +104,15 @@ public class CreateAssignmentTeacherFragment extends Fragment {
                 });
 
                 alert.show();
+            }
+        });
+
+        btTime = (Button) root.findViewById(R.id.btTimeAssignments);
+        btTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimeDateDialog timeDateDialog = new TimeDateDialog();
+                timeDateDialog.show(getActivity().getSupportFragmentManager(), "test");
             }
         });
 
