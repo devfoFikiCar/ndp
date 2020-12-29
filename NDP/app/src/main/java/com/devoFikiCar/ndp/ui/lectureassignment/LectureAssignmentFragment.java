@@ -22,6 +22,7 @@ import android.widget.Button;
 
 import com.devoFikiCar.ndp.LecturesStudents;
 import com.devoFikiCar.ndp.R;
+import com.devoFikiCar.ndp.ui.assignments.student.AssignmentsStudentFragment;
 import com.devoFikiCar.ndp.ui.assignments.teacher.AssignmentsTeacherFragment;
 import com.devoFikiCar.ndp.ui.lecture.student.LecturesStudentsFragment;
 import com.devoFikiCar.ndp.ui.lecture.teacher.LecturesTeacherFragment;
@@ -76,7 +77,11 @@ public class LectureAssignmentFragment extends Fragment {
                             .addToBackStack(null)
                             .commit();
                 } else {
-
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, new AssignmentsStudentFragment())
+                            .addToBackStack(null)
+                            .commit();
                 }
             }
         });

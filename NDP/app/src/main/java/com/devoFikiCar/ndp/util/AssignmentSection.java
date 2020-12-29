@@ -13,6 +13,7 @@ public class AssignmentSection {
     private String outputExample;
     private String inputTask;
     private String outputTask;
+    private static final String CODE = "FIKICARCODE";
 
     public AssignmentSection(String text, String inputExample, String outputExample, String inputTask, String outputTask) {
         this.text = text;
@@ -75,12 +76,6 @@ public class AssignmentSection {
 
     @Override
     public String toString() {
-        return "AssignmentSection{" +
-                "text='" + text + '\'' +
-                ", inputExample='" + inputExample + '\'' +
-                ", outputExample='" + outputExample + '\'' +
-                ", inputTask='" + inputTask + '\'' +
-                ", outputTask='" + outputTask + '\'' +
-                '}';
+        return CODE + text + CODE + inputExample + CODE + outputExample + CODE + inputTask + CODE + outputTask;
     }
 }
