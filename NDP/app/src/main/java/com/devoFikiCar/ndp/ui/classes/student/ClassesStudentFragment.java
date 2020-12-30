@@ -122,7 +122,6 @@ public class ClassesStudentFragment extends Fragment {
             }
             for (int i = 0; i < hashMaps.size(); i++) {
                 classItems.add(new ClassItem(hashMaps.get(i).get("classTitle"), "Class code: " + hashMaps.get(i).get("classID")));
-
             }
             adapter.notifyDataSetChanged();
         }

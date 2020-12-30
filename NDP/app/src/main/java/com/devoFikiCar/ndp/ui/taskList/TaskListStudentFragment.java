@@ -7,6 +7,7 @@
 
 package com.devoFikiCar.ndp.ui.taskList;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -14,18 +15,28 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.devoFikiCar.fclang.parser.math.Abs;
 import com.devoFikiCar.ndp.R;
+import com.devoFikiCar.ndp.util.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
 
 public class TaskListStudentFragment extends Fragment {
 
     private TaskListStudentViewModel mViewModel;
     private FirebaseFirestore firestore;
+    private RecyclerView recyclerView;
+    private TasksAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<TaskItem> taskItems = new ArrayList<>();
 
     public static TaskListStudentFragment newInstance() {
         return new TaskListStudentFragment();
@@ -45,6 +56,39 @@ public class TaskListStudentFragment extends Fragment {
 
         mViewModel.loadTasks(firestore, getContext(), assignmentPosition);
 
+        buildRecyclerView(root);
+
+        mViewModel.getTasks().observe(getViewLifecycleOwner(), tasksList);
+
         return root;
     }
+
+    private void buildRecyclerView(View root) {
+        recyclerView = root.findViewById(R.id.rvTasksList);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getContext());
+        adapter = new TasksAdapter(taskItems);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new TasksAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                System.out.println("clicked");
+            }
+        });
+    }
+
+    final Observer<ArrayList<Task>> tasksList = new Observer<ArrayList<Task>>() {
+        @Override
+        public void onChanged(ArrayList<Task> tasks) {
+            if (taskItems != null) {
+                taskItems.clear();
+            }
+            for (int i = 0; i < tasks.size(); i++) {
+                taskItems.add(new TaskItem("Task " + (i + 1), "NO PROGRESS"));
+            }
+            adapter.notifyDataSetChanged();
+        }
+    };
 }

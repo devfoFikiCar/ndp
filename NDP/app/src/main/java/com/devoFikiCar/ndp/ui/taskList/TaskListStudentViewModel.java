@@ -15,6 +15,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.devoFikiCar.ndp.helper.classSave;
+import com.devoFikiCar.ndp.helper.tempStorage;
 import com.devoFikiCar.ndp.util.Classes;
 import com.devoFikiCar.ndp.util.Task;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -86,7 +87,7 @@ public class TaskListStudentViewModel extends ViewModel {
                         }
 
                         setTasks(tmp);
-
+                        tempStorage.tasks = new ArrayList<>(tmp);
                     } else {
                         System.out.println("ERROR");
                     }
