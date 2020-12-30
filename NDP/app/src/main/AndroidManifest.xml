@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-        <activity android:name=".AssignmentsStudent"></activity>
+        <activity android:name=".TaskListStudent"></activity>
+        <activity android:name=".AssignmentsStudent" />
         <activity android:name=".CreateAssignmentTeacher" />
         <activity android:name=".AssignmentsTeacher" />
         <activity android:name=".StudentViewLecture" />

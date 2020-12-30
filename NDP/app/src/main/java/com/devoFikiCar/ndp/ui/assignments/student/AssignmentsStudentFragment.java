@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.ui.assignments.AssignmentItem;
 import com.devoFikiCar.ndp.ui.assignments.AssignmentsAdapter;
+import com.devoFikiCar.ndp.ui.taskList.TaskListStudentFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -72,6 +73,14 @@ public class AssignmentsStudentFragment extends Fragment {
             @Override
             public void OnItemClick(int position) {
                 System.out.println("clicked");
+                Bundle bundle = new Bundle();
+                bundle.putInt("position", position);
+
+                TaskListStudentFragment taskListStudentFragment = new TaskListStudentFragment();
+                taskListStudentFragment.setArguments(bundle);
+
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction().replace(R.id.fragment_container, taskListStudentFragment).commit();
             }
         });
     }
