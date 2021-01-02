@@ -24,11 +24,13 @@ import android.view.ViewGroup;
 
 import com.devoFikiCar.fclang.parser.math.Abs;
 import com.devoFikiCar.ndp.R;
+import com.devoFikiCar.ndp.helper.tempStorage;
 import com.devoFikiCar.ndp.ui.taskEditor.student.TaskEditorStudentFragment;
 import com.devoFikiCar.ndp.util.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TaskListStudentFragment extends Fragment {
 
@@ -90,6 +92,8 @@ public class TaskListStudentFragment extends Fragment {
             }
         });
     }
+
+    // todo on submit button empty temp storage solutions
 
     final Observer<ArrayList<Task>> tasksList = new Observer<ArrayList<Task>>() {
         @Override

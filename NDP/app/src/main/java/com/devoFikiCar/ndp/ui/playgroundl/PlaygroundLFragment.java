@@ -2,7 +2,7 @@
  * Copyright (C) devfoFikiCar - All Rights Reserved
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * Written by Filip Obradović <fiki.obradovic@gmail.com> 2020
+ * Written by Filip Obradović <fiki.obradovic@gmail.com> 2021
  */
 
 package com.devoFikiCar.ndp.ui.playgroundl;
@@ -57,7 +57,6 @@ public class PlaygroundLFragment extends Fragment {
     private TextProcessor etCode;
     private EditText etOutput;
     private Spinner spLanguages;
-    private String options[] = {"fclang", "python", "java"};
     private AlertDialog alertDialog;
     private ArrayList<LanguageItem> languageItems;
     private LanguageAdapter languageAdapter;
