@@ -2,7 +2,7 @@
  * Copyright (C) devfoFikiCar - All Rights Reserved
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * Written by Filip Obradović <fiki.obradovic@gmail.com> 2020
+ * Written by Filip Obradović <fiki.obradovic@gmail.com> 2021
  */
 
 package com.devoFikiCar.ndp.ui.taskList;
@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 
 import com.devoFikiCar.fclang.parser.math.Abs;
 import com.devoFikiCar.ndp.R;
+import com.devoFikiCar.ndp.ui.taskEditor.student.TaskEditorStudentFragment;
 import com.devoFikiCar.ndp.util.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -75,6 +76,14 @@ public class TaskListStudentFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 System.out.println("clicked");
+                Bundle bundle = new Bundle();
+                bundle.putInt("position", position);
+
+                TaskEditorStudentFragment taskEditorStudentFragment = new TaskEditorStudentFragment();
+                taskEditorStudentFragment.setArguments(bundle);
+
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction().replace(R.id.fragment_container, taskEditorStudentFragment).commit();
             }
         });
     }
