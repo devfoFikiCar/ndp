@@ -2,7 +2,7 @@
  * Copyright (C) devfoFikiCar - All Rights Reserved
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * Written by Filip Obradović <fiki.obradovic@gmail.com> 2020
+ * Written by Filip Obradović <fiki.obradovic@gmail.com> 2021
  */
 
 package com.devoFikiCar.ndp.ui.taskList;
@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
 
@@ -71,7 +72,8 @@ public class TaskListStudentViewModel extends ViewModel {
         System.out.println(assignmentID);
 
         DocumentReference docRef = db.collection("assignments").document(assignmentID);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        Source source = Source.CACHE;
+        docRef.get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull com.google.android.gms.tasks.Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {

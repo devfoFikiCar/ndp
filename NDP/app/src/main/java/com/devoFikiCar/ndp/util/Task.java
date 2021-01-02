@@ -2,7 +2,7 @@
  * Copyright (C) devfoFikiCar - All Rights Reserved
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * Written by Filip Obradović <fiki.obradovic@gmail.com> 2020
+ * Written by Filip Obradović <fiki.obradovic@gmail.com> 2021
  */
 
 package com.devoFikiCar.ndp.util;
@@ -69,5 +69,12 @@ public class Task {
                 ", inputTask='" + inputTask + '\'' +
                 ", outputTask='" + outputTask + '\'' +
                 '}';
+    }
+
+    public String toMarkdown(int num) {
+        return "## Task " + num + "\n***\n" +
+                text + "\n### Example input\n***\n" +
+                inputExample + "\n### Example output\n***\n" +
+                outputExample;
     }
 }

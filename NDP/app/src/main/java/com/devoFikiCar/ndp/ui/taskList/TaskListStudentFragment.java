@@ -83,7 +83,10 @@ public class TaskListStudentFragment extends Fragment {
                 taskEditorStudentFragment.setArguments(bundle);
 
                 getActivity().getSupportFragmentManager()
-                        .beginTransaction().replace(R.id.fragment_container, taskEditorStudentFragment).commit();
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, taskEditorStudentFragment)
+                        .addToBackStack("TaskListStudentFragment")
+                        .commit();
             }
         });
     }
@@ -95,7 +98,7 @@ public class TaskListStudentFragment extends Fragment {
                 taskItems.clear();
             }
             for (int i = 0; i < tasks.size(); i++) {
-                taskItems.add(new TaskItem("Task " + (i + 1), "NO PROGRESS"));
+                taskItems.add(new TaskItem("Task " + (i + 1), "IN PROGRESS"));
             }
             adapter.notifyDataSetChanged();
         }
