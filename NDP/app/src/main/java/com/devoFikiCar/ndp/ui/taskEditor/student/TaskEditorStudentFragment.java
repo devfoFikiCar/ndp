@@ -199,6 +199,7 @@ public class TaskEditorStudentFragment extends Fragment {
                     case 0: {
                         Log.i(TAG, "fclang chosen");
                         LANGUAGE = 0;
+                        tempStorage.LANGUAGE_ID = LANGUAGE;
                         if (tempStorage.solutions.size() > position && tempStorage.solutions.get(position) != null && tempStorage.solutions.get(position).length() > 0) {
                             etCode.setTextContent(tempStorage.solutions.get(position));
                         } else {
@@ -216,6 +217,7 @@ public class TaskEditorStudentFragment extends Fragment {
                         }
                         etCode.setLanguage(new PythonLanguage());
                         LANGUAGE = 71;
+                        tempStorage.LANGUAGE_ID = LANGUAGE;
                         break;
                     }
                     case 2: {
@@ -227,6 +229,7 @@ public class TaskEditorStudentFragment extends Fragment {
                         }
                         etCode.setLanguage(new JavaLanguage());
                         LANGUAGE = 62;
+                        tempStorage.LANGUAGE_ID = LANGUAGE;
                         break;
                     }
                     default: {
@@ -238,6 +241,7 @@ public class TaskEditorStudentFragment extends Fragment {
                         }
                         etCode.setLanguage(new JavaLanguage());
                         LANGUAGE = 0;
+                        tempStorage.LANGUAGE_ID = LANGUAGE;
                         break;
                     }
                 }

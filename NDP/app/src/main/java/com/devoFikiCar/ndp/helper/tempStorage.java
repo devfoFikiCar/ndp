@@ -17,4 +17,6 @@ import java.util.List;
 public class tempStorage {
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static List<String> solutions = Arrays.asList(new String[10000]);
+    public static int LANGUAGE_ID = 0;
+    public static int assignmentPosition = 0;
 }

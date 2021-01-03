@@ -2,7 +2,7 @@
  * Copyright (C) devfoFikiCar - All Rights Reserved
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * Written by Filip Obradović <fiki.obradovic@gmail.com> 2020
+ * Written by Filip Obradović <fiki.obradovic@gmail.com> 2021
  */
 
 package com.devoFikiCar.ndp.ui.assignments.student;
@@ -80,7 +80,8 @@ public class AssignmentsStudentFragment extends Fragment {
                 taskListStudentFragment.setArguments(bundle);
 
                 getActivity().getSupportFragmentManager()
-                        .beginTransaction().replace(R.id.fragment_container, taskListStudentFragment).commit();
+                        .beginTransaction().replace(R.id.fragment_container, taskListStudentFragment)
+                        .addToBackStack("AssignmentsStudentFragment").commit();
             }
         });
     }

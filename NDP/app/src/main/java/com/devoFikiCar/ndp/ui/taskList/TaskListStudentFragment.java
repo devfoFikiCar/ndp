@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.devoFikiCar.fclang.parser.math.Abs;
 import com.devoFikiCar.ndp.R;
@@ -40,6 +41,7 @@ public class TaskListStudentFragment extends Fragment {
     private TasksAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<TaskItem> taskItems = new ArrayList<>();
+    private Button btSubmit;
 
     public static TaskListStudentFragment newInstance() {
         return new TaskListStudentFragment();
@@ -56,10 +58,19 @@ public class TaskListStudentFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         int assignmentPosition = (int) bundle.get("position");
+        tempStorage.assignmentPosition = assignmentPosition;
 
         mViewModel.loadTasks(firestore, getContext(), assignmentPosition);
 
         buildRecyclerView(root);
+
+        btSubmit = root.findViewById(R.id.btSubmitTasks);
+        btSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewModel.submit(firestore, tempStorage.solutions.size(), getContext(), getActivity());
+            }
+        });
 
         mViewModel.getTasks().observe(getViewLifecycleOwner(), tasksList);
 
@@ -92,8 +103,6 @@ public class TaskListStudentFragment extends Fragment {
             }
         });
     }
-
-    // todo on submit button empty temp storage solutions
 
     final Observer<ArrayList<Task>> tasksList = new Observer<ArrayList<Task>>() {
         @Override

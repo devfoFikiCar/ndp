@@ -2,7 +2,7 @@
   ~ Copyright (C) devfoFikiCar - All Rights Reserved
   ~ Unauthorized copying of this file, via any medium is strictly prohibited
   ~ Proprietary and confidential
-  ~ Written by Filip Obradović <fiki.obradovic@gmail.com> 2020
+  ~ Written by Filip Obradović <fiki.obradovic@gmail.com> 2021
   -->
 
 <resources>
@@ -30,4 +30,5 @@
     <string name="time">Time</string>
     <string name="start_time">Start time</string>
     <string name="date">Date</string>
+    <string name="submit11">Submit</string>
 </resources>
