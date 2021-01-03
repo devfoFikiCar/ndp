@@ -219,7 +219,7 @@ public class TaskListStudentViewModel extends ViewModel {
                                 docData.put("output", output[i]);
                                 docData.put("score", pointsToDB);
 
-                                DocumentReference documentReference = db.collection("assignment").document(assignmentID)
+                                DocumentReference documentReference = db.collection("assignments").document(assignmentID)
                                         .collection(user.getUsername()).document();
 
                                 batch.set(documentReference, docData);
