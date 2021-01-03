@@ -195,17 +195,7 @@ public class TaskListStudentViewModel extends ViewModel {
 
             alertDialog.setTitle("Saving submissions and scores");
 
-            // todo
-            //  1. get current array of scores ( try not to overlap with other user)                DONE
-            //  2. add your score                                                                   DONE
-            //  3. update object                                                                    DONE
-            //  4. make sub-collections
-            //  5. add submissions and outputs to it
-            //  6. clean UI and memory
-
-            // 1
             String assignmentID = classes.getAssignmentsIDs().get(tempStorage.assignmentPosition).get("assignmentID");
-
             DocumentReference docRef = db.collection("assignments").document(assignmentID);
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -215,15 +205,12 @@ public class TaskListStudentViewModel extends ViewModel {
                         if (documentSnapshot != null) {
                             ArrayList<HashMap<String, String>> scores = (ArrayList<HashMap<String, String>>) documentSnapshot.get("scores");
 
-                            // 2
                             scores.add(new HashMap<>());
                             scores.get(scores.size() - 1).put(user.getUsername(), pointsToDB);
 
-                            // 3
                             db.collection("assignments").document(assignmentID)
                                     .update("scores", scores);
 
-                            // 4 and 5
                             WriteBatch batch = db.batch();
                             for (int i = 0; i < tempStorage.tasks.size(); i++) {
                                 System.out.println("here");
@@ -242,7 +229,6 @@ public class TaskListStudentViewModel extends ViewModel {
                                 @Override
                                 public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        // 6
                                         tempStorage.solutions = Arrays.asList(new String[10000]);
                                         alertDialog.dismiss();
                                         activity.getSupportFragmentManager().popBackStack();
