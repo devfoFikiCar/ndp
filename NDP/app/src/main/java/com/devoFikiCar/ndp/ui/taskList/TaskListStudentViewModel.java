@@ -34,8 +34,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Source;
 import com.google.firebase.firestore.WriteBatch;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -98,7 +101,7 @@ public class TaskListStudentViewModel extends ViewModel {
         this.tasks.postValue(tasks);
     }
 
-    public void loadTasks(FirebaseFirestore db, Context context, int assignmentPosition) {
+    public void loadTasks(FirebaseFirestore db, Context context, int assignmentPosition, FragmentActivity activity) {
         AlertDialog alertDialog = new SpotsDialog.Builder()
                 .setContext(context)
                 .setMessage("Loading tasks")
@@ -119,6 +122,43 @@ public class TaskListStudentViewModel extends ViewModel {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         System.out.println(document.getData());
+
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
+                        String dateStart = (String) document.get("timeStart");
+                        String dateEnd = (String) document.get("timeEnd");
+
+                        String[] split = dateStart.split(" ");
+                        String[] splitTime = split[0].split(":");
+                        String[] splitDate = split[1].split("-");
+
+                        Calendar calendarStart = Calendar.getInstance();
+                        calendarStart.set(Integer.valueOf(splitDate[2]), Integer.valueOf(splitDate[1]), Integer.valueOf(splitDate[0]), Integer.valueOf(splitTime[1]), Integer.valueOf(splitTime[0]));
+                        System.out.println(dateFormat.format(calendarStart.getTime()));
+
+                        Calendar calendar = Calendar.getInstance();
+                        if (calendar.getTimeInMillis() < calendarStart.getTimeInMillis()) {
+                            alertDialog.dismiss();
+                            Toast.makeText(context, "Assignment did not start", Toast.LENGTH_SHORT).show();
+                            activity.getSupportFragmentManager().popBackStack();
+                            return;
+                        }
+
+                        split = dateStart.split(" ");
+                        splitTime = split[0].split(":");
+                        splitDate = split[1].split("-");
+
+                        Calendar calendarEnd = Calendar.getInstance();
+                        calendarEnd.set(Integer.valueOf(splitDate[2]), Integer.valueOf(splitDate[1]), Integer.valueOf(splitDate[0]), Integer.valueOf(splitTime[1]), Integer.valueOf(splitTime[0]));
+                        System.out.println(dateFormat.format(calendarEnd.getTime()));
+
+                        if (calendar.getTimeInMillis() > calendarEnd.getTimeInMillis()) {
+                            alertDialog.dismiss();
+                            Toast.makeText(context, "Assignment has finished", Toast.LENGTH_SHORT).show();
+                            activity.getSupportFragmentManager().popBackStack();
+                            return;
+                        }
+
                         long numberOfTasks = (long) document.get("taskNumber");
                         ArrayList<Task> tmp = new ArrayList<>();
 

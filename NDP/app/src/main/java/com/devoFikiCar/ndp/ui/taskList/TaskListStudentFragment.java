@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.devoFikiCar.fclang.parser.math.Abs;
 import com.devoFikiCar.ndp.R;
@@ -42,6 +43,7 @@ public class TaskListStudentFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<TaskItem> taskItems = new ArrayList<>();
     private Button btSubmit;
+    private TextView tvTimeLeft;
 
     public static TaskListStudentFragment newInstance() {
         return new TaskListStudentFragment();
@@ -60,9 +62,11 @@ public class TaskListStudentFragment extends Fragment {
         int assignmentPosition = (int) bundle.get("position");
         tempStorage.assignmentPosition = assignmentPosition;
 
-        mViewModel.loadTasks(firestore, getContext(), assignmentPosition);
+        mViewModel.loadTasks(firestore, getContext(), assignmentPosition, getActivity());
 
         buildRecyclerView(root);
+
+        tvTimeLeft = (TextView) root.findViewById(R.id.tvTimeLeft);
 
         btSubmit = root.findViewById(R.id.btSubmitTasks);
         btSubmit.setOnClickListener(new View.OnClickListener() {
