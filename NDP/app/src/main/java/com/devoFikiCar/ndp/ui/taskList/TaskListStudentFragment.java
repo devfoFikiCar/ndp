@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.devoFikiCar.fclang.parser.math.Abs;
 import com.devoFikiCar.ndp.R;
@@ -35,6 +36,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -81,7 +83,12 @@ public class TaskListStudentFragment extends Fragment {
         btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mViewModel.submit(firestore, tempStorage.solutions.size(), getContext(), getActivity());
+                if (tempStorage.tempCalendarEnd.getTimeInMillis() > Calendar.getInstance().getTimeInMillis()) {
+                    mViewModel.submit(firestore, tempStorage.solutions.size(), getContext(), getActivity());
+                } else {
+                    Toast.makeText(getContext(), "Assignment has finished", Toast.LENGTH_SHORT).show();
+                    getActivity().getSupportFragmentManager().popBackStack();
+                }
             }
         });
 
@@ -101,7 +108,7 @@ public class TaskListStudentFragment extends Fragment {
 
             @Override
             public void onFinish() {
-                // TODO submit task automatically
+                // nothing
             }
         }.start();
     }

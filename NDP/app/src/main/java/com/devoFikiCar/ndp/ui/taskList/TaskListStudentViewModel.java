@@ -161,10 +161,13 @@ public class TaskListStudentViewModel extends ViewModel {
                         Calendar calendarEnd = Calendar.getInstance();
                         calendarEnd.set(Integer.valueOf(splitDate[2]), Integer.valueOf(splitDate[1]), Integer.valueOf(splitDate[0]), Integer.valueOf(splitTime[1]), Integer.valueOf(splitTime[0]));
                         System.out.println(dateFormat.format(calendarEnd.getTime()));
+                        tempStorage.tempCalendarEnd = calendarEnd;
 
                         if (calendar.getTimeInMillis() > calendarEnd.getTimeInMillis()) {
 
                             // TODO show score and submissions
+                            //  If there is score of user disable submit button if it is still in progress
+                            //  If not in progress open new activity for statics
 
                             alertDialog.dismiss();
                             Toast.makeText(context, "Assignment has finished", Toast.LENGTH_SHORT).show();

@@ -12,6 +12,7 @@ import com.devoFikiCar.ndp.util.Task;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 public class tempStorage {
@@ -19,4 +20,5 @@ public class tempStorage {
     public static List<String> solutions = Arrays.asList(new String[10000]);
     public static int LANGUAGE_ID = 0;
     public static int assignmentPosition = 0;
+    public static Calendar tempCalendarEnd = Calendar.getInstance();
 }
