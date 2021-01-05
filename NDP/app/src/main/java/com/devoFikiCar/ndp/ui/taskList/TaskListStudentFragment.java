@@ -10,6 +10,7 @@ package com.devoFikiCar.ndp.ui.taskList;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +35,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class TaskListStudentFragment extends Fragment {
 
@@ -44,6 +49,9 @@ public class TaskListStudentFragment extends Fragment {
     private ArrayList<TaskItem> taskItems = new ArrayList<>();
     private Button btSubmit;
     private TextView tvTimeLeft;
+    private CountDownTimer countDownTimer;
+    private long timeLeftInMilliseconds = 6000000;
+    private long timeLeftInMillisecondsCheck = timeLeftInMilliseconds;
 
     public static TaskListStudentFragment newInstance() {
         return new TaskListStudentFragment();
@@ -67,6 +75,7 @@ public class TaskListStudentFragment extends Fragment {
         buildRecyclerView(root);
 
         tvTimeLeft = (TextView) root.findViewById(R.id.tvTimeLeft);
+        updateTimer();
 
         btSubmit = root.findViewById(R.id.btSubmitTasks);
         btSubmit.setOnClickListener(new View.OnClickListener() {
@@ -77,8 +86,33 @@ public class TaskListStudentFragment extends Fragment {
         });
 
         mViewModel.getTasks().observe(getViewLifecycleOwner(), tasksList);
+        mViewModel.getTimeLeftInMilliseconds().observe(getViewLifecycleOwner(), timeLeftVM);
 
         return root;
+    }
+
+    private void startTimer() {
+        countDownTimer = new CountDownTimer(timeLeftInMilliseconds, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMilliseconds = millisUntilFinished;
+                updateTimer();
+            }
+
+            @Override
+            public void onFinish() {
+                // TODO submit task automatically
+            }
+        }.start();
+    }
+
+    private void updateTimer() {
+        int hours = (int) (timeLeftInMilliseconds / 1000) / 3600;
+        int minutes = (int) ((timeLeftInMilliseconds / 1000) % 3600) / 60;
+        tvTimeLeft.setText(hours + " hours and " + minutes + " minutes left");
+        if (hours == 0 && minutes < 10) {
+            tvTimeLeft.setTextColor(Color.RED);
+        }
     }
 
     private void buildRecyclerView(View root) {
@@ -118,6 +152,21 @@ public class TaskListStudentFragment extends Fragment {
                 taskItems.add(new TaskItem("Task " + (i + 1), "IN PROGRESS"));
             }
             adapter.notifyDataSetChanged();
+        }
+    };
+
+    final Observer<Long> timeLeftVM = new Observer<Long>() {
+        @Override
+        public void onChanged(Long aLong) {
+            if (aLong != timeLeftInMillisecondsCheck) {
+                timeLeftInMilliseconds = aLong;
+                timeLeftInMillisecondsCheck = timeLeftInMilliseconds;
+                if (countDownTimer != null) {
+                    countDownTimer.cancel();
+                }
+                startTimer();
+                updateTimer();
+            }
         }
     };
 }

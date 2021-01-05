@@ -52,6 +52,7 @@ public class TaskListStudentViewModel extends ViewModel {
     private Context context;
     private FirebaseFirestore db;
     private FragmentActivity activity;
+    private MutableLiveData<Long> timeLeftInMilliseconds = new MutableLiveData<>();
 
     public TaskListStudentViewModel() {
         init();
@@ -101,6 +102,15 @@ public class TaskListStudentViewModel extends ViewModel {
         this.tasks.postValue(tasks);
     }
 
+    public MutableLiveData<Long> getTimeLeftInMilliseconds() {
+        return timeLeftInMilliseconds;
+    }
+
+    public void setTimeLeftInMilliseconds(Long timeLeftInMilliseconds) {
+        System.out.println(timeLeftInMilliseconds);
+        this.timeLeftInMilliseconds.postValue(timeLeftInMilliseconds);
+    }
+
     public void loadTasks(FirebaseFirestore db, Context context, int assignmentPosition, FragmentActivity activity) {
         AlertDialog alertDialog = new SpotsDialog.Builder()
                 .setContext(context)
@@ -144,7 +154,7 @@ public class TaskListStudentViewModel extends ViewModel {
                             return;
                         }
 
-                        split = dateStart.split(" ");
+                        split = dateEnd.split(" ");
                         splitTime = split[0].split(":");
                         splitDate = split[1].split("-");
 
@@ -153,11 +163,16 @@ public class TaskListStudentViewModel extends ViewModel {
                         System.out.println(dateFormat.format(calendarEnd.getTime()));
 
                         if (calendar.getTimeInMillis() > calendarEnd.getTimeInMillis()) {
+
+                            // TODO show score and submissions
+
                             alertDialog.dismiss();
                             Toast.makeText(context, "Assignment has finished", Toast.LENGTH_SHORT).show();
                             activity.getSupportFragmentManager().popBackStack();
                             return;
                         }
+
+                        setTimeLeftInMilliseconds(calendarEnd.getTimeInMillis() - Calendar.getInstance().getTimeInMillis());
 
                         long numberOfTasks = (long) document.get("taskNumber");
                         ArrayList<Task> tmp = new ArrayList<>();
