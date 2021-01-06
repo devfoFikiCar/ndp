@@ -10,6 +10,7 @@ package com.devoFikiCar.ndp.ui.taskList;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,12 +18,14 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.api.RetrieveOutput;
 import com.devoFikiCar.ndp.api.SubmitCode;
 import com.devoFikiCar.ndp.async.AsyncTask;
 import com.devoFikiCar.ndp.helper.classSave;
 import com.devoFikiCar.ndp.helper.tempStorage;
 import com.devoFikiCar.ndp.helper.userSave;
+import com.devoFikiCar.ndp.ui.statistics.specific.student.StatisticsSpecificStudentFragment;
 import com.devoFikiCar.ndp.util.Classes;
 import com.devoFikiCar.ndp.util.Task;
 import com.devoFikiCar.ndp.util.User;
@@ -172,13 +175,8 @@ public class TaskListStudentViewModel extends ViewModel {
                         tempStorage.tempCalendarEnd = calendarEnd;
 
                         if (calendar.getTimeInMillis() > calendarEnd.getTimeInMillis()) {
-
-                            // TODO show score and submissions
-                            //  If not in progress open new activity for statics
-
                             alertDialog.dismiss();
-                            Toast.makeText(context, "Assignment has finished", Toast.LENGTH_SHORT).show();
-                            activity.getSupportFragmentManager().popBackStack();
+                            openSpecificStudentStatistics(assignmentPosition, activity);
                             return;
                         }
 
@@ -207,6 +205,19 @@ public class TaskListStudentViewModel extends ViewModel {
                 }
             }
         });
+    }
+
+    public void openSpecificStudentStatistics(int assignmentPosition, FragmentActivity activity) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("position", assignmentPosition);
+
+        StatisticsSpecificStudentFragment statisticsSpecificStudentFragment = new StatisticsSpecificStudentFragment();
+        statisticsSpecificStudentFragment.setArguments(bundle);
+
+        activity.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, statisticsSpecificStudentFragment)
+                .commit();
     }
 
     public void submit(FirebaseFirestore db, int numberOfTasks, Context context, FragmentActivity activity) {

@@ -55,6 +55,7 @@ public class TaskListStudentFragment extends Fragment {
     private CountDownTimer countDownTimer;
     private long timeLeftInMilliseconds = 6000000;
     private long timeLeftInMillisecondsCheck = timeLeftInMilliseconds;
+    private int assignmentPosition = -1;
 
     public static TaskListStudentFragment newInstance() {
         return new TaskListStudentFragment();
@@ -70,7 +71,7 @@ public class TaskListStudentFragment extends Fragment {
         firestore = FirebaseFirestore.getInstance();
 
         Bundle bundle = this.getArguments();
-        int assignmentPosition = (int) bundle.get("position");
+        assignmentPosition = (int) bundle.get("position");
         tempStorage.assignmentPosition = assignmentPosition;
 
         mViewModel.loadTasks(firestore, getContext(), assignmentPosition, getActivity());
@@ -173,6 +174,9 @@ public class TaskListStudentFragment extends Fragment {
                         if (d.containsKey(mViewModel.getUser().getUsername())) {
                             btSubmit.setEnabled(false);
                             System.out.println(d.toString());
+                            if (assignmentPosition != -1) {
+                                mViewModel.openSpecificStudentStatistics(assignmentPosition, getActivity());
+                            }
                         }
                     }
                 }
