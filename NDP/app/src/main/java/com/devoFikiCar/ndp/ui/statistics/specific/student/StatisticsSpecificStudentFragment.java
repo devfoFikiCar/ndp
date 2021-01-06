@@ -7,19 +7,19 @@
 
 package com.devoFikiCar.ndp.ui.statistics.specific.student;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.ui.statistics.specific.TaskStatsAdapter;
@@ -36,6 +36,7 @@ public class StatisticsSpecificStudentFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<TaskStatsItem> taskStatsItems = new ArrayList<>();
     private FirebaseFirestore firestore;
+    private TextView tvScore;
 
     public static StatisticsSpecificStudentFragment newInstance() {
         return new StatisticsSpecificStudentFragment();
@@ -56,6 +57,11 @@ public class StatisticsSpecificStudentFragment extends Fragment {
 
         buildRecyclerView(root);
 
+        tvScore = root.findViewById(R.id.tvScoreStatsSpecificStudent);
+
+        mViewModel.getScore().observe(getViewLifecycleOwner(), scoreUpdate);
+        mViewModel.getTaskStatsItemMutableLiveData().observe(getViewLifecycleOwner(), taskStatsList);
+
         return root;
     }
 
@@ -74,4 +80,26 @@ public class StatisticsSpecificStudentFragment extends Fragment {
             }
         });
     }
+
+    final Observer<ArrayList<TaskStatsItem>> taskStatsList = new Observer<ArrayList<TaskStatsItem>>() {
+        @Override
+        public void onChanged(ArrayList<TaskStatsItem> taskStatsItems1) {
+            if (taskStatsItems != null) {
+                taskStatsItems.clear();
+            }
+            for (int i = 0; i < taskStatsItems1.size(); i++) {
+                taskStatsItems.add(taskStatsItems1.get(i));
+            }
+            adapter.notifyDataSetChanged();
+        }
+    };
+
+    final Observer<String> scoreUpdate = new Observer<String>() {
+        @Override
+        public void onChanged(String s) {
+            if (tvScore != null && s != null) {
+                tvScore.setText(s);
+            }
+        }
+    };
 }

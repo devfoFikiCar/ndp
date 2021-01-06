@@ -20,10 +20,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class StatisticsSpecificStudentViewModel extends ViewModel {
     private MutableLiveData<ArrayList<TaskStatsItem>> taskStatsItemMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<String> score = new MutableLiveData<>();
 
     public MutableLiveData<ArrayList<TaskStatsItem>> getTaskStatsItemMutableLiveData() {
         return taskStatsItemMutableLiveData;
@@ -31,6 +33,14 @@ public class StatisticsSpecificStudentViewModel extends ViewModel {
 
     public void setTaskStatsItemMutableLiveData(ArrayList<TaskStatsItem> taskStatsItemMutableLiveData) {
         this.taskStatsItemMutableLiveData.postValue(taskStatsItemMutableLiveData);
+    }
+
+    public MutableLiveData<String> getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score.postValue(score);
     }
 
     public void getSubmission(FirebaseFirestore db, int position) {
@@ -43,13 +53,36 @@ public class StatisticsSpecificStudentViewModel extends ViewModel {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            String tmp = "";
+                            int currentTaskNumber = 0;
+                            ArrayList<TaskStatsItem> arrayList = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 System.out.println(document.getData());
+
+                                tmp = (String) document.get("score");
+                                String[] tmpS = tmp.split("\\|");
+                                arrayList.add(new TaskStatsItem("Task " + (currentTaskNumber + 1), tmpS[currentTaskNumber]));
+
+                                currentTaskNumber++;
                             }
+                            setScore(calculateScore(tmp));
+                            setTaskStatsItemMutableLiveData(arrayList);
                         } else {
                             System.out.println("Error");
                         }
                     }
                 });
+    }
+
+    private String calculateScore(String s) {
+        String[] split = s.split("\\|");
+        double points = 0.0;
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        for (int i = 0; i < split.length; i++) {
+            if (!split[i].equals("")) {
+                points += Double.valueOf(split[i]);
+            }
+        }
+        return "Score: " + decimalFormat.format(points);
     }
 }
