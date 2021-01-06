@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.devoFikiCar.ndp.R;
+import com.devoFikiCar.ndp.helper.userSave;
 import com.devoFikiCar.ndp.ui.statistics.specific.TaskStatsAdapter;
 import com.devoFikiCar.ndp.ui.statistics.specific.TaskStatsItem;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -50,10 +51,11 @@ public class StatisticsSpecificStudentFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         int position = bundle.getInt("position");
+        String username = bundle.getString("username", userSave.user.getUsername());
 
         mViewModel = new ViewModelProvider(this).get(StatisticsSpecificStudentViewModel.class);
         firestore = FirebaseFirestore.getInstance();
-        mViewModel.getSubmission(firestore, position);
+        mViewModel.getSubmission(firestore, position, username);
 
         buildRecyclerView(root);
 

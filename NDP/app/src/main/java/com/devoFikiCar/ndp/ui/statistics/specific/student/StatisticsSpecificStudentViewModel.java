@@ -43,9 +43,9 @@ public class StatisticsSpecificStudentViewModel extends ViewModel {
         this.score.postValue(score);
     }
 
-    public void getSubmission(FirebaseFirestore db, int position) {
+    public void getSubmission(FirebaseFirestore db, int position, String username) {
         String assignmentID = classSave.classes.getAssignmentsIDs().get(position).get("assignmentID");
-        String collectionName = userSave.user.getUsername();
+        String collectionName = username;
 
         db.collection("assignments").document(assignmentID).collection(collectionName)
                 .get()
