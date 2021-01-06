@@ -2,7 +2,7 @@
  * Copyright (C) devfoFikiCar - All Rights Reserved
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * Written by Filip Obradović <fiki.obradovic@gmail.com> 2020
+ * Written by Filip Obradović <fiki.obradovic@gmail.com> 2021
  */
 
 package com.devoFikiCar.ndp.api;
@@ -26,10 +26,10 @@ public class RetrieveOutput {
         try {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url("https://judge0.p.rapidapi.com/submissions/" + token)
+                    .url("https://judge0-ce.p.rapidapi.com/submissions/" + token)
                     .get()
                     .addHeader("x-rapidapi-key", "12bc36a072msh7fbc668fb4575d0p14dc53jsn8776abdff029")
-                    .addHeader("x-rapidapi-host", "judge0.p.rapidapi.com")
+                    .addHeader("x-rapidapi-host", "judge0-ce.p.rapidapi.com")
                     .build();
             int count = 0;
             String status = "";

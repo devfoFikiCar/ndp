@@ -2,7 +2,7 @@
  * Copyright (C) devfoFikiCar - All Rights Reserved
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * Written by Filip Obradović <fiki.obradovic@gmail.com> 2020
+ * Written by Filip Obradović <fiki.obradovic@gmail.com> 2021
  */
 
 package com.devoFikiCar.ndp.api;
@@ -27,11 +27,11 @@ public class SubmitCode {
             reqObject.put("redirect_stderr_to_stdout", "true");
             RequestBody requestBody = RequestBody.create(reqObject.toString(), mediaType);
             Request request = new Request.Builder()
-                    .url("https://judge0.p.rapidapi.com/submissions")
+                    .url("https://judge0-ce.p.rapidapi.com/submissions")
                     .post(requestBody)
                     .addHeader("accept", "application/json")
                     .addHeader("x-rapidapi-key", "12bc36a072msh7fbc668fb4575d0p14dc53jsn8776abdff029")
-                    .addHeader("x-rapidapi-host", "judge0.p.rapidapi.com")
+                    .addHeader("x-rapidapi-host", "judge0-ce.p.rapidapi.com")
                     .addHeader("wait", "true")
                     .addHeader("redirect_stderr_to_stdout", "true")
                     .build();
