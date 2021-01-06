@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,7 @@ public class StatisticsSpecificStudentFragment extends Fragment {
     private ArrayList<TaskStatsItem> taskStatsItems = new ArrayList<>();
     private FirebaseFirestore firestore;
     private TextView tvScore;
+    private Button btDone;
 
     public static StatisticsSpecificStudentFragment newInstance() {
         return new StatisticsSpecificStudentFragment();
@@ -60,6 +62,14 @@ public class StatisticsSpecificStudentFragment extends Fragment {
         buildRecyclerView(root);
 
         tvScore = root.findViewById(R.id.tvScoreStatsSpecificStudent);
+
+        btDone = root.findViewById(R.id.btOkStatsSpecificStudent);
+        btDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
 
         mViewModel.getScore().observe(getViewLifecycleOwner(), scoreUpdate);
         mViewModel.getTaskStatsItemMutableLiveData().observe(getViewLifecycleOwner(), taskStatsList);
