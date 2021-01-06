@@ -37,6 +37,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -94,6 +95,7 @@ public class TaskListStudentFragment extends Fragment {
 
         mViewModel.getTasks().observe(getViewLifecycleOwner(), tasksList);
         mViewModel.getTimeLeftInMilliseconds().observe(getViewLifecycleOwner(), timeLeftVM);
+        mViewModel.getScoresData().observe(getViewLifecycleOwner(), scoresData);
 
         return root;
     }
@@ -159,6 +161,22 @@ public class TaskListStudentFragment extends Fragment {
                 taskItems.add(new TaskItem("Task " + (i + 1), "IN PROGRESS"));
             }
             adapter.notifyDataSetChanged();
+        }
+    };
+
+    final Observer<ArrayList<HashMap<String, String>>> scoresData = new Observer<ArrayList<HashMap<String, String>>>() {
+        @Override
+        public void onChanged(ArrayList<HashMap<String, String>> hashMaps) {
+            if (hashMaps != null) {
+                if (btSubmit != null) {
+                    for (HashMap<String, String> d : hashMaps) {
+                        if (d.containsKey(mViewModel.getUser().getUsername())) {
+                            btSubmit.setEnabled(false);
+                            System.out.println(d.toString());
+                        }
+                    }
+                }
+            }
         }
     };
 

@@ -2,7 +2,7 @@
  * Copyright (C) devfoFikiCar - All Rights Reserved
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * Written by Filip Obradović <fiki.obradovic@gmail.com> 2020
+ * Written by Filip Obradović <fiki.obradovic@gmail.com> 2021
  */
 
 package com.devoFikiCar.ndp.ui.create.assignment;
@@ -72,6 +72,7 @@ public class CreateAssignmentTeacherViewModel extends ViewModel {
         }
         docData.put("timeStart", TimeStorage.toString1());
         docData.put("timeEnd", TimeStorage.toString2());
+        docData.put("scores", new ArrayList<>());
 
         db.collection("assignments")
                 .add(docData)

@@ -53,6 +53,7 @@ public class TaskListStudentViewModel extends ViewModel {
     private FirebaseFirestore db;
     private FragmentActivity activity;
     private MutableLiveData<Long> timeLeftInMilliseconds = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<HashMap<String, String>>> scoresData = new MutableLiveData<>();
 
     public TaskListStudentViewModel() {
         init();
@@ -111,6 +112,14 @@ public class TaskListStudentViewModel extends ViewModel {
         this.timeLeftInMilliseconds.postValue(timeLeftInMilliseconds);
     }
 
+    public MutableLiveData<ArrayList<HashMap<String, String>>> getScoresData() {
+        return scoresData;
+    }
+
+    public void setScoresData(ArrayList<HashMap<String, String>> scoresData) {
+        this.scoresData.postValue(scoresData);
+    }
+
     public void loadTasks(FirebaseFirestore db, Context context, int assignmentPosition, FragmentActivity activity) {
         AlertDialog alertDialog = new SpotsDialog.Builder()
                 .setContext(context)
@@ -124,8 +133,7 @@ public class TaskListStudentViewModel extends ViewModel {
         System.out.println(assignmentID);
 
         DocumentReference docRef = db.collection("assignments").document(assignmentID);
-        Source source = Source.CACHE;
-        docRef.get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull com.google.android.gms.tasks.Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
@@ -166,7 +174,6 @@ public class TaskListStudentViewModel extends ViewModel {
                         if (calendar.getTimeInMillis() > calendarEnd.getTimeInMillis()) {
 
                             // TODO show score and submissions
-                            //  If there is score of user disable submit button if it is still in progress
                             //  If not in progress open new activity for statics
 
                             alertDialog.dismiss();
@@ -187,6 +194,9 @@ public class TaskListStudentViewModel extends ViewModel {
 
                         setTasks(tmp);
                         tempStorage.tasks = new ArrayList<>(tmp);
+
+                        ArrayList<HashMap<String, String>> scores = (ArrayList<HashMap<String, String>>) document.get("scores");
+                        setScoresData(scores);
                     } else {
                         System.out.println("ERROR");
                     }
