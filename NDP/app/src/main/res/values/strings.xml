@@ -31,4 +31,7 @@
     <string name="start_time">Start time</string>
     <string name="date">Date</string>
     <string name="submit11">Submit</string>
+    <string name="code">Code:</string>
+    <string name="output">Output:</string>
+    <string name="expected_output">Expected output:</string>
 </resources>
