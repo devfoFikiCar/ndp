@@ -7,7 +7,11 @@
 
 package com.devoFikiCar.ndp.ui.statistics.specific.student;
 
+import android.content.Context;
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -16,6 +20,7 @@ import com.devoFikiCar.ndp.helper.userSave;
 import com.devoFikiCar.ndp.ui.statistics.specific.TaskStatsItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -26,6 +31,8 @@ import java.util.ArrayList;
 public class StatisticsSpecificStudentViewModel extends ViewModel {
     private MutableLiveData<ArrayList<TaskStatsItem>> taskStatsItemMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<String> score = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<com.devoFikiCar.ndp.util.Task>> tasks = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<SubmissionCore>> submissions = new MutableLiveData<>();
 
     public MutableLiveData<ArrayList<TaskStatsItem>> getTaskStatsItemMutableLiveData() {
         return taskStatsItemMutableLiveData;
@@ -43,30 +50,83 @@ public class StatisticsSpecificStudentViewModel extends ViewModel {
         this.score.postValue(score);
     }
 
+    public MutableLiveData<ArrayList<com.devoFikiCar.ndp.util.Task>> getTasks() {
+        return tasks;
+    }
+
+    public String getTaskExpectedOutput(int position) {
+        return tasks.getValue().get(position).getOutputTask();
+    }
+
+    public void setTasks(ArrayList<com.devoFikiCar.ndp.util.Task> tasks) {
+        this.tasks.postValue(tasks);
+    }
+
+    public MutableLiveData<ArrayList<SubmissionCore>> getSubmissions() {
+        return submissions;
+    }
+
+    public void setSubmissions(ArrayList<SubmissionCore> submissions) {
+        this.submissions.postValue(submissions);
+    }
+
     public void getSubmission(FirebaseFirestore db, int position, String username) {
         String assignmentID = classSave.classes.getAssignmentsIDs().get(position).get("assignmentID");
         String collectionName = username;
 
-        db.collection("assignments").document(assignmentID).collection(collectionName)
+
+        db.collection("assignments").document(assignmentID)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
-                            String tmp = "";
-                            int currentTaskNumber = 0;
-                            ArrayList<TaskStatsItem> arrayList = new ArrayList<>();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
                                 System.out.println(document.getData());
 
-                                tmp = (String) document.get("score");
-                                String[] tmpS = tmp.split("\\|");
-                                arrayList.add(new TaskStatsItem("Task " + (currentTaskNumber + 1), tmpS[currentTaskNumber]));
+                                long numberOfTasks = (long) document.get("taskNumber");
+                                ArrayList<com.devoFikiCar.ndp.util.Task> tmp = new ArrayList<>();
+                                for (int i = 0; i < numberOfTasks; i++) {
+                                    tmp.add(new com.devoFikiCar.ndp.util.Task((String) document.get("taskNumber" + i)));
+                                    System.out.println(tmp.get(i).toString());
+                                }
+                                setTasks(tmp);
 
-                                currentTaskNumber++;
+                                db.collection("assignments").document(assignmentID).collection(collectionName)
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    String tmp = "";
+                                                    int currentTaskNumber = 0;
+                                                    ArrayList<TaskStatsItem> arrayList = new ArrayList<>();
+                                                    ArrayList<SubmissionCore> tmpSC = new ArrayList<>();
+
+                                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                                        System.out.println(document.getData());
+
+                                                        tmp = (String) document.get("score");
+                                                        String[] tmpS = tmp.split("\\|");
+                                                        arrayList.add(new TaskStatsItem("Task " + (currentTaskNumber + 1), tmpS[currentTaskNumber]));
+
+                                                        tmpSC.add(new SubmissionCore((String) document.get("code"), (String) document.get("output")));
+
+                                                        currentTaskNumber++;
+                                                    }
+                                                    setScore(calculateScore(tmp));
+                                                    setTaskStatsItemMutableLiveData(arrayList);
+                                                    setSubmissions(tmpSC);
+                                                } else {
+                                                    System.out.println("Error");
+                                                }
+                                            }
+                                        });
+
+                            } else {
+                                System.out.println("Error");
                             }
-                            setScore(calculateScore(tmp));
-                            setTaskStatsItemMutableLiveData(arrayList);
                         } else {
                             System.out.println("Error");
                         }
@@ -84,5 +144,15 @@ public class StatisticsSpecificStudentViewModel extends ViewModel {
             }
         }
         return "Score: " + decimalFormat.format(points);
+    }
+
+    public void displayDetails(FragmentActivity activity, Context context, int position) {
+        SubmissionDialog submissionDialog = new SubmissionDialog();
+        Bundle bundle = new Bundle();
+        bundle.putString("code", getSubmissions().getValue().get(position).getCode());
+        bundle.putString("output", getSubmissions().getValue().get(position).getOutput());
+        bundle.putString("expectedOutput", getTaskExpectedOutput(position));
+        submissionDialog.setArguments(bundle);
+        submissionDialog.show(activity.getSupportFragmentManager(), "test");
     }
 }

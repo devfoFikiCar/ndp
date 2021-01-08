@@ -40,6 +40,7 @@ public class StatisticsSpecificStudentFragment extends Fragment {
     private FirebaseFirestore firestore;
     private TextView tvScore;
     private Button btDone;
+    private String username;
 
     public static StatisticsSpecificStudentFragment newInstance() {
         return new StatisticsSpecificStudentFragment();
@@ -53,7 +54,7 @@ public class StatisticsSpecificStudentFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         int position = bundle.getInt("position");
-        String username = bundle.getString("username", userSave.user.getUsername());
+        username = bundle.getString("username", userSave.user.getUsername());
 
         mViewModel = new ViewModelProvider(this).get(StatisticsSpecificStudentViewModel.class);
         firestore = FirebaseFirestore.getInstance();
@@ -88,6 +89,7 @@ public class StatisticsSpecificStudentFragment extends Fragment {
         adapter.setOnItemClickListener(new TaskStatsAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(int position) {
+                mViewModel.displayDetails(getActivity(), getContext(), position);
                 System.out.println("clicked");
             }
         });
