@@ -2,7 +2,7 @@
  * Copyright (C) devfoFikiCar - All Rights Reserved
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * Written by Filip Obradović <fiki.obradovic@gmail.com> 2020
+ * Written by Filip Obradović <fiki.obradovic@gmail.com> 2021
  */
 
 package com.devoFikiCar.ndp.ui.assignments.teacher;
@@ -24,10 +24,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.devoFikiCar.ndp.R;
+import com.devoFikiCar.ndp.StatisticsSpecificStudent;
 import com.devoFikiCar.ndp.ui.assignments.AssignmentItem;
 import com.devoFikiCar.ndp.ui.assignments.AssignmentsAdapter;
 import com.devoFikiCar.ndp.ui.create.assignment.CreateAssignmentTeacherFragment;
 import com.devoFikiCar.ndp.ui.create.lecture.CreateLectureTeacherFragment;
+import com.devoFikiCar.ndp.ui.statistics.specific.teacher.StatisticsSpecificTeacherFragment;
+import com.devoFikiCar.ndp.ui.taskList.TaskListStudentFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -77,6 +80,16 @@ public class AssignmentsTeacherFragment extends Fragment {
         adapter.setOnItemClickListener(new AssignmentsAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(int position) {
+                System.out.println("clicked");
+                Bundle bundle = new Bundle();
+                bundle.putInt("position", position);
+
+                StatisticsSpecificTeacherFragment statisticsSpecificTeacherFragment = new StatisticsSpecificTeacherFragment();
+                statisticsSpecificTeacherFragment.setArguments(bundle);
+
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction().replace(R.id.fragment_container, statisticsSpecificTeacherFragment)
+                        .addToBackStack("AssignmentsTeacherFragment").commit();
                 System.out.println("clicked");
             }
         });

@@ -52,13 +52,14 @@ public class SubmissionDialog extends AppCompatDialogFragment {
         etOutput = (EditText) view.findViewById(R.id.etDialogOutput);
         etExpectedOutput = (EditText) view.findViewById(R.id.etDialogExpectedOutput);
 
+        tpCode.setEnabled(false);
         etOutput.setEnabled(false);
         etExpectedOutput.setEnabled(false);
 
-        tpCode.setTextContent(bundle.getString("code"));
-        System.out.println(bundle.getString("code"));
         tpCode.setLanguage(new PythonLanguage());
         tpCode.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
+        tpCode.setTextContent(bundle.getString("code"));
+        System.out.println(bundle.getString("code"));
 
         etOutput.setText(bundle.getString("output"));
         System.out.println(bundle.getString("output"));

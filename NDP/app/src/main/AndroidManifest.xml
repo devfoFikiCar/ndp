@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-        <activity android:name=".StatisticsSpecificStudent"></activity>
+        <activity android:name=".StatisticsSpecificTeacher"></activity>
+        <activity android:name=".StatisticsSpecificStudent" />
         <activity android:name=".TaskEditorStudent" />
         <activity android:name=".TaskListStudent" />
         <activity android:name=".AssignmentsStudent" />
