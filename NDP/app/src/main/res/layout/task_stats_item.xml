@@ -3,7 +3,7 @@
   ~ Copyright (C) devfoFikiCar - All Rights Reserved
   ~ Unauthorized copying of this file, via any medium is strictly prohibited
   ~ Proprietary and confidential
-  ~ Written by Filip Obradović <fiki.obradovic@gmail.com> 2021
+  ~ Written by Filip Obradović <fiki.obradovic@gmail.com> [2020-2021]
   -->
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
