@@ -2,7 +2,7 @@
   ~ Copyright (C) devfoFikiCar - All Rights Reserved
   ~ Unauthorized copying of this file, via any medium is strictly prohibited
   ~ Proprietary and confidential
-  ~ Written by Filip Obradović <fiki.obradovic@gmail.com> 2021
+  ~ Written by Filip Obradović <fiki.obradovic@gmail.com> [2020-2021]
   -->
 
 <resources>
@@ -34,4 +34,5 @@
     <string name="code">Code:</string>
     <string name="output">Output:</string>
     <string name="expected_output">Expected output:</string>
+    <string name="statisticsBT">Statistics</string>
 </resources>

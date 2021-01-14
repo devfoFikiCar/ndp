@@ -20,18 +20,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.devoFikiCar.ndp.LecturesStudents;
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.ui.assignments.student.AssignmentsStudentFragment;
 import com.devoFikiCar.ndp.ui.assignments.teacher.AssignmentsTeacherFragment;
 import com.devoFikiCar.ndp.ui.lecture.student.LecturesStudentsFragment;
 import com.devoFikiCar.ndp.ui.lecture.teacher.LecturesTeacherFragment;
+import com.devoFikiCar.ndp.ui.statistics.overall.student.StatisticsStudentOverallFragment;
+import com.devoFikiCar.ndp.ui.statistics.overall.teacher.StatisticsTeacherOverallFragment;
 
 public class LectureAssignmentFragment extends Fragment {
 
     private LectureAssignmentViewModel mViewModel;
-    private Button btLectures;
-    private Button btAssignments;
 
     public static LectureAssignmentFragment newInstance() {
         return new LectureAssignmentFragment();
@@ -45,47 +44,67 @@ public class LectureAssignmentFragment extends Fragment {
 
         mViewModel = new ViewModelProvider(this).get(LectureAssignmentViewModel.class);
 
-        btLectures = (Button) root.findViewById(R.id.btLecturesList);
-        btAssignments = (Button) root.findViewById(R.id.btAssignmentsList);
-
-        btLectures.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mViewModel.getUser().isTeacher()) {
-                    getActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, new LecturesTeacherFragment())
-                            .addToBackStack(null)
-                            .commit();
-                } else {
-                    getActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, new LecturesStudentsFragment())
-                            .addToBackStack(null)
-                            .commit();
-                }
-            }
-        });
-
-        btAssignments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mViewModel.getUser().isTeacher()) {
-                    getActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, new AssignmentsTeacherFragment())
-                            .addToBackStack(null)
-                            .commit();
-                } else {
-                    getActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, new AssignmentsStudentFragment())
-                            .addToBackStack(null)
-                            .commit();
-                }
-            }
-        });
+        setLecturesButton(root);
+        setAssignmentsButton(root);
+        setStatsButton(root);
 
         return root;
+    }
+
+    private void setStatsButton(View root) {
+        Button btStats = root.findViewById(R.id.btStats);
+        btStats.setOnClickListener(v -> {
+            if (mViewModel.getUser().isTeacher()) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new StatisticsTeacherOverallFragment())
+                        .addToBackStack(null)
+                        .commit();
+            } else {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new StatisticsStudentOverallFragment())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+    }
+
+    private void setAssignmentsButton(View root) {
+        Button btAssignments = root.findViewById(R.id.btAssignmentsList);
+        btAssignments.setOnClickListener(v -> {
+            if (mViewModel.getUser().isTeacher()) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new AssignmentsTeacherFragment())
+                        .addToBackStack(null)
+                        .commit();
+            } else {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new AssignmentsStudentFragment())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+    }
+
+    private void setLecturesButton(View root) {
+        Button btLectures = root.findViewById(R.id.btLecturesList);
+        btLectures.setOnClickListener(v -> {
+            if (mViewModel.getUser().isTeacher()) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new LecturesTeacherFragment())
+                        .addToBackStack(null)
+                        .commit();
+            } else {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new LecturesStudentsFragment())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
     }
 }
