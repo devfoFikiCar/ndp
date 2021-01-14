@@ -5,7 +5,7 @@
  * Written by Filip Obradović <fiki.obradovic@gmail.com> 2021
  */
 
-package com.devoFikiCar.ndp.ui.statistics.specific;
+package com.devoFikiCar.ndp.ui.statistics.overall;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +19,12 @@ import com.devoFikiCar.ndp.R;
 
 import java.util.ArrayList;
 
-public class TaskStatsAdapter extends RecyclerView.Adapter<TaskStatsAdapter.TaskStatsViewHolder> {
-    ArrayList<TaskStatsItem> arrayList;
+public class UserStatsAdapter extends RecyclerView.Adapter<UserStatsAdapter.UserStatsViewHolder> {
+    ArrayList<UserStatsItem> arrayList;
     private OnItemClickListener mListener;
 
-    public TaskStatsAdapter(ArrayList<TaskStatsItem> taskStatsItems) {
-        this.arrayList = taskStatsItems;
+    public UserStatsAdapter(ArrayList<UserStatsItem> arrayList) {
+        this.arrayList = arrayList;
     }
 
     public interface OnItemClickListener {
@@ -35,15 +35,12 @@ public class TaskStatsAdapter extends RecyclerView.Adapter<TaskStatsAdapter.Task
         mListener = listener;
     }
 
-    public static class TaskStatsViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvNumber;
-        public TextView tvScore;
+    public static class UserStatsViewHolder extends RecyclerView.ViewHolder {
+        public TextView tvTitle;
 
-
-        public TaskStatsViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+        public UserStatsViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
-            tvNumber = itemView.findViewById(R.id.tvTaskNumberStats);
-            tvScore = itemView.findViewById(R.id.tvScoreStats);
+            tvTitle = itemView.findViewById(R.id.tvAssignmentTitleUser);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -61,25 +58,23 @@ public class TaskStatsAdapter extends RecyclerView.Adapter<TaskStatsAdapter.Task
 
     @NonNull
     @Override
-    public TaskStatsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_stats_item, parent, false);
-        TaskStatsViewHolder taskStatsViewHolder = new TaskStatsViewHolder(view, mListener);
-        return taskStatsViewHolder;
+    public UserStatsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_stats_item, parent, false);
+        UserStatsViewHolder userStatsViewHolder = new UserStatsViewHolder(view, mListener);
+        return userStatsViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TaskStatsViewHolder holder, int position) {
-        TaskStatsItem taskStatsItem = arrayList.get(position);
+    public void onBindViewHolder(@NonNull UserStatsViewHolder holder, int position) {
+        UserStatsItem userStatsItem = arrayList.get(position);
 
-        holder.tvNumber.setText(taskStatsItem.getTaskNumber());
-        holder.tvScore.setText(taskStatsItem.getScore());
+        holder.tvTitle.setText(userStatsItem.getAssignmentTitle());
     }
 
     @Override
     public int getItemCount() {
         if (arrayList == null) {
             return 0;
-        }
-        return arrayList.size();
+        } else return arrayList.size();
     }
 }
