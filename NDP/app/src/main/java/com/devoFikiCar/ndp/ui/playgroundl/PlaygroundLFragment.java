@@ -8,7 +8,9 @@
 package com.devoFikiCar.ndp.ui.playgroundl;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -88,6 +90,10 @@ public class PlaygroundLFragment extends Fragment {
         etCode.setTextContent(FCLANG_CODE_START);
         etCode.setLanguage(new JavaLanguage());
         etCode.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
+
+        // todo add themes everywhere you need
+        SharedPreferences preferences = getContext().getSharedPreferences("theme", Context.MODE_PRIVATE);
+        System.out.println(preferences.getInt("selected", -1));
 
         btInput.setOnClickListener(new View.OnClickListener() {
             @Override
