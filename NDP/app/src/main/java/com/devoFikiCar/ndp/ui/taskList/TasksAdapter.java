@@ -23,39 +23,12 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksViewHol
     ArrayList<TaskItem> arrayList;
     private OnItemClickListener mListener;
 
-    public interface OnItemClickListener {
-        void onItemClick(int position);
+    public TasksAdapter(ArrayList<TaskItem> arrayList) {
+        this.arrayList = arrayList;
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.mListener = listener;
-    }
-
-    public static class TasksViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvNumber;
-        public TextView tvStatus;
-
-        public TasksViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
-            super(itemView);
-            tvNumber = itemView.findViewById(R.id.tvTaskNumber);
-            tvStatus = itemView.findViewById(R.id.tvStatusTask);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
-                        }
-                    }
-                }
-            });
-        }
-    }
-
-    public TasksAdapter(ArrayList<TaskItem> arrayList) {
-        this.arrayList = arrayList;
     }
 
     @NonNull
@@ -79,5 +52,32 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksViewHol
         if (arrayList == null)
             return 0;
         return arrayList.size();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public static class TasksViewHolder extends RecyclerView.ViewHolder {
+        public TextView tvNumber;
+        public TextView tvStatus;
+
+        public TasksViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+            super(itemView);
+            tvNumber = itemView.findViewById(R.id.tvTaskNumber);
+            tvStatus = itemView.findViewById(R.id.tvStatusTask);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
+        }
     }
 }

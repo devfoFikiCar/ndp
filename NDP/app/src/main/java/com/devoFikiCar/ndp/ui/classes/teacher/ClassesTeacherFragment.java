@@ -7,24 +7,22 @@
 
 package com.devoFikiCar.ndp.ui.classes.teacher;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.ui.classes.ClassItem;
@@ -38,13 +36,35 @@ import java.util.HashMap;
 
 public class ClassesTeacherFragment extends Fragment {
 
+    final Observer<Integer> change = new Observer<Integer>() {
+        @Override
+        public void onChanged(Integer integer) {
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new LectureAssignmentFragment())
+                    .addToBackStack(null)
+                    .commit();
+        }
+    };
     private ClassesTeacherViewModel mViewModel;
     private FloatingActionButton btCreateClass;
     private FirebaseFirestore firestore;
     private RecyclerView recyclerView;
     private ClassesAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<ClassItem> classItems = new ArrayList<>();
+    private final ArrayList<ClassItem> classItems = new ArrayList<>();
+    final Observer<ArrayList<HashMap<String, String>>> classesList = new Observer<ArrayList<HashMap<String, String>>>() {
+        @Override
+        public void onChanged(ArrayList<HashMap<String, String>> strings) {
+            if (classItems != null) {
+                classItems.clear();
+            }
+            for (int i = 0; i < strings.size(); i++) {
+                classItems.add(new ClassItem(strings.get(i).get("classTitle"), "Class code: " + strings.get(i).get("classID")));
+            }
+            adapter.notifyDataSetChanged();
+        }
+    };
 
     public static ClassesTeacherFragment newInstance() {
         return new ClassesTeacherFragment();
@@ -57,7 +77,7 @@ public class ClassesTeacherFragment extends Fragment {
         View root = inflater.inflate(R.layout.classes_teacher_fragment, container, false);
         mViewModel = new ViewModelProvider(this).get(ClassesTeacherViewModel.class);
 
-        btCreateClass = (FloatingActionButton) root.findViewById(R.id.createClass);
+        btCreateClass = root.findViewById(R.id.createClass);
 
         firestore = FirebaseFirestore.getInstance();
 
@@ -114,28 +134,4 @@ public class ClassesTeacherFragment extends Fragment {
             }
         });
     }
-
-    final Observer<ArrayList<HashMap<String, String>>> classesList = new Observer<ArrayList<HashMap<String, String>>>() {
-        @Override
-        public void onChanged(ArrayList<HashMap<String, String>> strings) {
-            if (classItems != null) {
-                classItems.clear();
-            }
-            for (int i = 0; i < strings.size(); i++) {
-                classItems.add(new ClassItem(strings.get(i).get("classTitle"), "Class code: " + strings.get(i).get("classID")));
-            }
-            adapter.notifyDataSetChanged();
-        }
-    };
-
-    final Observer<Integer> change = new Observer<Integer>() {
-        @Override
-        public void onChanged(Integer integer) {
-            getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, new LectureAssignmentFragment())
-                    .addToBackStack(null)
-                    .commit();
-        }
-    };
 }

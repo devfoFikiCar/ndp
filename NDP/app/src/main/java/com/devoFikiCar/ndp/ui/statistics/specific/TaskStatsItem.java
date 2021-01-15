@@ -8,8 +8,8 @@
 package com.devoFikiCar.ndp.ui.statistics.specific;
 
 public class TaskStatsItem {
-    private String taskNumber;
-    private String score;
+    private final String taskNumber;
+    private final String score;
 
     public TaskStatsItem(String taskNumber, String score) {
         this.taskNumber = taskNumber;

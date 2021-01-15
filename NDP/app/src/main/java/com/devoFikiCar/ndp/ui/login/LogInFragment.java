@@ -30,8 +30,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.devoFikiCar.ndp.LogIn;
 import com.devoFikiCar.ndp.MainActivity;
 import com.devoFikiCar.ndp.R;
-import com.devoFikiCar.ndp.util.User;
 import com.devoFikiCar.ndp.helper.userSave;
+import com.devoFikiCar.ndp.util.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -66,11 +66,11 @@ public class LogInFragment extends Fragment {
         View root = inflater.inflate(R.layout.login_fragment, container, false);
         mViewModel = new ViewModelProvider(this).get(LogInViewModel.class);
 
-        btLogIn = (Button) root.findViewById(R.id.btLogIn);
-        etUser = (EditText) root.findViewById(R.id.etUsername);
-        etPassword = (EditText) root.findViewById(R.id.etPassword);
-        cbTeacher = (CheckBox) root.findViewById(R.id.cbTeacher);
-        tvPlayInPlaygroundNL = (TextView) root.findViewById(R.id.tvPlayInPlaygroundNL);
+        btLogIn = root.findViewById(R.id.btLogIn);
+        etUser = root.findViewById(R.id.etUsername);
+        etPassword = root.findViewById(R.id.etPassword);
+        cbTeacher = root.findViewById(R.id.cbTeacher);
+        tvPlayInPlaygroundNL = root.findViewById(R.id.tvPlayInPlaygroundNL);
         firestore = FirebaseFirestore.getInstance();
 
         btLogIn.setOnClickListener(new View.OnClickListener() {

@@ -7,16 +7,9 @@
 
 package com.devoFikiCar.ndp.ui.taskEditor.student;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +20,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.brackeys.ui.editorkit.listener.OnChangeListener;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.brackeys.ui.editorkit.theme.EditorTheme;
 import com.brackeys.ui.editorkit.widget.TextProcessor;
 import com.brackeys.ui.language.java.JavaLanguage;
@@ -57,6 +54,7 @@ public class TaskEditorStudentFragment extends Fragment {
             + "\t\t\t\t}\n"
             + "}\n";
     private static final String TAG = TaskEditorStudent.class.getSimpleName();
+    private static int LANGUAGE = 0;
     private TaskEditorStudentViewModel mViewModel;
     private Button btInput;
     private Button btRun;
@@ -68,7 +66,6 @@ public class TaskEditorStudentFragment extends Fragment {
     private Button btOk;
     private Button btText;
     private AlertDialog alertDialog;
-    private static int LANGUAGE = 0;
 
     public static TaskEditorStudentFragment newInstance() {
         return new TaskEditorStudentFragment();
@@ -85,14 +82,14 @@ public class TaskEditorStudentFragment extends Fragment {
         Bundle bundle = this.getArguments();
         int position = bundle.getInt("position");
 
-        btInput = (Button) root.findViewById(R.id.btInputT);
-        btRun = (Button) root.findViewById(R.id.btRunT);
+        btInput = root.findViewById(R.id.btInputT);
+        btRun = root.findViewById(R.id.btRunT);
 
-        etCode = (TextProcessor) root.findViewById(R.id.etCodeT);
-        etOutput = (EditText) root.findViewById(R.id.etOutputT);
+        etCode = root.findViewById(R.id.etCodeT);
+        etOutput = root.findViewById(R.id.etOutputT);
 
         initList();
-        spLanguages = (Spinner) root.findViewById(R.id.spLanguagesT);
+        spLanguages = root.findViewById(R.id.spLanguagesT);
         languageAdapter = new LanguageAdapter(getContext(), languageItems);
         spLanguages.setAdapter(languageAdapter);
         spLanguages.setSelection(0);

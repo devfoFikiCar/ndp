@@ -30,7 +30,6 @@ import com.devoFikiCar.ndp.util.TimeStorage;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class TimeDateDialog extends AppCompatDialogFragment {
     private EditText editText1;
@@ -63,10 +62,10 @@ public class TimeDateDialog extends AppCompatDialogFragment {
                     }
                 });
 
-        editText1 = (EditText) view.findViewById(R.id.etTimeDate1);
-        editText2 = (EditText) view.findViewById(R.id.etTimeDate2);
-        time1 = (Button) view.findViewById(R.id.btStartTime1);
-        time2 = (Button) view.findViewById(R.id.btStartTime2);
+        editText1 = view.findViewById(R.id.etTimeDate1);
+        editText2 = view.findViewById(R.id.etTimeDate2);
+        time1 = view.findViewById(R.id.btStartTime1);
+        time2 = view.findViewById(R.id.btStartTime2);
 
         editText1.setEnabled(false);
         editText1.setText(TimeStorage.toString1());

@@ -27,44 +27,15 @@ public class TaskStatsAdapter extends RecyclerView.Adapter<TaskStatsAdapter.Task
         this.arrayList = taskStatsItems;
     }
 
-    public interface OnItemClickListener {
-        void OnItemClick(int position);
-    }
-
-    public void setOnItemClickListener (OnItemClickListener listener) {
+    public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
-    }
-
-    public static class TaskStatsViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvNumber;
-        public TextView tvScore;
-
-
-        public TaskStatsViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
-            super(itemView);
-            tvNumber = itemView.findViewById(R.id.tvTaskNumberStats);
-            tvScore = itemView.findViewById(R.id.tvScoreStats);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.OnItemClick(position);
-                        }
-                    }
-                }
-            });
-        }
     }
 
     @NonNull
     @Override
     public TaskStatsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_stats_item, parent, false);
-        TaskStatsViewHolder taskStatsViewHolder = new TaskStatsViewHolder(view, mListener);
-        return taskStatsViewHolder;
+        return new TaskStatsViewHolder(view, mListener);
     }
 
     @Override
@@ -81,5 +52,30 @@ public class TaskStatsAdapter extends RecyclerView.Adapter<TaskStatsAdapter.Task
             return 0;
         }
         return arrayList.size();
+    }
+
+    public interface OnItemClickListener {
+        void OnItemClick(int position);
+    }
+
+    public static class TaskStatsViewHolder extends RecyclerView.ViewHolder {
+        public TextView tvNumber;
+        public TextView tvScore;
+
+
+        public TaskStatsViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+            super(itemView);
+            tvNumber = itemView.findViewById(R.id.tvTaskNumberStats);
+            tvScore = itemView.findViewById(R.id.tvScoreStats);
+
+            itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.OnItemClick(position);
+                    }
+                }
+            });
+        }
     }
 }

@@ -7,18 +7,16 @@
 
 package com.devoFikiCar.ndp.ui.lectureassignment;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.ui.assignments.student.AssignmentsStudentFragment;

@@ -8,7 +8,7 @@
 package com.devoFikiCar.ndp.ui.statistics.overall;
 
 public class UserStatsItem {
-    private String assignmentTitle;
+    private final String assignmentTitle;
 
     public UserStatsItem(String assignmentTitle) {
         this.assignmentTitle = assignmentTitle;

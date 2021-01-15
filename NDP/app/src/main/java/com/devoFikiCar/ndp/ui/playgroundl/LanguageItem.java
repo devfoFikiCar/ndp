@@ -8,8 +8,8 @@
 package com.devoFikiCar.ndp.ui.playgroundl;
 
 public class LanguageItem {
-    private String languageName;
-    private int languageImage;
+    private final String languageName;
+    private final int languageImage;
 
     public LanguageItem(String languageName, int languageImage) {
         this.languageName = languageName;

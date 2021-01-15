@@ -26,8 +26,8 @@ import dmax.dialog.SpotsDialog;
 
 public class StudentViewLectureViewModel extends ViewModel {
     private Classes classes;
-    private MutableLiveData<String> title = new MutableLiveData<>();
-    private MutableLiveData<String> content = new MutableLiveData<>();
+    private final MutableLiveData<String> title = new MutableLiveData<>();
+    private final MutableLiveData<String> content = new MutableLiveData<>();
 
     public StudentViewLectureViewModel() {
         init();

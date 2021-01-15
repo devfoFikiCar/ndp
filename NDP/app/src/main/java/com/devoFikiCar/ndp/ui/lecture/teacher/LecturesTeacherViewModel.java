@@ -9,7 +9,6 @@ package com.devoFikiCar.ndp.ui.lecture.teacher;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
@@ -26,14 +25,12 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import br.tiagohm.markdownview.MarkdownView;
-import br.tiagohm.markdownview.css.styles.Github;
 import dmax.dialog.SpotsDialog;
 
 public class LecturesTeacherViewModel extends ViewModel {
     private Classes classes;
-    private MutableLiveData<ArrayList<HashMap<String, String>>> lectureIDs = new MutableLiveData<>();
-    private MutableLiveData<String> content = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<HashMap<String, String>>> lectureIDs = new MutableLiveData<>();
+    private final MutableLiveData<String> content = new MutableLiveData<>();
 
     public LecturesTeacherViewModel() {
         init();

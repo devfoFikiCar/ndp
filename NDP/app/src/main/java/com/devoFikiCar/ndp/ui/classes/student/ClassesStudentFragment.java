@@ -36,13 +36,36 @@ import java.util.HashMap;
 
 public class ClassesStudentFragment extends Fragment {
 
+    final Observer<Integer> change = new Observer<Integer>() {
+        @Override
+        public void onChanged(Integer integer) {
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new LectureAssignmentFragment())
+                    .addToBackStack(null)
+                    .commit();
+        }
+    };
     private ClassesStudentViewModel mViewModel;
     private Button btJoinClass;
     private FirebaseFirestore firestore;
     private RecyclerView recyclerView;
     private ClassesAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<ClassItem> classItems = new ArrayList<>();
+    private final ArrayList<ClassItem> classItems = new ArrayList<>();
+    final Observer<ArrayList<HashMap<String, String>>> classesList = new Observer<ArrayList<HashMap<String, String>>>() {
+
+        @Override
+        public void onChanged(ArrayList<HashMap<String, String>> hashMaps) {
+            if (classItems != null) {
+                classItems.clear();
+            }
+            for (int i = 0; i < hashMaps.size(); i++) {
+                classItems.add(new ClassItem(hashMaps.get(i).get("classTitle"), "Class code: " + hashMaps.get(i).get("classID")));
+            }
+            adapter.notifyDataSetChanged();
+        }
+    };
 
     public static ClassesStudentFragment newInstance() {
         return new ClassesStudentFragment();
@@ -55,7 +78,7 @@ public class ClassesStudentFragment extends Fragment {
         View root = inflater.inflate(R.layout.classes_student_fragment, container, false);
         mViewModel = new ViewModelProvider(this).get(ClassesStudentViewModel.class);
 
-        btJoinClass = (Button) root.findViewById(R.id.btJoinClass);
+        btJoinClass = root.findViewById(R.id.btJoinClass);
 
         firestore = FirebaseFirestore.getInstance();
 
@@ -112,29 +135,4 @@ public class ClassesStudentFragment extends Fragment {
             }
         });
     }
-
-    final Observer<ArrayList<HashMap<String, String>>> classesList = new Observer<ArrayList<HashMap<String, String>>>() {
-
-        @Override
-        public void onChanged(ArrayList<HashMap<String, String>> hashMaps) {
-            if (classItems != null) {
-                classItems.clear();
-            }
-            for (int i = 0; i < hashMaps.size(); i++) {
-                classItems.add(new ClassItem(hashMaps.get(i).get("classTitle"), "Class code: " + hashMaps.get(i).get("classID")));
-            }
-            adapter.notifyDataSetChanged();
-        }
-    };
-
-    final Observer<Integer> change = new Observer<Integer>() {
-        @Override
-        public void onChanged(Integer integer) {
-            getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, new LectureAssignmentFragment())
-                    .addToBackStack(null)
-                    .commit();
-        }
-    };
 }

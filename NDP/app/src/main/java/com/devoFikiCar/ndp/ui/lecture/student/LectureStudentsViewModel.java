@@ -7,8 +7,6 @@
 
 package com.devoFikiCar.ndp.ui.lecture.student;
 
-import android.util.Log;
-
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -26,7 +24,7 @@ import java.util.HashMap;
 
 public class LectureStudentsViewModel extends ViewModel {
     private Classes classes;
-    private MutableLiveData<ArrayList<HashMap<String, String>>> lectureIDs = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<HashMap<String, String>>> lectureIDs = new MutableLiveData<>();
 
     public LectureStudentsViewModel() {
         init();

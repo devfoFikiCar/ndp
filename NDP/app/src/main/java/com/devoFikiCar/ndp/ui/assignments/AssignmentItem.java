@@ -8,8 +8,8 @@
 package com.devoFikiCar.ndp.ui.assignments;
 
 public class AssignmentItem {
-    private String assignmentTitle;
-    private String assignmentID;
+    private final String assignmentTitle;
+    private final String assignmentID;
 
     public AssignmentItem(String assignmentTitle, String assignmentID) {
         this.assignmentTitle = assignmentTitle;

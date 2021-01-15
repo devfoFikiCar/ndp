@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.devoFikiCar.ndp.helper.classSave;
 import com.devoFikiCar.ndp.ui.statistics.specific.TaskStatsItem;
-import com.devoFikiCar.ndp.ui.taskList.TaskItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -28,8 +27,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class StatisticsSpecificTeacherViewModel extends ViewModel {
-    private MutableLiveData<ArrayList<TaskStatsItem>> taskStatsItemMutableLiveData = new MutableLiveData<>();
-    private MutableLiveData<ArrayList<String>> student = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<TaskStatsItem>> taskStatsItemMutableLiveData = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<String>> student = new MutableLiveData<>();
 
     public MutableLiveData<ArrayList<TaskStatsItem>> getTaskStatsItemMutableLiveData() {
         return taskStatsItemMutableLiveData;

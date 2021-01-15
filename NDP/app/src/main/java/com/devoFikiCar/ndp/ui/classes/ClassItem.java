@@ -8,8 +8,8 @@
 package com.devoFikiCar.ndp.ui.classes;
 
 public class ClassItem {
-    private String classTitle;
-    private String classID;
+    private final String classTitle;
+    private final String classID;
 
     public ClassItem(String classTitle, String classID) {
         this.classTitle = classTitle;

@@ -7,21 +7,19 @@
 
 package com.devoFikiCar.ndp.ui.statistics.specific.teacher;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.ui.statistics.specific.TaskStatsAdapter;
@@ -37,7 +35,19 @@ public class StatisticsSpecificTeacherFragment extends Fragment {
     private RecyclerView recyclerView;
     private TaskStatsAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<TaskStatsItem> taskStatsItems = new ArrayList<>();
+    private final ArrayList<TaskStatsItem> taskStatsItems = new ArrayList<>();
+    final Observer<ArrayList<TaskStatsItem>> taskStatsList = new Observer<ArrayList<TaskStatsItem>>() {
+        @Override
+        public void onChanged(ArrayList<TaskStatsItem> taskStatsItems1) {
+            if (taskStatsItems != null) {
+                taskStatsItems.clear();
+            }
+            for (int i = 0; i < taskStatsItems1.size(); i++) {
+                taskStatsItems.add(taskStatsItems1.get(i));
+            }
+            adapter.notifyDataSetChanged();
+        }
+    };
     private FirebaseFirestore firestore;
     private Button btDone;
     private String username;
@@ -106,17 +116,4 @@ public class StatisticsSpecificTeacherFragment extends Fragment {
             }
         });
     }
-
-    final Observer<ArrayList<TaskStatsItem>> taskStatsList = new Observer<ArrayList<TaskStatsItem>>() {
-        @Override
-        public void onChanged(ArrayList<TaskStatsItem> taskStatsItems1) {
-            if (taskStatsItems != null) {
-                taskStatsItems.clear();
-            }
-            for (int i = 0; i < taskStatsItems1.size(); i++) {
-                taskStatsItems.add(taskStatsItems1.get(i));
-            }
-            adapter.notifyDataSetChanged();
-        }
-    };
 }

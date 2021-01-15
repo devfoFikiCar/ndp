@@ -17,8 +17,8 @@ public class AsyncWorker {
     private static final AsyncWorker instance = new AsyncWorker();
     private static final int NUMBER_OF_THREADS = 4;
 
-    private ExecutorService executorService;
-    private Handler handler;
+    private final ExecutorService executorService;
+    private final Handler handler;
 
     private AsyncWorker() {
         executorService = Executors.newFixedThreadPool(NUMBER_OF_THREADS);

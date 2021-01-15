@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -45,10 +44,10 @@ public class PlaygroundLFragment extends Fragment {
     private static final String PYTHON_CODE_START = "# code";
     private static final String FCLANG_CODE_START = "// code";
     private static final String JAVA_CODE_START = "public class Main {\n"
-                                                + "\t\t\t\tpublic static void main(String[] args){\n"
-                                                + "\t\t\t\t\t\t\t\t// code\n"
-                                                + "\t\t\t\t}\n"
-                                                + "}\n";
+            + "\t\t\t\tpublic static void main(String[] args){\n"
+            + "\t\t\t\t\t\t\t\t// code\n"
+            + "\t\t\t\t}\n"
+            + "}\n";
     private static final String TAG = PlaygroundL.class.getSimpleName();
     private static int LANGUAGE = 0;
     private PlaygroundLViewModel mViewModel;
@@ -72,14 +71,14 @@ public class PlaygroundLFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.playgroundl_fragment, container, false);
         mViewModel = new ViewModelProvider(this).get(PlaygroundLViewModel.class);
-        btInput = (Button) root.findViewById(R.id.btInput);
-        btRun = (Button) root.findViewById(R.id.btRun);
+        btInput = root.findViewById(R.id.btInput);
+        btRun = root.findViewById(R.id.btRun);
 
-        etCode = (TextProcessor) root.findViewById(R.id.etCode);
-        etOutput = (EditText) root.findViewById(R.id.etOutput);
+        etCode = root.findViewById(R.id.etCode);
+        etOutput = root.findViewById(R.id.etOutput);
 
         initList();
-        spLanguages = (Spinner) root.findViewById(R.id.spLanguages);
+        spLanguages = root.findViewById(R.id.spLanguages);
         languageAdapter = new LanguageAdapter(getContext(), languageItems);
         spLanguages.setAdapter(languageAdapter);
         spLanguages.setSelection(0);

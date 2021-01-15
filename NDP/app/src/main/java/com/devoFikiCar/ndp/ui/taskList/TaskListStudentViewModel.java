@@ -7,7 +7,6 @@
 
 package com.devoFikiCar.ndp.ui.taskList;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -29,12 +28,10 @@ import com.devoFikiCar.ndp.ui.statistics.specific.student.StatisticsSpecificStud
 import com.devoFikiCar.ndp.util.Classes;
 import com.devoFikiCar.ndp.util.Task;
 import com.devoFikiCar.ndp.util.User;
-import com.google.android.gms.common.api.Batch;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Source;
 import com.google.firebase.firestore.WriteBatch;
 
 import java.text.DateFormat;
@@ -50,13 +47,13 @@ import dmax.dialog.SpotsDialog;
 public class TaskListStudentViewModel extends ViewModel {
     private Classes classes;
     private User user;
-    private MutableLiveData<ArrayList<Task>> tasks = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<Task>> tasks = new MutableLiveData<>();
     private AlertDialog alertDialog;
     private Context context;
     private FirebaseFirestore db;
     private FragmentActivity activity;
-    private MutableLiveData<Long> timeLeftInMilliseconds = new MutableLiveData<>();
-    private MutableLiveData<ArrayList<HashMap<String, String>>> scoresData = new MutableLiveData<>();
+    private final MutableLiveData<Long> timeLeftInMilliseconds = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<HashMap<String, String>>> scoresData = new MutableLiveData<>();
 
     public TaskListStudentViewModel() {
         init();
@@ -98,12 +95,12 @@ public class TaskListStudentViewModel extends ViewModel {
         return tasks;
     }
 
-    public void setDb(FirebaseFirestore db) {
-        this.db = db;
-    }
-
     public void setTasks(ArrayList<Task> tasks) {
         this.tasks.postValue(tasks);
+    }
+
+    public void setDb(FirebaseFirestore db) {
+        this.db = db;
     }
 
     public MutableLiveData<Long> getTimeLeftInMilliseconds() {

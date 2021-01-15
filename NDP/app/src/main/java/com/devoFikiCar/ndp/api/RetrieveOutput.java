@@ -12,7 +12,9 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
-import okhttp3.*;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class RetrieveOutput {
     private static final int LEVEL_1 = 1000;
@@ -32,7 +34,7 @@ public class RetrieveOutput {
                     .addHeader("x-rapidapi-host", "judge0-ce.p.rapidapi.com")
                     .build();
             int count = 0;
-            String status = "";
+            String status;
             JSONObject jsonObject;
             do {
                 Response response = client.newCall(request).execute();

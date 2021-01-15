@@ -12,11 +12,11 @@ import java.util.HashMap;
 
 public class User {
     private String id;
-    private String username;
-    private String password;
-    private String fullName;
-    private String schoolCode;
-    private boolean teacher;
+    private final String username;
+    private final String password;
+    private final String fullName;
+    private final String schoolCode;
+    private final boolean teacher;
     private ArrayList<HashMap<String, String>> enrolledIn;
 
     public User(User user) {

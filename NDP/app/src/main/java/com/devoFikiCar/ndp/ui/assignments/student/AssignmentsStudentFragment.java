@@ -7,20 +7,18 @@
 
 package com.devoFikiCar.ndp.ui.assignments.student;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.ui.assignments.AssignmentItem;
@@ -37,7 +35,19 @@ public class AssignmentsStudentFragment extends Fragment {
     private RecyclerView recyclerView;
     private AssignmentsAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<AssignmentItem> assignmentItems = new ArrayList<>();
+    private final ArrayList<AssignmentItem> assignmentItems = new ArrayList<>();
+    final Observer<ArrayList<HashMap<String, String>>> assignmentsList = new Observer<ArrayList<HashMap<String, String>>>() {
+        @Override
+        public void onChanged(ArrayList<HashMap<String, String>> hashMaps) {
+            if (assignmentItems != null) {
+                assignmentItems.clear();
+            }
+            for (int i = 0; i < hashMaps.size(); i++) {
+                assignmentItems.add(new AssignmentItem(hashMaps.get(i).get("assignmentTitle"), hashMaps.get(i).get("assignmentID")));
+            }
+            adapter.notifyDataSetChanged();
+        }
+    };
     private FirebaseFirestore firestore;
 
     public static AssignmentsStudentFragment newInstance() {
@@ -85,17 +95,4 @@ public class AssignmentsStudentFragment extends Fragment {
             }
         });
     }
-
-    final Observer<ArrayList<HashMap<String, String>>> assignmentsList = new Observer<ArrayList<HashMap<String, String>>>() {
-        @Override
-        public void onChanged(ArrayList<HashMap<String, String>> hashMaps) {
-            if (assignmentItems != null) {
-                assignmentItems.clear();
-            }
-            for (int i = 0; i < hashMaps.size(); i++) {
-                assignmentItems.add(new AssignmentItem(hashMaps.get(i).get("assignmentTitle") , hashMaps.get(i).get("assignmentID")));
-            }
-            adapter.notifyDataSetChanged();
-        }
-    };
 }

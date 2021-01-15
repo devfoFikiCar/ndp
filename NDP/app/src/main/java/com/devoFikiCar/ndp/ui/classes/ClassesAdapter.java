@@ -23,39 +23,12 @@ public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.ClassesV
     ArrayList<ClassItem> arrayList;
     private OnItemClickListener mListener;
 
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
-
-    public void setOnItemClickListener (OnItemClickListener listener) {
-        mListener = listener;
-    }
-
-    public static class ClassesViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvTitle;
-        public TextView tvID;
-
-        public ClassesViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
-            super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvTitleLineClass);
-            tvID = itemView.findViewById(R.id.tvIDLineClass);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
-                        }
-                    }
-                }
-            });
-        }
-    }
-
     public ClassesAdapter(ArrayList<ClassItem> arrayList) {
         this.arrayList = arrayList;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
     }
 
     @NonNull
@@ -79,5 +52,32 @@ public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.ClassesV
         if (arrayList == null)
             return 0;
         return arrayList.size();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public static class ClassesViewHolder extends RecyclerView.ViewHolder {
+        public TextView tvTitle;
+        public TextView tvID;
+
+        public ClassesViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+            super(itemView);
+            tvTitle = itemView.findViewById(R.id.tvTitleLineClass);
+            tvID = itemView.findViewById(R.id.tvIDLineClass);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
+        }
     }
 }

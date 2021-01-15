@@ -23,37 +23,12 @@ public class LecturesAdapter extends RecyclerView.Adapter<LecturesAdapter.Lectur
     ArrayList<LectureItem> arrayList;
     private OnItemClickListener mListener;
 
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
-
-    public void setOnItemClickListener (OnItemClickListener listener) {
-        mListener = listener;
-    }
-
     public LecturesAdapter(ArrayList<LectureItem> arrayList) {
         this.arrayList = arrayList;
     }
 
-    public static class LecturesViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvTitle;
-
-        public LecturesViewHolder(@NonNull View itemView, OnItemClickListener listener) {
-            super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvLectureTitle);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
-                        }
-                    }
-                }
-            });
-        }
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
     }
 
     @NonNull
@@ -76,5 +51,30 @@ public class LecturesAdapter extends RecyclerView.Adapter<LecturesAdapter.Lectur
         if (arrayList == null)
             return 0;
         return arrayList.size();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public static class LecturesViewHolder extends RecyclerView.ViewHolder {
+        private final TextView tvTitle;
+
+        public LecturesViewHolder(@NonNull View itemView, OnItemClickListener listener) {
+            super(itemView);
+            tvTitle = itemView.findViewById(R.id.tvLectureTitle);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
+        }
     }
 }

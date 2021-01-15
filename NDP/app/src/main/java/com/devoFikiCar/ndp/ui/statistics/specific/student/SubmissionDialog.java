@@ -21,7 +21,6 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.brackeys.ui.editorkit.theme.EditorTheme;
 import com.brackeys.ui.editorkit.widget.TextProcessor;
-import com.brackeys.ui.language.java.JavaLanguage;
 import com.brackeys.ui.language.python.PythonLanguage;
 import com.devoFikiCar.ndp.R;
 
@@ -48,9 +47,9 @@ public class SubmissionDialog extends AppCompatDialogFragment {
                     }
                 });
 
-        tpCode = (TextProcessor) view.findViewById(R.id.tpCodeDialog);
-        etOutput = (EditText) view.findViewById(R.id.etDialogOutput);
-        etExpectedOutput = (EditText) view.findViewById(R.id.etDialogExpectedOutput);
+        tpCode = view.findViewById(R.id.tpCodeDialog);
+        etOutput = view.findViewById(R.id.etDialogOutput);
+        etExpectedOutput = view.findViewById(R.id.etDialogExpectedOutput);
 
         tpCode.setEnabled(false);
         etOutput.setEnabled(false);

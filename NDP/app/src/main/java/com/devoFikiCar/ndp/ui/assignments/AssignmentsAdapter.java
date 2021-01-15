@@ -19,44 +19,16 @@ import com.devoFikiCar.ndp.R;
 
 import java.util.ArrayList;
 
-public class AssignmentsAdapter extends RecyclerView.Adapter<AssignmentsAdapter.AssignmentsViewHolder>{
+public class AssignmentsAdapter extends RecyclerView.Adapter<AssignmentsAdapter.AssignmentsViewHolder> {
     ArrayList<AssignmentItem> arrayList;
     private OnItemClickListener mListener;
 
-    public interface OnItemClickListener {
-        void OnItemClick(int position);
-    }
-
-    public void setOnItemClickListener (OnItemClickListener listener) {
-        mListener = listener;
-    }
-
-    public static class AssignmentsViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvTitle;
-        public TextView tvID;
-
-
-        public AssignmentsViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
-            super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvTitleLineAssignment);
-            tvID = itemView.findViewById(R.id.tvIDLineAssignment);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.OnItemClick(position);
-                        }
-                    }
-                }
-            });
-        }
-    }
-
     public AssignmentsAdapter(ArrayList<AssignmentItem> arrayList) {
         this.arrayList = arrayList;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
     }
 
     @NonNull
@@ -81,5 +53,33 @@ public class AssignmentsAdapter extends RecyclerView.Adapter<AssignmentsAdapter.
             return 0;
         }
         return arrayList.size();
+    }
+
+    public interface OnItemClickListener {
+        void OnItemClick(int position);
+    }
+
+    public static class AssignmentsViewHolder extends RecyclerView.ViewHolder {
+        public TextView tvTitle;
+        public TextView tvID;
+
+
+        public AssignmentsViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+            super(itemView);
+            tvTitle = itemView.findViewById(R.id.tvTitleLineAssignment);
+            tvID = itemView.findViewById(R.id.tvIDLineAssignment);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.OnItemClick(position);
+                        }
+                    }
+                }
+            });
+        }
     }
 }

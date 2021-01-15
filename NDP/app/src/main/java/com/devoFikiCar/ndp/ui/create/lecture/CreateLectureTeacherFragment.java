@@ -7,27 +7,24 @@
 
 package com.devoFikiCar.ndp.ui.create.lecture;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.brackeys.ui.editorkit.theme.EditorTheme;
 import com.brackeys.ui.editorkit.widget.TextProcessor;
-import com.brackeys.ui.language.java.JavaLanguage;
 import com.brackeys.ui.language.markdown.MarkdownLanguage;
 import com.devoFikiCar.ndp.R;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -57,16 +54,16 @@ public class CreateLectureTeacherFragment extends Fragment {
 
         mViewModel = new ViewModelProvider(this).get(CreateLectureTeacherViewModel.class);
 
-        etMarkdown = (TextProcessor) root.findViewById(R.id.etMarkdown);
+        etMarkdown = root.findViewById(R.id.etMarkdown);
         etMarkdown.setLanguage(new MarkdownLanguage());
         etMarkdown.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
         etMarkdown.setTextContent("# Title");
 
         firestore = FirebaseFirestore.getInstance();
 
-        etTitle = (EditText) root.findViewById(R.id.etTitleLecture);
+        etTitle = root.findViewById(R.id.etTitleLecture);
 
-        btHelp = (Button) root.findViewById(R.id.btHelp);
+        btHelp = root.findViewById(R.id.btHelp);
         btHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +75,7 @@ public class CreateLectureTeacherFragment extends Fragment {
             }
         });
 
-        btPreview = (Button) root.findViewById(R.id.btPreview);
+        btPreview = root.findViewById(R.id.btPreview);
         btPreview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +98,7 @@ public class CreateLectureTeacherFragment extends Fragment {
             }
         });
 
-        btDone = (Button) root.findViewById(R.id.btCreateLectureDone);
+        btDone = root.findViewById(R.id.btCreateLectureDone);
         btDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

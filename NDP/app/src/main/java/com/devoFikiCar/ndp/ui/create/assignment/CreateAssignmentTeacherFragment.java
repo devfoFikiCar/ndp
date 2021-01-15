@@ -7,22 +7,20 @@
 
 package com.devoFikiCar.ndp.ui.create.assignment;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.brackeys.ui.editorkit.theme.EditorTheme;
 import com.brackeys.ui.editorkit.widget.TextProcessor;
@@ -36,9 +34,9 @@ import br.tiagohm.markdownview.css.styles.Github;
 
 public class CreateAssignmentTeacherFragment extends Fragment {
 
-    private CreateAssignmentTeacherViewModel mViewModel;
     private static final String ASSIGNMENT_TEXT = "Text:\"Here goes task text\"\nExample input:\"Here goes input\"\nExample output:\"Example output\"\n" +
             "Task input:\"Here goes test input\"\nTask output:\"Here goes expected output to task input\"";
+    private CreateAssignmentTeacherViewModel mViewModel;
     private TextProcessor etMarkdown;
     private Button btHelp;
     private Button btPreview;
@@ -60,15 +58,15 @@ public class CreateAssignmentTeacherFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(CreateAssignmentTeacherViewModel.class);
         firestore = FirebaseFirestore.getInstance();
 
-        etMarkdown = (TextProcessor) root.findViewById(R.id.etMarkdownAssignment);
+        etMarkdown = root.findViewById(R.id.etMarkdownAssignment);
         etMarkdown.setLanguage(new MarkdownLanguage());
         etMarkdown.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
         etMarkdown.setTextContent(ASSIGNMENT_TEXT);
 
-        btHelp = (Button) root.findViewById(R.id.btHelpAssignment);
-        etTitle = (EditText) root.findViewById(R.id.etTitleLectureAssignment);
+        btHelp = root.findViewById(R.id.btHelpAssignment);
+        etTitle = root.findViewById(R.id.etTitleLectureAssignment);
 
-        btDone = (Button) root.findViewById(R.id.btCreateLectureDoneAssignment);
+        btDone = root.findViewById(R.id.btCreateLectureDoneAssignment);
         btDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +78,7 @@ public class CreateAssignmentTeacherFragment extends Fragment {
             }
         });
 
-        btPreview = (Button) root.findViewById(R.id.btPreviewAssignment);
+        btPreview = root.findViewById(R.id.btPreviewAssignment);
         btPreview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +105,7 @@ public class CreateAssignmentTeacherFragment extends Fragment {
             }
         });
 
-        btTime = (Button) root.findViewById(R.id.btTimeAssignments);
+        btTime = root.findViewById(R.id.btTimeAssignments);
         btTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -7,20 +7,18 @@
 
 package com.devoFikiCar.ndp.ui.lecture.student;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.ui.lecture.LectureItem;
@@ -37,7 +35,19 @@ public class LecturesStudentsFragment extends Fragment {
     private RecyclerView recyclerView;
     private LecturesAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<LectureItem> lectureItems = new ArrayList<>();
+    private final ArrayList<LectureItem> lectureItems = new ArrayList<>();
+    final Observer<ArrayList<HashMap<String, String>>> lecturesList = new Observer<ArrayList<HashMap<String, String>>>() {
+        @Override
+        public void onChanged(ArrayList<HashMap<String, String>> hashMaps) {
+            if (lectureItems != null) {
+                lectureItems.clear();
+            }
+            for (int i = 0; i < hashMaps.size(); i++) {
+                lectureItems.add(new LectureItem(hashMaps.get(i).get("lectureTitle")));
+            }
+            adapter.notifyDataSetChanged();
+        }
+    };
     private FirebaseFirestore firestore;
 
     public static LecturesStudentsFragment newInstance() {
@@ -84,17 +94,4 @@ public class LecturesStudentsFragment extends Fragment {
             }
         });
     }
-
-    final Observer<ArrayList<HashMap<String, String>>> lecturesList = new Observer<ArrayList<HashMap<String, String>>>() {
-        @Override
-        public void onChanged(ArrayList<HashMap<String, String>> hashMaps) {
-            if (lectureItems != null) {
-                lectureItems.clear();
-            }
-            for (int i = 0; i < hashMaps.size(); i++) {
-                lectureItems.add(new LectureItem(hashMaps.get(i).get("lectureTitle")));
-            }
-            adapter.notifyDataSetChanged();
-        }
-    };
 }

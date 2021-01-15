@@ -10,8 +10,8 @@ package com.devoFikiCar.ndp.ui.playgroundl;
 import androidx.lifecycle.ViewModel;
 
 import com.devoFikiCar.fclang.StartFClang;
-import com.devoFikiCar.ndp.util.User;
 import com.devoFikiCar.ndp.helper.userSave;
+import com.devoFikiCar.ndp.util.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,9 +19,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class PlaygroundLViewModel extends ViewModel {
-    private ArrayList<String> inputCode = new ArrayList<>();
+    private final ArrayList<String> inputCode = new ArrayList<>();
     private ArrayList<String> output = new ArrayList<>();
-    private Queue<Object> inputData = new LinkedList<>();
+    private final Queue<Object> inputData = new LinkedList<>();
     private User user;
     private String text = "";
     private String stdin = "";
@@ -50,15 +50,15 @@ public class PlaygroundLViewModel extends ViewModel {
         inputData.clear();
         setStdin(text);
         for (String s1 : text.split("\n"))
-            inputData.add((Object) s1);
-    }
-
-    private void setStdin(String stdin) {
-        this.stdin = stdin;
+            inputData.add(s1);
     }
 
     public String getStdin() {
         return stdin;
+    }
+
+    private void setStdin(String stdin) {
+        this.stdin = stdin;
     }
 
     public void clearPlaygroundL() {

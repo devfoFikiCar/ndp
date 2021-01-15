@@ -24,7 +24,7 @@ import java.util.HashMap;
 
 public class AssignmentsStudentViewModel extends ViewModel {
     private Classes classes;
-    private MutableLiveData<ArrayList<HashMap<String, String>>> assignmentsIDs = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<HashMap<String, String>>> assignmentsIDs = new MutableLiveData<>();
 
     public AssignmentsStudentViewModel() {
         init();

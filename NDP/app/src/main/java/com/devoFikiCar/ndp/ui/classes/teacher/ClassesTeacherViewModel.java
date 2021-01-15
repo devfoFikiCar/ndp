@@ -16,9 +16,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.devoFikiCar.ndp.helper.classSave;
+import com.devoFikiCar.ndp.helper.userSave;
 import com.devoFikiCar.ndp.util.Classes;
 import com.devoFikiCar.ndp.util.User;
-import com.devoFikiCar.ndp.helper.userSave;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,8 +38,8 @@ import dmax.dialog.SpotsDialog;
 
 public class ClassesTeacherViewModel extends ViewModel {
     private User user;
-    private MutableLiveData<ArrayList<HashMap<String, String>>> idTitles = new MutableLiveData<>();
-    private MutableLiveData<Integer> change = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<HashMap<String, String>>> idTitles = new MutableLiveData<>();
+    private final MutableLiveData<Integer> change = new MutableLiveData<>();
 
     public ClassesTeacherViewModel() {
         init();

@@ -35,7 +35,7 @@ public class InfoFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.info_fragment, container, false);
         mViewModel = new ViewModelProvider(this).get(InfoViewModel.class);
-        pdfView = (PDFView) root.findViewById(R.id.pdfView);
+        pdfView = root.findViewById(R.id.pdfView);
         pdfView.fromAsset(mViewModel.getInfoPdfPath()).load();
         return root;
     }

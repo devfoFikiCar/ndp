@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Queue;
 
 public class StartFClang {
-    private static ArrayList<String> output = new ArrayList<>();
+    private static final ArrayList<String> output = new ArrayList<>();
     private static ArrayList<String> code = new ArrayList<>();
     private static ArrayList<Token> tokens = new ArrayList<>();
     private static Queue<Object> input;

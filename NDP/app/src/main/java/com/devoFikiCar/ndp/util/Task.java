@@ -8,12 +8,12 @@
 package com.devoFikiCar.ndp.util;
 
 public class Task {
-    private String text;
-    private String inputExample;
-    private String outputExample;
-    private String inputTask;
-    private String outputTask;
     private static final String CODE = "FIKICARCODE";
+    private final String text;
+    private final String inputExample;
+    private final String outputExample;
+    private final String inputTask;
+    private final String outputTask;
 
     public Task(String s) {
         String[] parts = s.split(CODE);

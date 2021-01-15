@@ -36,9 +36,29 @@ public class StatisticsSpecificStudentFragment extends Fragment {
     private RecyclerView recyclerView;
     private TaskStatsAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<TaskStatsItem> taskStatsItems = new ArrayList<>();
+    private final ArrayList<TaskStatsItem> taskStatsItems = new ArrayList<>();
+    final Observer<ArrayList<TaskStatsItem>> taskStatsList = new Observer<ArrayList<TaskStatsItem>>() {
+        @Override
+        public void onChanged(ArrayList<TaskStatsItem> taskStatsItems1) {
+            if (taskStatsItems != null) {
+                taskStatsItems.clear();
+            }
+            for (int i = 0; i < taskStatsItems1.size(); i++) {
+                taskStatsItems.add(taskStatsItems1.get(i));
+            }
+            adapter.notifyDataSetChanged();
+        }
+    };
     private FirebaseFirestore firestore;
     private TextView tvScore;
+    final Observer<String> scoreUpdate = new Observer<String>() {
+        @Override
+        public void onChanged(String s) {
+            if (tvScore != null && s != null) {
+                tvScore.setText(s);
+            }
+        }
+    };
     private Button btDone;
     private String username;
 
@@ -94,26 +114,4 @@ public class StatisticsSpecificStudentFragment extends Fragment {
             }
         });
     }
-
-    final Observer<ArrayList<TaskStatsItem>> taskStatsList = new Observer<ArrayList<TaskStatsItem>>() {
-        @Override
-        public void onChanged(ArrayList<TaskStatsItem> taskStatsItems1) {
-            if (taskStatsItems != null) {
-                taskStatsItems.clear();
-            }
-            for (int i = 0; i < taskStatsItems1.size(); i++) {
-                taskStatsItems.add(taskStatsItems1.get(i));
-            }
-            adapter.notifyDataSetChanged();
-        }
-    };
-
-    final Observer<String> scoreUpdate = new Observer<String>() {
-        @Override
-        public void onChanged(String s) {
-            if (tvScore != null && s != null) {
-                tvScore.setText(s);
-            }
-        }
-    };
 }

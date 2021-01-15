@@ -15,16 +15,16 @@ import com.devoFikiCar.ndp.util.User;
 public class LectureAssignmentViewModel extends ViewModel {
     User user;
 
+    public LectureAssignmentViewModel() {
+        init();
+    }
+
     public User getUser() {
         return user;
     }
 
     public void setUser() {
         this.user = new User(userSave.user);
-    }
-
-    public LectureAssignmentViewModel() {
-        init();
     }
 
     private void init() {

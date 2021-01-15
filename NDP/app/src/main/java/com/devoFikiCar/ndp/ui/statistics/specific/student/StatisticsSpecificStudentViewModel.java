@@ -16,7 +16,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.devoFikiCar.ndp.helper.classSave;
-import com.devoFikiCar.ndp.helper.userSave;
 import com.devoFikiCar.ndp.ui.statistics.specific.TaskStatsItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,10 +28,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class StatisticsSpecificStudentViewModel extends ViewModel {
-    private MutableLiveData<ArrayList<TaskStatsItem>> taskStatsItemMutableLiveData = new MutableLiveData<>();
-    private MutableLiveData<String> score = new MutableLiveData<>();
-    private MutableLiveData<ArrayList<com.devoFikiCar.ndp.util.Task>> tasks = new MutableLiveData<>();
-    private MutableLiveData<ArrayList<SubmissionCore>> submissions = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<TaskStatsItem>> taskStatsItemMutableLiveData = new MutableLiveData<>();
+    private final MutableLiveData<String> score = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<com.devoFikiCar.ndp.util.Task>> tasks = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<SubmissionCore>> submissions = new MutableLiveData<>();
 
     public MutableLiveData<ArrayList<TaskStatsItem>> getTaskStatsItemMutableLiveData() {
         return taskStatsItemMutableLiveData;
@@ -54,12 +53,12 @@ public class StatisticsSpecificStudentViewModel extends ViewModel {
         return tasks;
     }
 
-    public String getTaskExpectedOutput(int position) {
-        return tasks.getValue().get(position).getOutputTask();
-    }
-
     public void setTasks(ArrayList<com.devoFikiCar.ndp.util.Task> tasks) {
         this.tasks.postValue(tasks);
+    }
+
+    public String getTaskExpectedOutput(int position) {
+        return tasks.getValue().get(position).getOutputTask();
     }
 
     public MutableLiveData<ArrayList<SubmissionCore>> getSubmissions() {

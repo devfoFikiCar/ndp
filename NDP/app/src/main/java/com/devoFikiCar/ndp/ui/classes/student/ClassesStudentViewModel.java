@@ -16,9 +16,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.devoFikiCar.ndp.helper.classSave;
+import com.devoFikiCar.ndp.helper.userSave;
 import com.devoFikiCar.ndp.util.Classes;
 import com.devoFikiCar.ndp.util.User;
-import com.devoFikiCar.ndp.helper.userSave;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -35,8 +35,8 @@ import dmax.dialog.SpotsDialog;
 
 public class ClassesStudentViewModel extends ViewModel {
     private User user;
-    private MutableLiveData<ArrayList<HashMap<String, String>>> idTitles = new MutableLiveData<>();
-    private MutableLiveData<Integer> change = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<HashMap<String, String>>> idTitles = new MutableLiveData<>();
+    private final MutableLiveData<Integer> change = new MutableLiveData<>();
 
     public ClassesStudentViewModel() {
         init();
@@ -77,7 +77,7 @@ public class ClassesStudentViewModel extends ViewModel {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    if (document.exists() && user.getSchoolCode().equals((String)document.get("schoolCode"))) {
+                    if (document.exists() && user.getSchoolCode().equals(document.get("schoolCode"))) {
                         System.out.println(document.getData());
                         user.addEnrolledIn(id, document.get("classTitle").toString());
                         userSave.user = new User(user);

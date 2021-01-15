@@ -27,33 +27,8 @@ public class UserStatsAdapter extends RecyclerView.Adapter<UserStatsAdapter.User
         this.arrayList = arrayList;
     }
 
-    public interface OnItemClickListener {
-        void OnItemClick(int position);
-    }
-
-    public void setOnItemClickListener (OnItemClickListener listener) {
+    public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
-    }
-
-    public static class UserStatsViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvTitle;
-
-        public UserStatsViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
-            super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvAssignmentTitleUser);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.OnItemClick(position);
-                        }
-                    }
-                }
-            });
-        }
     }
 
     @NonNull
@@ -76,5 +51,30 @@ public class UserStatsAdapter extends RecyclerView.Adapter<UserStatsAdapter.User
         if (arrayList == null) {
             return 0;
         } else return arrayList.size();
+    }
+
+    public interface OnItemClickListener {
+        void OnItemClick(int position);
+    }
+
+    public static class UserStatsViewHolder extends RecyclerView.ViewHolder {
+        public TextView tvTitle;
+
+        public UserStatsViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+            super(itemView);
+            tvTitle = itemView.findViewById(R.id.tvAssignmentTitleUser);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.OnItemClick(position);
+                        }
+                    }
+                }
+            });
+        }
     }
 }

@@ -7,18 +7,8 @@
 
 package com.devoFikiCar.ndp.ui.taskList;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +17,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.devoFikiCar.fclang.parser.math.Abs;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.helper.tempStorage;
 import com.devoFikiCar.ndp.ui.taskEditor.student.TaskEditorStudentFragment;
@@ -35,12 +32,8 @@ import com.devoFikiCar.ndp.util.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class TaskListStudentFragment extends Fragment {
 
@@ -49,13 +42,57 @@ public class TaskListStudentFragment extends Fragment {
     private RecyclerView recyclerView;
     private TasksAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<TaskItem> taskItems = new ArrayList<>();
+    private final ArrayList<TaskItem> taskItems = new ArrayList<>();
+    final Observer<ArrayList<Task>> tasksList = new Observer<ArrayList<Task>>() {
+        @Override
+        public void onChanged(ArrayList<Task> tasks) {
+            if (taskItems != null) {
+                taskItems.clear();
+            }
+            for (int i = 0; i < tasks.size(); i++) {
+                taskItems.add(new TaskItem("Task " + (i + 1), "IN PROGRESS"));
+            }
+            adapter.notifyDataSetChanged();
+        }
+    };
     private Button btSubmit;
     private TextView tvTimeLeft;
     private CountDownTimer countDownTimer;
     private long timeLeftInMilliseconds = 6000000;
     private long timeLeftInMillisecondsCheck = timeLeftInMilliseconds;
+    final Observer<Long> timeLeftVM = new Observer<Long>() {
+        @Override
+        public void onChanged(Long aLong) {
+            if (aLong != timeLeftInMillisecondsCheck) {
+                timeLeftInMilliseconds = aLong;
+                timeLeftInMillisecondsCheck = timeLeftInMilliseconds;
+                if (countDownTimer != null) {
+                    countDownTimer.cancel();
+                }
+                startTimer();
+                updateTimer();
+            }
+        }
+    };
     private int assignmentPosition = -1;
+    final Observer<ArrayList<HashMap<String, String>>> scoresData = new Observer<ArrayList<HashMap<String, String>>>() {
+        @Override
+        public void onChanged(ArrayList<HashMap<String, String>> hashMaps) {
+            if (hashMaps != null) {
+                if (btSubmit != null) {
+                    for (HashMap<String, String> d : hashMaps) {
+                        if (d.containsKey(mViewModel.getUser().getUsername())) {
+                            btSubmit.setEnabled(false);
+                            System.out.println(d.toString());
+                            if (assignmentPosition != -1) {
+                                mViewModel.openSpecificStudentStatistics(assignmentPosition, getActivity());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    };
 
     public static TaskListStudentFragment newInstance() {
         return new TaskListStudentFragment();
@@ -78,7 +115,7 @@ public class TaskListStudentFragment extends Fragment {
 
         buildRecyclerView(root);
 
-        tvTimeLeft = (TextView) root.findViewById(R.id.tvTimeLeft);
+        tvTimeLeft = root.findViewById(R.id.tvTimeLeft);
         updateTimer();
 
         btSubmit = root.findViewById(R.id.btSubmitTasks);
@@ -151,51 +188,4 @@ public class TaskListStudentFragment extends Fragment {
             }
         });
     }
-
-    final Observer<ArrayList<Task>> tasksList = new Observer<ArrayList<Task>>() {
-        @Override
-        public void onChanged(ArrayList<Task> tasks) {
-            if (taskItems != null) {
-                taskItems.clear();
-            }
-            for (int i = 0; i < tasks.size(); i++) {
-                taskItems.add(new TaskItem("Task " + (i + 1), "IN PROGRESS"));
-            }
-            adapter.notifyDataSetChanged();
-        }
-    };
-
-    final Observer<ArrayList<HashMap<String, String>>> scoresData = new Observer<ArrayList<HashMap<String, String>>>() {
-        @Override
-        public void onChanged(ArrayList<HashMap<String, String>> hashMaps) {
-            if (hashMaps != null) {
-                if (btSubmit != null) {
-                    for (HashMap<String, String> d : hashMaps) {
-                        if (d.containsKey(mViewModel.getUser().getUsername())) {
-                            btSubmit.setEnabled(false);
-                            System.out.println(d.toString());
-                            if (assignmentPosition != -1) {
-                                mViewModel.openSpecificStudentStatistics(assignmentPosition, getActivity());
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    };
-
-    final Observer<Long> timeLeftVM = new Observer<Long>() {
-        @Override
-        public void onChanged(Long aLong) {
-            if (aLong != timeLeftInMillisecondsCheck) {
-                timeLeftInMilliseconds = aLong;
-                timeLeftInMillisecondsCheck = timeLeftInMilliseconds;
-                if (countDownTimer != null) {
-                    countDownTimer.cancel();
-                }
-                startTimer();
-                updateTimer();
-            }
-        }
-    };
 }
