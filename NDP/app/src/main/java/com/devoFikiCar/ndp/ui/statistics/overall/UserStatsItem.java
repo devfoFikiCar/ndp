@@ -9,12 +9,18 @@ package com.devoFikiCar.ndp.ui.statistics.overall;
 
 public class UserStatsItem {
     private final String assignmentTitle;
+    private final String score;
 
-    public UserStatsItem(String assignmentTitle) {
+    public UserStatsItem(String assignmentTitle, String score) {
         this.assignmentTitle = assignmentTitle;
+        this.score = score;
     }
 
     public String getAssignmentTitle() {
         return assignmentTitle;
+    }
+
+    public String getScore() {
+        return score;
     }
 }

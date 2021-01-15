@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.devoFikiCar.ndp.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class UserStatsAdapter extends RecyclerView.Adapter<UserStatsAdapter.UserStatsViewHolder> {
@@ -35,8 +37,7 @@ public class UserStatsAdapter extends RecyclerView.Adapter<UserStatsAdapter.User
     @Override
     public UserStatsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_stats_item, parent, false);
-        UserStatsViewHolder userStatsViewHolder = new UserStatsViewHolder(view, mListener);
-        return userStatsViewHolder;
+        return new UserStatsViewHolder(view, mListener);
     }
 
     @Override
@@ -44,6 +45,7 @@ public class UserStatsAdapter extends RecyclerView.Adapter<UserStatsAdapter.User
         UserStatsItem userStatsItem = arrayList.get(position);
 
         holder.tvTitle.setText(userStatsItem.getAssignmentTitle());
+        holder.tvScore.setText(userStatsItem.getScore());
     }
 
     @Override
@@ -59,19 +61,18 @@ public class UserStatsAdapter extends RecyclerView.Adapter<UserStatsAdapter.User
 
     public static class UserStatsViewHolder extends RecyclerView.ViewHolder {
         public TextView tvTitle;
+        public TextView tvScore;
 
         public UserStatsViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvAssignmentTitleUser);
+            tvScore = itemView.findViewById(R.id.tvScoreStatsUser);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.OnItemClick(position);
-                        }
+            itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.OnItemClick(position);
                     }
                 }
             });

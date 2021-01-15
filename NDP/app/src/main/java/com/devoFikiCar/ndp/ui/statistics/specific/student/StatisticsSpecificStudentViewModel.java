@@ -28,10 +28,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class StatisticsSpecificStudentViewModel extends ViewModel {
-    private final MutableLiveData<ArrayList<TaskStatsItem>> taskStatsItemMutableLiveData = new MutableLiveData<>();
-    private final MutableLiveData<String> score = new MutableLiveData<>();
-    private final MutableLiveData<ArrayList<com.devoFikiCar.ndp.util.Task>> tasks = new MutableLiveData<>();
-    private final MutableLiveData<ArrayList<SubmissionCore>> submissions = new MutableLiveData<>();
+    private  MutableLiveData<ArrayList<TaskStatsItem>> taskStatsItemMutableLiveData = new MutableLiveData<>();
+    private  MutableLiveData<String> score = new MutableLiveData<>();
+    private  MutableLiveData<ArrayList<com.devoFikiCar.ndp.util.Task>> tasks = new MutableLiveData<>();
+    private  MutableLiveData<ArrayList<SubmissionCore>> submissions = new MutableLiveData<>();
 
     public MutableLiveData<ArrayList<TaskStatsItem>> getTaskStatsItemMutableLiveData() {
         return taskStatsItemMutableLiveData;

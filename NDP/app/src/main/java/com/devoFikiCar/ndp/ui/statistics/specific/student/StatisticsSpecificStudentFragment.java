@@ -36,7 +36,7 @@ public class StatisticsSpecificStudentFragment extends Fragment {
     private RecyclerView recyclerView;
     private TaskStatsAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private final ArrayList<TaskStatsItem> taskStatsItems = new ArrayList<>();
+    private ArrayList<TaskStatsItem> taskStatsItems = new ArrayList<>();
     final Observer<ArrayList<TaskStatsItem>> taskStatsList = new Observer<ArrayList<TaskStatsItem>>() {
         @Override
         public void onChanged(ArrayList<TaskStatsItem> taskStatsItems1) {

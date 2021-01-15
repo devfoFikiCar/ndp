@@ -100,7 +100,7 @@ public class LectureAssignmentFragment extends Fragment {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, new LecturesStudentsFragment())
-                        .addToBackStack(null)
+                        .addToBackStack("LectureAssignmentFragment")
                         .commit();
             }
         });
