@@ -92,7 +92,7 @@ public class StatisticsStudentOverallFragment extends Fragment {
                 System.out.println("Clicked: " + position);
                 Bundle bundle = new Bundle();
                 bundle.putInt("position", position);
-                bundle.putString("username", userSave.user.getUsername());
+                bundle.putString("username", username);
 
                 StatisticsSpecificStudentFragment statisticsSpecificStudentFragment = new StatisticsSpecificStudentFragment();
                 statisticsSpecificStudentFragment.setArguments(bundle);

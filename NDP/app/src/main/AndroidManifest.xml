@@ -3,7 +3,7 @@
   ~ Copyright (C) devfoFikiCar - All Rights Reserved
   ~ Unauthorized copying of this file, via any medium is strictly prohibited
   ~ Proprietary and confidential
-  ~ Written by Filip Obradović <fiki.obradovic@gmail.com> 2021
+  ~ Written by Filip Obradović <fiki.obradovic@gmail.com> [2020-2021]
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-        <activity android:name=".StatisticsTeacherOverall"></activity>
+        <activity android:name=".Settings"></activity>
+        <activity android:name=".StatisticsTeacherOverall" />
         <activity android:name=".StatisticsStudentOverall" />
         <activity android:name=".StatisticsSpecificTeacher" />
         <activity android:name=".StatisticsSpecificStudent" />
