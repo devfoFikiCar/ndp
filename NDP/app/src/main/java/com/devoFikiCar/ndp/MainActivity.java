@@ -22,6 +22,7 @@ import com.devoFikiCar.ndp.ui.classes.student.ClassesStudentFragment;
 import com.devoFikiCar.ndp.ui.classes.teacher.ClassesTeacherFragment;
 import com.devoFikiCar.ndp.ui.info.InfoFragment;
 import com.devoFikiCar.ndp.ui.playgroundl.PlaygroundLFragment;
+import com.devoFikiCar.ndp.ui.settings.SettingsFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -66,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 else
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ClassesStudentFragment()).commit();
                 break;
+            case R.id.nav_settings:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

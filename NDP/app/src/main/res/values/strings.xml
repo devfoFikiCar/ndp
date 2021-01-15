@@ -35,4 +35,5 @@
     <string name="output">Output:</string>
     <string name="expected_output">Expected output:</string>
     <string name="statisticsBT">Statistics</string>
+    <string name="select_code_editor_theme">Select code editor theme:</string>
 </resources>

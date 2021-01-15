@@ -14,14 +14,40 @@
     android:layout_height="match_parent"
     tools:context=".ui.settings.SettingsFragment">
 
+
     <TextView
-        android:id="@+id/message"
+        android:id="@+id/tvSettingsOption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SettingsFragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/select_code_editor_theme"
+        app:layout_constraintBottom_toTopOf="@+id/spThemes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Spinner
+        android:id="@+id/spThemes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/tpPreview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSettingsOption" />
+
+    <com.brackeys.ui.editorkit.widget.TextProcessor
+        android:id="@+id/tpPreview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spThemes">
+
+    </com.brackeys.ui.editorkit.widget.TextProcessor>
 </androidx.constraintlayout.widget.ConstraintLayout>
