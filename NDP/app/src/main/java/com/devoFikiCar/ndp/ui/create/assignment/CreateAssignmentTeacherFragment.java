@@ -63,7 +63,7 @@ public class CreateAssignmentTeacherFragment extends Fragment {
 
         etMarkdown = root.findViewById(R.id.etMarkdownAssignment);
         SharedPreferences preferences = getContext().getSharedPreferences("theme", Context.MODE_PRIVATE);
-        selected = preferences.getInt("selected", -1);
+        selected = preferences.getInt("selected", 0);
 
         etMarkdown.setLanguage(new MarkdownLanguage());
         switch (selected) {

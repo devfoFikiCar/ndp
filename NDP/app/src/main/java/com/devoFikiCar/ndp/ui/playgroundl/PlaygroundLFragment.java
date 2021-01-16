@@ -89,7 +89,7 @@ public class PlaygroundLFragment extends Fragment {
         System.out.println(mViewModel.getUser().toString());
 
         SharedPreferences preferences = getContext().getSharedPreferences("theme", Context.MODE_PRIVATE);
-        selected = preferences.getInt("selected", -1);
+        selected = preferences.getInt("selected", 0);
 
         etCode.setLanguage(new JavaLanguage());
         switch (selected) {

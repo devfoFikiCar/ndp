@@ -61,7 +61,7 @@ public class CreateLectureTeacherFragment extends Fragment {
         etMarkdown = root.findViewById(R.id.etMarkdown);
 
         SharedPreferences preferences = getContext().getSharedPreferences("theme", Context.MODE_PRIVATE);
-        selected = preferences.getInt("selected", -1);
+        selected = preferences.getInt("selected", 0);
 
         etMarkdown.setLanguage(new MarkdownLanguage());
         switch (selected) {

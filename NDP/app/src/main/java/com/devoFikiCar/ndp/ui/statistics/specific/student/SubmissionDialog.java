@@ -60,7 +60,7 @@ public class SubmissionDialog extends AppCompatDialogFragment {
         etExpectedOutput.setEnabled(false);
 
         SharedPreferences preferences = getContext().getSharedPreferences("theme", Context.MODE_PRIVATE);
-        selected = preferences.getInt("selected", -1);
+        selected = preferences.getInt("selected", 0);
 
         tpCode.setLanguage(new PythonLanguage());
         switch (selected) {
