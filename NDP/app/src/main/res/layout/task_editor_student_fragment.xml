@@ -98,6 +98,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Ok"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btTaskTextT"
         app:layout_constraintHorizontal_bias="0.5"

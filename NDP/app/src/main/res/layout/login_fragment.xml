@@ -67,7 +67,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
-        android:text="@string/tv_login"
+        android:text="@string/don_t_have_an_account_register"
+        android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@+id/btLogIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -78,6 +79,7 @@
         android:layout_height="40dp"
         android:layout_marginBottom="148dp"
         android:text="@string/bt_login"
+        android:textStyle="bold"
         android:background="@drawable/custom_button_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

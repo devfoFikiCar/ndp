@@ -69,6 +69,7 @@
         android:focusable="false"
         android:scrollbars="vertical|horizontal"
         android:text="@string/done"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

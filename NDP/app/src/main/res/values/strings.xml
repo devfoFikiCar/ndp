@@ -36,4 +36,5 @@
     <string name="expected_output">Expected output:</string>
     <string name="statisticsBT">Statistics</string>
     <string name="select_code_editor_theme">Select code editor theme:</string>
+    <string name="don_t_have_an_account_register">Don\'t have an account? <b><u>Register</u></b></string>
 </resources>
