@@ -8,7 +8,9 @@
 package com.devoFikiCar.ndp.ui.taskEditor.student;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -66,6 +68,7 @@ public class TaskEditorStudentFragment extends Fragment {
     private Button btOk;
     private Button btText;
     private AlertDialog alertDialog;
+    private int selected = -1;
 
     public static TaskEditorStudentFragment newInstance() {
         return new TaskEditorStudentFragment();
@@ -96,13 +99,35 @@ public class TaskEditorStudentFragment extends Fragment {
 
         System.out.println(mViewModel.getUser().toString());
 
+        SharedPreferences preferences = getContext().getSharedPreferences("theme", Context.MODE_PRIVATE);
+        selected = preferences.getInt("selected", -1);
+
+        etCode.setLanguage(new JavaLanguage());
+        switch (selected) {
+            case 0:
+                etCode.setColorScheme(EditorTheme.INSTANCE.getDARCULA());
+                break;
+            case 1:
+                etCode.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
+                break;
+            case 2:
+                etCode.setColorScheme(EditorTheme.INSTANCE.getOBSIDIAN());
+                break;
+            case 3:
+                etCode.setColorScheme(EditorTheme.INSTANCE.getLADIES_NIGHT());
+                break;
+            case 4:
+                etCode.setColorScheme(EditorTheme.INSTANCE.getTOMORROW_NIGHT());
+                break;
+            case 5:
+                etCode.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
+                break;
+        }
         if (tempStorage.solutions.size() > position && tempStorage.solutions.get(position) != null && tempStorage.solutions.get(position).length() > 0) {
             etCode.setTextContent(tempStorage.solutions.get(position));
         } else {
             etCode.setTextContent(FCLANG_CODE_START);
         }
-        etCode.setLanguage(new JavaLanguage());
-        etCode.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
 
         btInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,46 +222,135 @@ public class TaskEditorStudentFragment extends Fragment {
                         Log.i(TAG, "fclang chosen");
                         LANGUAGE = 0;
                         tempStorage.LANGUAGE_ID = LANGUAGE;
+
+                        etCode.setLanguage(new JavaLanguage());
+                        switch (selected) {
+                            case 0:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getDARCULA());
+                                break;
+                            case 1:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
+                                break;
+                            case 2:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getOBSIDIAN());
+                                break;
+                            case 3:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getLADIES_NIGHT());
+                                break;
+                            case 4:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getTOMORROW_NIGHT());
+                                break;
+                            case 5:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
+                                break;
+                        }
+
                         if (tempStorage.solutions.size() > position && tempStorage.solutions.get(position) != null && tempStorage.solutions.get(position).length() > 0) {
                             etCode.setTextContent(tempStorage.solutions.get(position));
                         } else {
                             etCode.setTextContent(FCLANG_CODE_START);
                         }
-                        etCode.setLanguage(new JavaLanguage());
+
                         break;
                     }
                     case 1: {
                         Log.i(TAG, "python chosen");
+
+                        etCode.setLanguage(new PythonLanguage());
+                        switch (selected) {
+                            case 0:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getDARCULA());
+                                break;
+                            case 1:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
+                                break;
+                            case 2:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getOBSIDIAN());
+                                break;
+                            case 3:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getLADIES_NIGHT());
+                                break;
+                            case 4:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getTOMORROW_NIGHT());
+                                break;
+                            case 5:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
+                                break;
+                        }
+
                         if (tempStorage.solutions.size() > position && tempStorage.solutions.get(position) != null && tempStorage.solutions.get(position).length() > 0) {
                             etCode.setTextContent(tempStorage.solutions.get(position));
                         } else {
                             etCode.setTextContent(PYTHON_CODE_START);
                         }
-                        etCode.setLanguage(new PythonLanguage());
                         LANGUAGE = 71;
                         tempStorage.LANGUAGE_ID = LANGUAGE;
                         break;
                     }
                     case 2: {
                         Log.i(TAG, "java chosen");
+
+                        etCode.setLanguage(new JavaLanguage());
+                        switch (selected) {
+                            case 0:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getDARCULA());
+                                break;
+                            case 1:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
+                                break;
+                            case 2:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getOBSIDIAN());
+                                break;
+                            case 3:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getLADIES_NIGHT());
+                                break;
+                            case 4:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getTOMORROW_NIGHT());
+                                break;
+                            case 5:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
+                                break;
+                        }
+
                         if (tempStorage.solutions.size() > position && tempStorage.solutions.get(position) != null && tempStorage.solutions.get(position).length() > 0) {
                             etCode.setTextContent(tempStorage.solutions.get(position));
                         } else {
                             etCode.setTextContent(JAVA_CODE_START);
                         }
-                        etCode.setLanguage(new JavaLanguage());
                         LANGUAGE = 62;
                         tempStorage.LANGUAGE_ID = LANGUAGE;
                         break;
                     }
                     default: {
                         Log.e(TAG, "Abnormal value");
+
+                        etCode.setLanguage(new JavaLanguage());
+                        switch (selected) {
+                            case 0:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getDARCULA());
+                                break;
+                            case 1:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
+                                break;
+                            case 2:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getOBSIDIAN());
+                                break;
+                            case 3:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getLADIES_NIGHT());
+                                break;
+                            case 4:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getTOMORROW_NIGHT());
+                                break;
+                            case 5:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
+                                break;
+                        }
+
                         if (tempStorage.solutions.size() > position && tempStorage.solutions.get(position) != null && tempStorage.solutions.get(position).length() > 0) {
                             etCode.setTextContent(tempStorage.solutions.get(position));
                         } else {
                             etCode.setTextContent(FCLANG_CODE_START);
                         }
-                        etCode.setLanguage(new JavaLanguage());
                         LANGUAGE = 0;
                         tempStorage.LANGUAGE_ID = LANGUAGE;
                         break;

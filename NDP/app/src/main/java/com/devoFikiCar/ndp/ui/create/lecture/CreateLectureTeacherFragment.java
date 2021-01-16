@@ -8,8 +8,10 @@
 package com.devoFikiCar.ndp.ui.create.lecture;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,6 +27,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.brackeys.ui.editorkit.theme.EditorTheme;
 import com.brackeys.ui.editorkit.widget.TextProcessor;
+import com.brackeys.ui.language.java.JavaLanguage;
 import com.brackeys.ui.language.markdown.MarkdownLanguage;
 import com.devoFikiCar.ndp.R;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -41,6 +44,7 @@ public class CreateLectureTeacherFragment extends Fragment {
     private Button btDone;
     private FirebaseFirestore firestore;
     private EditText etTitle;
+    private int selected = -1;
 
     public static CreateLectureTeacherFragment newInstance() {
         return new CreateLectureTeacherFragment();
@@ -55,8 +59,31 @@ public class CreateLectureTeacherFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(CreateLectureTeacherViewModel.class);
 
         etMarkdown = root.findViewById(R.id.etMarkdown);
+
+        SharedPreferences preferences = getContext().getSharedPreferences("theme", Context.MODE_PRIVATE);
+        selected = preferences.getInt("selected", -1);
+
         etMarkdown.setLanguage(new MarkdownLanguage());
-        etMarkdown.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
+        switch (selected) {
+            case 0:
+                etMarkdown.setColorScheme(EditorTheme.INSTANCE.getDARCULA());
+                break;
+            case 1:
+                etMarkdown.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
+                break;
+            case 2:
+                etMarkdown.setColorScheme(EditorTheme.INSTANCE.getOBSIDIAN());
+                break;
+            case 3:
+                etMarkdown.setColorScheme(EditorTheme.INSTANCE.getLADIES_NIGHT());
+                break;
+            case 4:
+                etMarkdown.setColorScheme(EditorTheme.INSTANCE.getTOMORROW_NIGHT());
+                break;
+            case 5:
+                etMarkdown.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
+                break;
+        }
         etMarkdown.setTextContent("# Title");
 
         firestore = FirebaseFirestore.getInstance();

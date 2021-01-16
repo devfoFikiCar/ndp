@@ -9,7 +9,9 @@ package com.devoFikiCar.ndp.ui.statistics.specific.student;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.brackeys.ui.editorkit.theme.EditorTheme;
 import com.brackeys.ui.editorkit.widget.TextProcessor;
+import com.brackeys.ui.language.java.JavaLanguage;
 import com.brackeys.ui.language.python.PythonLanguage;
 import com.devoFikiCar.ndp.R;
 
@@ -28,6 +31,7 @@ public class SubmissionDialog extends AppCompatDialogFragment {
     private TextProcessor tpCode;
     private EditText etOutput;
     private EditText etExpectedOutput;
+    private int selected = -1;
 
     @NonNull
     @Override
@@ -55,8 +59,30 @@ public class SubmissionDialog extends AppCompatDialogFragment {
         etOutput.setEnabled(false);
         etExpectedOutput.setEnabled(false);
 
+        SharedPreferences preferences = getContext().getSharedPreferences("theme", Context.MODE_PRIVATE);
+        selected = preferences.getInt("selected", -1);
+
         tpCode.setLanguage(new PythonLanguage());
-        tpCode.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
+        switch (selected) {
+            case 0:
+                tpCode.setColorScheme(EditorTheme.INSTANCE.getDARCULA());
+                break;
+            case 1:
+                tpCode.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
+                break;
+            case 2:
+                tpCode.setColorScheme(EditorTheme.INSTANCE.getOBSIDIAN());
+                break;
+            case 3:
+                tpCode.setColorScheme(EditorTheme.INSTANCE.getLADIES_NIGHT());
+                break;
+            case 4:
+                tpCode.setColorScheme(EditorTheme.INSTANCE.getTOMORROW_NIGHT());
+                break;
+            case 5:
+                tpCode.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
+                break;
+        }
         tpCode.setTextContent(bundle.getString("code"));
         System.out.println(bundle.getString("code"));
 

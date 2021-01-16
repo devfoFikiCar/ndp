@@ -8,7 +8,9 @@
 package com.devoFikiCar.ndp.ui.create.assignment;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +46,7 @@ public class CreateAssignmentTeacherFragment extends Fragment {
     private Button btTime;
     private FirebaseFirestore firestore;
     private EditText etTitle;
+    private int selected = -1;
 
     public static CreateAssignmentTeacherFragment newInstance() {
         return new CreateAssignmentTeacherFragment();
@@ -59,9 +62,31 @@ public class CreateAssignmentTeacherFragment extends Fragment {
         firestore = FirebaseFirestore.getInstance();
 
         etMarkdown = root.findViewById(R.id.etMarkdownAssignment);
+        SharedPreferences preferences = getContext().getSharedPreferences("theme", Context.MODE_PRIVATE);
+        selected = preferences.getInt("selected", -1);
+
         etMarkdown.setLanguage(new MarkdownLanguage());
-        etMarkdown.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
-        etMarkdown.setTextContent(ASSIGNMENT_TEXT);
+        switch (selected) {
+            case 0:
+                etMarkdown.setColorScheme(EditorTheme.INSTANCE.getDARCULA());
+                break;
+            case 1:
+                etMarkdown.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
+                break;
+            case 2:
+                etMarkdown.setColorScheme(EditorTheme.INSTANCE.getOBSIDIAN());
+                break;
+            case 3:
+                etMarkdown.setColorScheme(EditorTheme.INSTANCE.getLADIES_NIGHT());
+                break;
+            case 4:
+                etMarkdown.setColorScheme(EditorTheme.INSTANCE.getTOMORROW_NIGHT());
+                break;
+            case 5:
+                etMarkdown.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
+                break;
+        }
+        etMarkdown.setTextContent(ASSIGNMENT_TEXT);;
 
         btHelp = root.findViewById(R.id.btHelpAssignment);
         etTitle = root.findViewById(R.id.etTitleLectureAssignment);

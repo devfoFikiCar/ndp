@@ -61,6 +61,7 @@ public class PlaygroundLFragment extends Fragment {
     private AlertDialog alertDialog;
     private ArrayList<LanguageItem> languageItems;
     private LanguageAdapter languageAdapter;
+    private int selected = -1;
 
     public static PlaygroundLFragment newInstance() {
         return new PlaygroundLFragment();
@@ -87,13 +88,31 @@ public class PlaygroundLFragment extends Fragment {
 
         System.out.println(mViewModel.getUser().toString());
 
-        etCode.setTextContent(FCLANG_CODE_START);
-        etCode.setLanguage(new JavaLanguage());
-        etCode.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
-
-        // todo add themes everywhere you need
         SharedPreferences preferences = getContext().getSharedPreferences("theme", Context.MODE_PRIVATE);
-        System.out.println(preferences.getInt("selected", -1));
+        selected = preferences.getInt("selected", -1);
+
+        etCode.setLanguage(new JavaLanguage());
+        switch (selected) {
+            case 0:
+                etCode.setColorScheme(EditorTheme.INSTANCE.getDARCULA());
+                break;
+            case 1:
+                etCode.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
+                break;
+            case 2:
+                etCode.setColorScheme(EditorTheme.INSTANCE.getOBSIDIAN());
+                break;
+            case 3:
+                etCode.setColorScheme(EditorTheme.INSTANCE.getLADIES_NIGHT());
+                break;
+            case 4:
+                etCode.setColorScheme(EditorTheme.INSTANCE.getTOMORROW_NIGHT());
+                break;
+            case 5:
+                etCode.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
+                break;
+        }
+        etCode.setTextContent(FCLANG_CODE_START);
 
         btInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,29 +172,117 @@ public class PlaygroundLFragment extends Fragment {
                 switch (position) {
                     case 0: {
                         Log.i(TAG, "fclang chosen");
-                        LANGUAGE = 0;
-                        etCode.setTextContent(FCLANG_CODE_START);
+
                         etCode.setLanguage(new JavaLanguage());
+                        switch (selected) {
+                            case 0:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getDARCULA());
+                                break;
+                            case 1:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
+                                break;
+                            case 2:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getOBSIDIAN());
+                                break;
+                            case 3:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getLADIES_NIGHT());
+                                break;
+                            case 4:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getTOMORROW_NIGHT());
+                                break;
+                            case 5:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
+                                break;
+                        }
+                        etCode.setTextContent(FCLANG_CODE_START);
+
+                        LANGUAGE = 0;
                         break;
                     }
                     case 1: {
                         Log.i(TAG, "python chosen");
-                        etCode.setTextContent(PYTHON_CODE_START);
+
                         etCode.setLanguage(new PythonLanguage());
+                        switch (selected) {
+                            case 0:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getDARCULA());
+                                break;
+                            case 1:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
+                                break;
+                            case 2:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getOBSIDIAN());
+                                break;
+                            case 3:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getLADIES_NIGHT());
+                                break;
+                            case 4:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getTOMORROW_NIGHT());
+                                break;
+                            case 5:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
+                                break;
+                        }
+                        etCode.setTextContent(PYTHON_CODE_START);
+
                         LANGUAGE = 71;
                         break;
                     }
                     case 2: {
                         Log.i(TAG, "java chosen");
-                        etCode.setTextContent(JAVA_CODE_START);
+
                         etCode.setLanguage(new JavaLanguage());
+                        switch (selected) {
+                            case 0:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getDARCULA());
+                                break;
+                            case 1:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
+                                break;
+                            case 2:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getOBSIDIAN());
+                                break;
+                            case 3:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getLADIES_NIGHT());
+                                break;
+                            case 4:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getTOMORROW_NIGHT());
+                                break;
+                            case 5:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
+                                break;
+                        }
+                        etCode.setTextContent(JAVA_CODE_START);
+
                         LANGUAGE = 62;
                         break;
                     }
                     default: {
                         Log.e(TAG, "Abnormal value");
-                        etCode.setTextContent(FCLANG_CODE_START);
+
                         etCode.setLanguage(new JavaLanguage());
+                        switch (selected) {
+                            case 0:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getDARCULA());
+                                break;
+                            case 1:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getMONOKAI());
+                                break;
+                            case 2:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getOBSIDIAN());
+                                break;
+                            case 3:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getLADIES_NIGHT());
+                                break;
+                            case 4:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getTOMORROW_NIGHT());
+                                break;
+                            case 5:
+                                etCode.setColorScheme(EditorTheme.INSTANCE.getVISUAL_STUDIO_2013());
+                                break;
+                        }
+                        etCode.setTextContent(FCLANG_CODE_START);
+
                         LANGUAGE = 0;
                         break;
                     }
