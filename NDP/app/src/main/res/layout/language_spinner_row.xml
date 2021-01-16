@@ -7,7 +7,8 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary">
 
     <ImageView
         android:id="@+id/image_view_language"
@@ -24,7 +25,15 @@
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/image_view_language"
         android:text="Python"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:textColor="@color/userInput"
+        android:textSize="18sp" />
 
+    <ImageView
+        android:id="@+id/imgview"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_baseline_arrow_circle_down_24" />
 </RelativeLayout>

@@ -12,6 +12,7 @@
     android:id="@+id/log_in"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".ui.login.LogInFragment">
 
     <EditText
@@ -22,6 +23,8 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
         android:hint="@string/tv_id"
+        android:textColor="@color/userInput"
+        android:textColorHint="@color/userInput"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         android:drawableStart="@drawable/ic_user"
@@ -46,6 +49,8 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="4dp"
         android:hint="@string/tv_password"
+        android:textColor="@color/userInput"
+        android:textColorHint="@color/userInput"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
@@ -69,6 +74,7 @@
         android:layout_marginBottom="80dp"
         android:text="@string/don_t_have_an_account_register"
         android:textStyle="normal"
+        android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/btLogIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -80,6 +86,7 @@
         android:layout_marginBottom="148dp"
         android:text="@string/bt_login"
         android:textStyle="bold"
+        android:textColor="@color/userInput"
         android:background="@drawable/custom_button_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,6 +97,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cb_teacher"
+        android:textColor="@color/colorAccent"
+        android:buttonTint="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/btLogIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

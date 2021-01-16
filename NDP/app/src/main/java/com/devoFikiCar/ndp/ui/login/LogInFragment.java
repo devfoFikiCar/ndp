@@ -9,6 +9,7 @@ package com.devoFikiCar.ndp.ui.login;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -159,12 +161,12 @@ public class LogInFragment extends Fragment {
 
     private void wrongPassword() {
         etPassword.setText("");
-        etPassword.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+        etPassword.setHintTextColor(Color.RED);
     }
 
     private void wrongUser() {
         etUser.setText("");
-        etUser.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+        etPassword.setHintTextColor(Color.RED);
     }
 
     private void wrongUserPassword() {

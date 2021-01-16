@@ -169,6 +169,7 @@ public class PlaygroundLFragment extends Fragment {
         spLanguages.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                view.findViewById(R.id.imgview).setVisibility(View.VISIBLE);
                 switch (position) {
                     case 0: {
                         Log.i(TAG, "fclang chosen");

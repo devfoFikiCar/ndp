@@ -3,11 +3,13 @@
   ~ Copyright (C) devfoFikiCar - All Rights Reserved
   ~ Unauthorized copying of this file, via any medium is strictly prohibited
   ~ Proprietary and confidential
-  ~ Written by Filip Obradović <fiki.obradovic@gmail.com> 2020
+  ~ Written by Filip Obradović <fiki.obradovic@gmail.com> [2020-2021]
   -->
 
 <resources>
-    <color name="colorPrimary">#D9D2D0</color>
-    <color name="colorPrimaryDark">#3B403F</color>
-    <color name="colorAccent">#bbb438</color>
+    <color name="colorPrimary">#002b36</color>
+    <color name="colorPrimaryDark">#002b36</color>
+    <color name="colorAccent">#859900</color>
+    <color name="userInput">#2aa198</color>
+    <color name="buttonColor">#268bd2</color>
 </resources>

@@ -47,6 +47,7 @@ public class LanguageAdapter extends ArrayAdapter<LanguageItem> {
         }
 
         ImageView imageView = convertView.findViewById(R.id.image_view_language);
+        ImageView imageView1 = convertView.findViewById(R.id.imgview);
         TextView textView = convertView.findViewById(R.id.text_view_name);
 
         LanguageItem languageItem = getItem(position);
@@ -54,6 +55,9 @@ public class LanguageAdapter extends ArrayAdapter<LanguageItem> {
         if (languageItem != null) {
             imageView.setImageResource(languageItem.getLanguageImage());
             textView.setText(languageItem.getLanguageName());
+            if (position != 0) {
+                imageView1.setVisibility(View.INVISIBLE);
+            }
         }
 
         return convertView;

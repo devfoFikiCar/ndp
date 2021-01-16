@@ -12,7 +12,8 @@
     android:id="@+id/playground_l"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.playgroundl.PlaygroundLFragment">
+    tools:context=".ui.playgroundl.PlaygroundLFragment"
+    android:background="@color/colorPrimary">
 
     <Button
         android:id="@+id/btInput"
@@ -22,6 +23,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/pg_input"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
         app:layout_constraintBottom_toTopOf="@+id/spLanguages"
         app:layout_constraintEnd_toStartOf="@+id/btRun"
         app:layout_constraintHorizontal_bias="0.5"
@@ -37,6 +40,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/pg_run"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="1"
@@ -69,6 +74,7 @@
         android:layout_marginBottom="8dp"
         android:focusable="false"
         android:gravity="top|left"
+        android:textColor="@color/buttonColor"
         android:inputType="textMultiLine"
         android:minLines="1"
         android:scrollbars="vertical|horizontal"
@@ -82,7 +88,9 @@
         android:id="@+id/spLanguages"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
         android:background="@drawable/spinner_style_pl"
+        tools:listitem="@layout/language_spinner_row"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"

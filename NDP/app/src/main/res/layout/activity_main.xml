@@ -13,6 +13,7 @@
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
     android:fitsSystemWindows="true"
+    android:background="@color/colorPrimary"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -39,6 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        app:itemTextColor="@color/colorAccent"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/drawer_menu" />
 
