@@ -27,13 +27,6 @@ import br.tiagohm.markdownview.MarkdownView;
 public class StudentViewLectureFragment extends Fragment {
 
     private StudentViewLectureViewModel mViewModel;
-    private TextView tvTitle;
-    final Observer<String> title = new Observer<String>() {
-        @Override
-        public void onChanged(String s) {
-            updateTitle(s);
-        }
-    };
     private MarkdownView markdownView;
     final Observer<String> content = new Observer<String>() {
         @Override
@@ -58,19 +51,13 @@ public class StudentViewLectureFragment extends Fragment {
         Bundle bundle = this.getArguments();
         int classPosition = (int) bundle.get("position");
 
-        tvTitle = root.findViewById(R.id.tvLectureTitleView);
         markdownView = root.findViewById(R.id.markdown_view);
         firestore = FirebaseFirestore.getInstance();
 
         mViewModel.loadData(firestore, getContext(), classPosition, getContext());
 
-        mViewModel.getTitle().observe(getViewLifecycleOwner(), title);
         mViewModel.getContent().observe(getViewLifecycleOwner(), content);
 
         return root;
-    }
-
-    private void updateTitle(String s) {
-        tvTitle.setText(s);
     }
 }

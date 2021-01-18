@@ -23,4 +23,12 @@ public class UserStatsItem {
     public String getScore() {
         return score;
     }
+
+    @Override
+    public String toString() {
+        return "UserStatsItem{" +
+                "assignmentTitle='" + assignmentTitle + '\'' +
+                ", score='" + score + '\'' +
+                '}';
+    }
 }

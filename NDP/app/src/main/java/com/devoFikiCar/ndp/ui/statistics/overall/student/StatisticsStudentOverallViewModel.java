@@ -88,7 +88,9 @@ public class StatisticsStudentOverallViewModel extends ViewModel {
                                     arrayList.add(new UserStatsItem(title, "Did not finish."));
                                 }
                             }
-
+                            for (int i = 0; i < arrayList.size(); i++) {
+                                System.out.println(arrayList.get(i).toString());
+                            }
                             setUserStatsItems(arrayList);
                         } else {
                             System.out.println("Error.");

@@ -88,7 +88,7 @@ public class LogInFragment extends Fragment {
                 } else {
                     flagPassword = false;
                     Log.e(TAG, "Incorrect password format");
-                    wrongPassword();
+                    wrongUserPassword();
                 }
 
                 if (etUser.getText().length() >= 4) {
@@ -97,7 +97,7 @@ public class LogInFragment extends Fragment {
                 } else {
                     flagUser = false;
                     Log.e(TAG, "Incorrect user format");
-                    wrongUser();
+                    wrongUserPassword();
                 }
 
                 if (flagPassword && flagUser) {

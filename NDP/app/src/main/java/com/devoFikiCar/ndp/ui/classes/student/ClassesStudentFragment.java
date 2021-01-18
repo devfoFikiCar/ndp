@@ -92,6 +92,7 @@ public class ClassesStudentFragment extends Fragment {
 
                 final EditText classID = new EditText(getActivity());
                 classID.setMaxLines(1);
+                classID.setHint("Class code");
                 alertDialog.setView(classID);
 
                 alertDialog.setPositiveButton("Join", new DialogInterface.OnClickListener() {

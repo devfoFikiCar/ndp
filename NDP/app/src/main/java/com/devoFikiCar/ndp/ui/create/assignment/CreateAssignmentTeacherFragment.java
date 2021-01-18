@@ -95,11 +95,26 @@ public class CreateAssignmentTeacherFragment extends Fragment {
         btDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TimeStorage.wrongDate()) {
-                    Toast.makeText(getContext(), "Wrong date format", Toast.LENGTH_SHORT).show();
-                } else {
-                    mViewModel.createAssignment(firestore, getContext(), etTitle.getText().toString(), etMarkdown.getText().toString(), getActivity());
-                }
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                alert.setTitle("Confirmation");
+                alert.setMessage("After clicking ok you won't be able to delete or alter assignment in any way.\nAre you sure you are done?");
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (TimeStorage.wrongDate()) {
+                            Toast.makeText(getContext(), "Wrong date format", Toast.LENGTH_SHORT).show();
+                        } else {
+                            mViewModel.createAssignment(firestore, getContext(), etTitle.getText().toString(), etMarkdown.getText().toString(), getActivity());
+                        }
+                    }
+                });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // nothing
+                    }
+                });
+                alert.show();
             }
         });
 

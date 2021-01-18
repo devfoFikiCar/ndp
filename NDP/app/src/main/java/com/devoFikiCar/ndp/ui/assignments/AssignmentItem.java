@@ -13,7 +13,7 @@ public class AssignmentItem {
 
     public AssignmentItem(String assignmentTitle, String assignmentID) {
         this.assignmentTitle = assignmentTitle;
-        this.assignmentID = assignmentID;
+        this.assignmentID = "Assignment code: " + assignmentID;
     }
 
     public String getAssignmentTitle() {

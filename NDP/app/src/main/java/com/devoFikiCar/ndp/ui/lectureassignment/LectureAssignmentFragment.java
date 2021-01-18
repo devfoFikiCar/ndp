@@ -56,13 +56,13 @@ public class LectureAssignmentFragment extends Fragment {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, new StatisticsTeacherOverallFragment())
-                        .addToBackStack(null)
+                        .addToBackStack("LectureAssignmentFragment")
                         .commit();
             } else {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, new StatisticsStudentOverallFragment())
-                        .addToBackStack(null)
+                        .addToBackStack("LectureAssignmentFragment")
                         .commit();
             }
         });
@@ -75,13 +75,13 @@ public class LectureAssignmentFragment extends Fragment {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, new AssignmentsTeacherFragment())
-                        .addToBackStack(null)
+                        .addToBackStack("LectureAssignmentFragment")
                         .commit();
             } else {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, new AssignmentsStudentFragment())
-                        .addToBackStack(null)
+                        .addToBackStack("LectureAssignmentFragment")
                         .commit();
             }
         });

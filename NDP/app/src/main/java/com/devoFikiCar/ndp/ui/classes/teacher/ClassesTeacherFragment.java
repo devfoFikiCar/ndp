@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -47,7 +48,7 @@ public class ClassesTeacherFragment extends Fragment {
         }
     };
     private ClassesTeacherViewModel mViewModel;
-    private FloatingActionButton btCreateClass;
+    private Button btCreateClass;
     private FirebaseFirestore firestore;
     private RecyclerView recyclerView;
     private ClassesAdapter adapter;
@@ -87,10 +88,11 @@ public class ClassesTeacherFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-                alertDialog.setTitle("Creating new class");
+                alertDialog.setTitle("Create new class");
 
                 final EditText classTitle = new EditText(getActivity());
                 classTitle.setMaxLines(1);
+                classTitle.setHint("Class title");
                 alertDialog.setView(classTitle);
 
                 alertDialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {

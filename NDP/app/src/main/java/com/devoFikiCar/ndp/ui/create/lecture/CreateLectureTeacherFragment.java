@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +31,7 @@ import com.brackeys.ui.editorkit.widget.TextProcessor;
 import com.brackeys.ui.language.java.JavaLanguage;
 import com.brackeys.ui.language.markdown.MarkdownLanguage;
 import com.devoFikiCar.ndp.R;
+import com.devoFikiCar.ndp.util.TimeStorage;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import br.tiagohm.markdownview.MarkdownView;
@@ -129,7 +131,22 @@ public class CreateLectureTeacherFragment extends Fragment {
         btDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mViewModel.createLecture(firestore, getContext(), etTitle.getText().toString(), etMarkdown.getText().toString(), getActivity());
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                alert.setTitle("Confirmation");
+                alert.setMessage("After clicking ok you won't be able to delete or alter lecture in any way.\nAre you sure you are done?");
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mViewModel.createLecture(firestore, getContext(), etTitle.getText().toString(), etMarkdown.getText().toString(), getActivity());
+                    }
+                });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // nothing
+                    }
+                });
+                alert.show();
             }
         });
 

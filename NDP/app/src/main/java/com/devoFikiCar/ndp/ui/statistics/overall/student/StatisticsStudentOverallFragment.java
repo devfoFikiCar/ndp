@@ -29,6 +29,8 @@ import com.devoFikiCar.ndp.ui.statistics.specific.student.StatisticsSpecificStud
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class StatisticsStudentOverallFragment extends Fragment {
 
@@ -115,6 +117,7 @@ public class StatisticsStudentOverallFragment extends Fragment {
             for (int i = 0; i < userStatsItems1.size(); i++) {
                 userStatsItems.add(userStatsItems1.get(i));
             }
+            Collections.reverse(userStatsItems);
             adapter.notifyDataSetChanged();
         }
     };

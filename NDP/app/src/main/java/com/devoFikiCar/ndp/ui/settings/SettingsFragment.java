@@ -33,6 +33,8 @@ import java.util.ArrayList;
 
 public class SettingsFragment extends Fragment {
 
+    // TODO ADD SPINNER COLOR
+
     private SettingsViewModel mViewModel;
     private Spinner spThemes;
     private TextProcessor tpPreview;

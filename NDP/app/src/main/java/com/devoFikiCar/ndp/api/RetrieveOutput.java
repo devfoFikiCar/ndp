@@ -65,7 +65,7 @@ public class RetrieveOutput {
                         return "Network error";
                 }
                 count++;
-                if (status.equals("Accepted") || status.equals("Compilation Error")) {
+                if (status.equals("Accepted") || status.equals("Compilation Error") || status.equals("Runtime Error") || status.equals("Runtime Error (NZEC)")) {
                     flag = false;
                 }
             } while (flag);

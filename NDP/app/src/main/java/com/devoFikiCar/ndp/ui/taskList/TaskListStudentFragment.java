@@ -7,6 +7,8 @@
 
 package com.devoFikiCar.ndp.ui.taskList;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -122,12 +124,27 @@ public class TaskListStudentFragment extends Fragment {
         btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tempStorage.tempCalendarEnd.getTimeInMillis() > Calendar.getInstance().getTimeInMillis()) {
-                    mViewModel.submit(firestore, tempStorage.solutions.size(), getContext(), getActivity());
-                } else {
-                    Toast.makeText(getContext(), "Assignment has finished", Toast.LENGTH_SHORT).show();
-                    getActivity().getSupportFragmentManager().popBackStack();
-                }
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                alert.setTitle("Confirmation");
+                alert.setMessage("After clicking ok you won't be able to delete or alter your submission in any way, also you submission code will be tested in last selected language.\nAre you sure you are done?");
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (tempStorage.tempCalendarEnd.getTimeInMillis() > Calendar.getInstance().getTimeInMillis()) {
+                            mViewModel.submit(firestore, tempStorage.solutions.size(), getContext(), getActivity());
+                        } else {
+                            Toast.makeText(getContext(), "Assignment has finished", Toast.LENGTH_SHORT).show();
+                            getActivity().getSupportFragmentManager().popBackStack();
+                        }
+                    }
+                });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // nothing
+                    }
+                });
+                alert.show();
             }
         });
 
