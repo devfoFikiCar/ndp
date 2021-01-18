@@ -11,18 +11,20 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="4dp"
+    app:cardBackgroundColor="@color/colorAccent"
     app:cardCornerRadius="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="4dp">
+        android:background="@color/colorPrimary"
+        android:layout_margin="1dp">
 
         <ImageView
             android:id="@+id/imageViewUser"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_baseline_class_24"
+            android:src="@drawable/ic_user_accent"
             android:padding="2dp" />
         <TextView
             android:id="@+id/tvAssignmentTitleUser"
@@ -31,7 +33,7 @@
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/imageViewUser"
             android:text="Line 1"
-            android:textColor="@android:color/black"
+            android:textColor="@color/colorAccent"
             android:textSize="20sp"
             android:textStyle="bold" />
         <TextView
@@ -42,6 +44,7 @@
             android:layout_marginStart="8dp"
             android:layout_toEndOf="@+id/imageViewUser"
             android:text="Line 2"
+            android:textColor="@color/buttonColor"
             android:textSize="15sp" />
     </RelativeLayout>
 

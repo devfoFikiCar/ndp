@@ -12,6 +12,7 @@
     android:id="@+id/assignments_teacher"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".ui.assignments.teacher.AssignmentsTeacherFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -30,6 +31,8 @@
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
         android:text="@string/create_assignment"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -12,6 +12,7 @@
     android:id="@+id/statistics_specific_student"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".ui.statistics.specific.student.StatisticsSpecificStudentFragment">
 
     <Button
@@ -21,6 +22,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/done"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="TextView"
-        android:textColor="@android:color/black"
+        android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/btOkStatsSpecificStudent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

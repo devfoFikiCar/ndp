@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-        <activity android:name=".Settings"></activity>
+        <activity android:name=".Settings" />
         <activity android:name=".StatisticsTeacherOverall" />
         <activity android:name=".StatisticsStudentOverall" />
         <activity android:name=".StatisticsSpecificTeacher" />
@@ -37,7 +37,8 @@
         <activity android:name=".LectureAssignment" />
         <activity android:name=".ClassesStudent" />
         <activity android:name=".ClassesTeacher" />
-        <activity android:name=".LogIn">
+        <activity android:name=".LogIn"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,11 +50,6 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

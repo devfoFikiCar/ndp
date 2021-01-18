@@ -12,6 +12,7 @@
     android:id="@+id/create_assignment_teacher"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".ui.create.assignment.CreateAssignmentTeacherFragment">
 
     <Button
@@ -22,6 +23,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/preview"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
         app:layout_constraintBottom_toTopOf="@+id/etTitleLectureAssignment"
         app:layout_constraintEnd_toStartOf="@+id/btHelpAssignment"
         app:layout_constraintHorizontal_bias="0.5"
@@ -37,6 +40,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/help"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="1"
@@ -69,6 +74,8 @@
         android:focusable="false"
         android:scrollbars="vertical|horizontal"
         android:text="@string/done"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,8 +96,12 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
+        android:hint="Assignment title"
+        android:textColorHint="@color/buttonColor"
+        android:textColor="@color/buttonColor"
+        android:backgroundTint="@color/colorAccent"
         app:layout_constraintTop_toBottomOf="@+id/btPreviewAssignment"
-        app:layout_constraintVertical_weight="1" />
+        app:layout_constraintVertical_weight="1"/>
 
     <Button
         android:id="@+id/btTimeAssignments"
@@ -99,6 +110,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/time"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="1"

@@ -14,19 +14,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.viewLecture.StudentViewLectureFragment">
 
-    <TextView
-        android:id="@+id/tvLectureTitleView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/markdown_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:textSize="25sp"/>
-
     <br.tiagohm.markdownview.MarkdownView
         android:id="@+id/markdown_view"
         android:layout_width="0dp"
@@ -34,8 +21,8 @@
         app:escapeHtml="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLectureTitleView"
-        app:layout_constraintHorizontal_weight="2"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

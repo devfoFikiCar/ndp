@@ -12,6 +12,7 @@
     android:id="@+id/create_lecture_teacher"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".ui.create.lecture.CreateLectureTeacherFragment">
 
     <Button
@@ -22,6 +23,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/preview"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
         app:layout_constraintBottom_toTopOf="@+id/etTitleLecture"
         app:layout_constraintEnd_toStartOf="@+id/btHelp"
         app:layout_constraintHorizontal_bias="0.5"
@@ -37,6 +40,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/help"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="1"
@@ -62,6 +67,8 @@
     <Button
         android:id="@+id/btCreateLectureDone"
         android:text="@string/done"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -84,6 +91,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:hint="Lecture title"
+        android:textColorHint="@color/buttonColor"
+        android:textColor="@color/buttonColor"
+        android:backgroundTint="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/etMarkdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

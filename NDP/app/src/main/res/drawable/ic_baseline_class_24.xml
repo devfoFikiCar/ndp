@@ -2,7 +2,7 @@
   ~ Copyright (C) devfoFikiCar - All Rights Reserved
   ~ Unauthorized copying of this file, via any medium is strictly prohibited
   ~ Proprietary and confidential
-  ~ Written by Filip Obradović <fiki.obradovic@gmail.com> 2020
+  ~ Written by Filip Obradović <fiki.obradovic@gmail.com> [2020-2021]
   -->
 
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
@@ -10,7 +10,7 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24"
-    android:tint="?attr/colorControlNormal">
+    android:tint="@color/colorAccent">
   <path
       android:fillColor="@android:color/white"
       android:pathData="M18,2H6c-1.1,0 -2,0.9 -2,2v16c0,1.1 0.9,2 2,2h12c1.1,0 2,-0.9 2,-2V4c0,-1.1 -0.9,-2 -2,-2zM6,4h5v8l-2.5,-1.5L6,12V4z"/>

@@ -75,6 +75,7 @@
         android:focusable="false"
         android:gravity="top|left"
         android:textColor="@color/buttonColor"
+        android:backgroundTint="@color/colorAccent"
         android:inputType="textMultiLine"
         android:minLines="1"
         android:scrollbars="vertical|horizontal"
