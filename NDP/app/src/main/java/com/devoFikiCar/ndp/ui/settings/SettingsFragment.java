@@ -76,7 +76,7 @@ public class SettingsFragment extends Fragment {
         int selected = preferences.getInt("selected", 0);
 
         spThemes = root.findViewById(R.id.spThemes);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, themes);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.settings_spinner_row, themes);
         spThemes.setAdapter(arrayAdapter);
         spThemes.setSelection(selected);
 
