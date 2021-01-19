@@ -88,8 +88,15 @@ public class CreateAssignmentTeacherFragment extends Fragment {
         }
         etMarkdown.setTextContent(ASSIGNMENT_TEXT);;
 
-        btHelp = root.findViewById(R.id.btHelpAssignment);
         etTitle = root.findViewById(R.id.etTitleLectureAssignment);
+
+        btHelp = root.findViewById(R.id.btHelpAssignment);
+        btHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Look at assignment section on info page.", Toast.LENGTH_LONG).show();
+            }
+        });
 
         btDone = root.findViewById(R.id.btCreateLectureDoneAssignment);
         btDone.setOnClickListener(new View.OnClickListener() {
