@@ -10,14 +10,4 @@ package com.devoFikiCar.ndp.ui.info;
 import androidx.lifecycle.ViewModel;
 
 public class InfoViewModel extends ViewModel {
-    private final String infoPdfPathStudent = "IntroductionStudent.pdf";
-    private final String infoPdfPathTeacher = "IntroductionTeacher.pdf";
-
-    public String getInfoPdfPathStudent() {
-        return infoPdfPathStudent;
-    }
-
-    public String getInfoPdfPathTeacher() {
-        return infoPdfPathTeacher;
-    }
 }

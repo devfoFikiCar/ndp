@@ -368,7 +368,7 @@ public class LogInFragment extends Fragment {
 
     private void wrongUser() {
         etUser.setText("");
-        etPassword.setHintTextColor(Color.RED);
+        etUser.setHintTextColor(Color.RED);
     }
 
     private void wrongUserPassword() {

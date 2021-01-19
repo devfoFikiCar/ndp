@@ -106,7 +106,6 @@
         android:id="@+id/cbCodeR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:buttonTint="@color/colorAccent"
         android:text="I have school code"
         android:textColor="@color/colorAccent"
@@ -114,4 +113,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etConfirmPasswordR" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Request teacher account at\nnaucidaprogramiras@gmail.com"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etSchoolCodeR" />
 </androidx.constraintlayout.widget.ConstraintLayout>

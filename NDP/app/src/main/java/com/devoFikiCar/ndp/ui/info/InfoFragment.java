@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,10 +20,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.devoFikiCar.ndp.R;
 import com.devoFikiCar.ndp.helper.userSave;
-import com.github.barteksc.pdfviewer.PDFView;
 
 public class InfoFragment extends Fragment {
-    private PDFView pdfView;
+    private WebView webview;
 
     private InfoViewModel mViewModel;
 
@@ -36,11 +36,12 @@ public class InfoFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.info_fragment, container, false);
         mViewModel = new ViewModelProvider(this).get(InfoViewModel.class);
-        pdfView = root.findViewById(R.id.pdfView);
+        webview = (WebView) root.findViewById(R.id.webview);
+
         if (userSave.user.isTeacher()) {
-            pdfView.fromAsset(mViewModel.getInfoPdfPathTeacher()).load();
+            webview.loadUrl("file:///android_asset/teacherInfo.html");
         } else {
-            pdfView.fromAsset(mViewModel.getInfoPdfPathStudent()).load();
+            webview.loadUrl("file:///android_asset/studentInfo.html");
         }
 
         return root;
