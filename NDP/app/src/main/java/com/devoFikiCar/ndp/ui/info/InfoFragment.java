@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.devoFikiCar.ndp.R;
+import com.devoFikiCar.ndp.helper.userSave;
 import com.github.barteksc.pdfviewer.PDFView;
 
 public class InfoFragment extends Fragment {
@@ -36,7 +37,12 @@ public class InfoFragment extends Fragment {
         View root = inflater.inflate(R.layout.info_fragment, container, false);
         mViewModel = new ViewModelProvider(this).get(InfoViewModel.class);
         pdfView = root.findViewById(R.id.pdfView);
-        pdfView.fromAsset(mViewModel.getInfoPdfPath()).load();
+        if (userSave.user.isTeacher()) {
+            pdfView.fromAsset(mViewModel.getInfoPdfPathTeacher()).load();
+        } else {
+            pdfView.fromAsset(mViewModel.getInfoPdfPathStudent()).load();
+        }
+
         return root;
     }
 }
