@@ -12,6 +12,7 @@
     android:id="@+id/lecture_assignment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".ui.lectureassignment.LectureAssignmentFragment">
 
     <Button
@@ -19,6 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lectures"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btAssignmentsList"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,6 +33,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/assignments"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btStats"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,9 +46,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/statisticsBT"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btAssignmentsList" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="83dp"
+        android:layout_height="83dp"
+        android:src="@drawable/ic_baseline_lecture_book_24"
+        app:layout_constraintBottom_toTopOf="@+id/btLecturesList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="83dp"
+        android:layout_height="83dp"
+        android:src="@drawable/ic_baseline_assignment_24"
+        app:layout_constraintBottom_toTopOf="@+id/btAssignmentsList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btLecturesList" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="83dp"
+        android:layout_height="83dp"
+        android:src="@drawable/ic_baseline_assessment_24"
+        app:layout_constraintBottom_toTopOf="@+id/btStats"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btAssignmentsList" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
