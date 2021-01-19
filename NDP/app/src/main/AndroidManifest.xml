@@ -37,8 +37,7 @@
         <activity android:name=".LectureAssignment" />
         <activity android:name=".ClassesStudent" />
         <activity android:name=".ClassesTeacher" />
-        <activity android:name=".LogIn"
-            >
+        <activity android:name=".LogIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,8 +48,7 @@
         <activity android:name=".PlaygroundL" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

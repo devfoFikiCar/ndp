@@ -129,9 +129,8 @@ public class ClassesTeacherViewModel extends ViewModel {
         alertDialog.show();
 
         DocumentReference docRef = db.collection("classes").document(getIdTitles().getValue().get(position).get("classID"));
-        Source source = Source.CACHE;
 
-        docRef.get(source).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {

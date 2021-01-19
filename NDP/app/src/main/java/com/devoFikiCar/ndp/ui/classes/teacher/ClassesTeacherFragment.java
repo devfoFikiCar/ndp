@@ -43,7 +43,7 @@ public class ClassesTeacherFragment extends Fragment {
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, new LectureAssignmentFragment())
-                    .addToBackStack(null)
+                    .addToBackStack("ClassesTeacherFragment")
                     .commit();
         }
     };

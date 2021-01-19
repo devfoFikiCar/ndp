@@ -12,4 +12,10 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="fontFamily">@font/mono_regular</item>
     </style>
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+    </style>
 </resources>

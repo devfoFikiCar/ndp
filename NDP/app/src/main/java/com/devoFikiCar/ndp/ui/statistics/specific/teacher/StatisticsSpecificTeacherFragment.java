@@ -109,6 +109,7 @@ public class StatisticsSpecificTeacherFragment extends Fragment {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, statisticsSpecificStudentFragment)
+                        .addToBackStack("StatisticsSpecificTeacherFragment")
                         .commit();
 
 

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) devfoFikiCar - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Filip Obradović <fiki.obradovic@gmail.com> [2020-2021]
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/etFullNameR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/custom_input"
+        android:ems="10"
+        android:hint="Full name"
+        android:inputType="textPersonName"
+        android:padding="3dp"
+        android:textColor="@color/userInput"
+        android:textColorHint="@color/userInput"
+        app:layout_constraintBottom_toTopOf="@+id/etUsernameR"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etUsernameR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/custom_input"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:padding="3dp"
+        android:textColor="@color/userInput"
+        android:textColorHint="@color/userInput"
+        app:layout_constraintBottom_toTopOf="@+id/etPasswordR"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etFullNameR" />
+
+    <EditText
+        android:id="@+id/etPasswordR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/custom_input"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="3dp"
+        android:textColor="@color/userInput"
+        android:textColorHint="@color/userInput"
+        app:layout_constraintBottom_toTopOf="@+id/etConfirmPasswordR"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etUsernameR" />
+
+    <EditText
+        android:id="@+id/etConfirmPasswordR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/custom_input"
+        android:ems="10"
+        android:hint="Confirm password"
+        android:inputType="textPassword"
+        android:padding="3dp"
+        android:textColor="@color/userInput"
+        android:textColorHint="@color/userInput"
+        app:layout_constraintBottom_toTopOf="@+id/cbCodeR"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPasswordR" />
+
+    <EditText
+        android:id="@+id/etSchoolCodeR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/custom_input"
+        android:ems="10"
+        android:hint="School code"
+        android:inputType="textPassword"
+        android:maxLength="4"
+        android:padding="3dp"
+        android:textColor="@color/userInput"
+        android:textColorHint="@color/userInput"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbCodeR" />
+
+    <CheckBox
+        android:id="@+id/cbCodeR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:buttonTint="@color/colorAccent"
+        android:text="I have school code"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/etSchoolCodeR"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etConfirmPasswordR" />
+</androidx.constraintlayout.widget.ConstraintLayout>

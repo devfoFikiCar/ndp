@@ -10,5 +10,4 @@ package com.devoFikiCar.ndp.ui.settings;
 import androidx.lifecycle.ViewModel;
 
 public class SettingsViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
 }

@@ -90,7 +90,10 @@ public class LecturesStudentsFragment extends Fragment {
                 studentViewLectureFragment.setArguments(bundle);
 
                 getActivity().getSupportFragmentManager()
-                        .beginTransaction().replace(R.id.fragment_container, studentViewLectureFragment).commit();
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, studentViewLectureFragment)
+                        .addToBackStack("LecturesStudentsFragment")
+                        .commit();
             }
         });
     }

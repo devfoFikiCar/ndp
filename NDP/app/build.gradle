@@ -2,7 +2,7 @@
  * Copyright (C) devfoFikiCar - All Rights Reserved
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * Written by Filip Obradović <fiki.obradovic@gmail.com> 2020
+ * Written by Filip Obradović <fiki.obradovic@gmail.com> [2020-2021]
  */
 
 apply plugin: 'com.android.application'
@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "com.devoFikiCar.ndp"
-        minSdkVersion 28
+        minSdkVersion 29
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
