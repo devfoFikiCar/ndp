@@ -23,7 +23,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/select_code_editor_theme"
+        android:text="@string/izaberi_temu"
         android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/spThemes"
         app:layout_constraintStart_toStartOf="parent"
