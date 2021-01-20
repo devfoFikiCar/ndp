@@ -54,18 +54,6 @@ public class ClassesTeacherFragment extends Fragment {
     private ClassesAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private final ArrayList<ClassItem> classItems = new ArrayList<>();
-    final Observer<ArrayList<HashMap<String, String>>> classesList = new Observer<ArrayList<HashMap<String, String>>>() {
-        @Override
-        public void onChanged(ArrayList<HashMap<String, String>> strings) {
-            if (classItems != null) {
-                classItems.clear();
-            }
-            for (int i = 0; i < strings.size(); i++) {
-                classItems.add(new ClassItem(strings.get(i).get("classTitle"), "Kod odeljenja: " + strings.get(i).get("classID")));
-            }
-            adapter.notifyDataSetChanged();
-        }
-    };
 
     public static ClassesTeacherFragment newInstance() {
         return new ClassesTeacherFragment();
@@ -135,4 +123,23 @@ public class ClassesTeacherFragment extends Fragment {
             }
         });
     }
+
+    final Observer<ArrayList<HashMap<String, String>>> classesList = new Observer<ArrayList<HashMap<String, String>>>() {
+        @Override
+        public void onChanged(ArrayList<HashMap<String, String>> strings) {
+            try {
+                if (classItems != null) {
+                    classItems.clear();
+                }
+                if (strings != null && !strings.isEmpty()) {
+                    for (int i = 0; i < strings.size(); i++) {
+                        classItems.add(new ClassItem(strings.get(i).get("classTitle"), "Kod odeljenja: " +  (String) strings.get(i).get("classID")));
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
 }

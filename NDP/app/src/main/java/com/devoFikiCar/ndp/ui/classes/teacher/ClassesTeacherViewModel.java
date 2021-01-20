@@ -65,7 +65,7 @@ public class ClassesTeacherViewModel extends ViewModel {
     public void createClass(FirebaseFirestore db, String title, Context context) {
         AlertDialog alertDialog = new SpotsDialog.Builder()
                 .setContext(context)
-                .setMessage("Creating class")
+                .setMessage("Odeljenje se pravi")
                 .setCancelable(false)
                 .build();
 
