@@ -99,8 +99,8 @@ public class LogInFragment extends Fragment {
 
                 AlertDialog dialog = new AlertDialog.Builder(getActivity(), R.style.AlertDialogStyle)
                         .setView(view)
-                        .setTitle("Register")
-                        .setPositiveButton("Register", null)
+                        .setTitle("Registracija")
+                        .setPositiveButton("Registruj", null)
                         .setNegativeButton("Cancel", null)
                         .create();
 
@@ -142,7 +142,7 @@ public class LogInFragment extends Fragment {
                             && etPassword1.getText().toString().equals(etConfirmPassword.getText().toString())) {
                             if (cbHasCode.isChecked()) {
                                 if (etSchoolCode.getText().length() != 4) {
-                                    Toast.makeText(getContext(), "Wrong code format.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Pogresan format koda.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     positiveButton.setEnabled(false);
                                     firestore.collection("users")
@@ -156,7 +156,7 @@ public class LogInFragment extends Fragment {
                                                         if (task.getResult().isEmpty()) {
                                                             etSchoolCode.setText("");
                                                             etSchoolCode.setHintTextColor(Color.RED);
-                                                            Toast.makeText(getContext(), "School code does not exist.", Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(getContext(), "Kod ne postoji", Toast.LENGTH_SHORT).show();
                                                         } else {
                                                             firestore.collection("users")
                                                                     .whereEqualTo("username", etSchoolCode.getText().toString() + etUsername.getText().toString())
@@ -190,13 +190,13 @@ public class LogInFragment extends Fragment {
                                                                                                 @Override
                                                                                                 public void onFailure(@NonNull Exception e) {
                                                                                                     dialog.dismiss();
-                                                                                                    Toast.makeText(getContext(), "An error occurred. Try again later!", Toast.LENGTH_SHORT).show();
+                                                                                                    Toast.makeText(getContext(), "Greska!", Toast.LENGTH_SHORT).show();
                                                                                                 }
                                                                                             });
                                                                                 } else {
                                                                                     etUsername.setText("");
                                                                                     etUsername.setHintTextColor(Color.RED);
-                                                                                    Toast.makeText(getContext(), "Username is already taken.", Toast.LENGTH_SHORT).show();
+                                                                                    Toast.makeText(getContext(), "Username je vec uzet", Toast.LENGTH_SHORT).show();
                                                                                 }
                                                                             } else {
                                                                                 System.out.println("ERROR");
@@ -244,13 +244,13 @@ public class LogInFragment extends Fragment {
                                                                     @Override
                                                                     public void onFailure(@NonNull Exception e) {
                                                                         dialog.dismiss();
-                                                                        Toast.makeText(getContext(), "An error occurred. Try again later!", Toast.LENGTH_SHORT).show();
+                                                                        Toast.makeText(getContext(), "Greska!", Toast.LENGTH_SHORT).show();
                                                                     }
                                                                 });
                                                     } else {
                                                         etUsername.setText("");
                                                         etUsername.setHintTextColor(Color.RED);
-                                                        Toast.makeText(getContext(), "Username is already taken.", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(getContext(), "Username je vec uzet", Toast.LENGTH_SHORT).show();
                                                     }
                                                 } else {
                                                     System.out.println("ERROR");
@@ -330,7 +330,7 @@ public class LogInFragment extends Fragment {
                                             alertDialog.dismiss();
                                             Log.e(TAG, "Wrong credentials");
                                             wrongUserPassword();
-                                            Toast.makeText(getContext(), "Wrong credentials", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), "Pogresne informacije", Toast.LENGTH_SHORT).show();
                                         } else {
                                             Log.i(TAG, "Correct credentials");
                                             System.out.println(mViewModel.getUser().toString());
@@ -347,13 +347,13 @@ public class LogInFragment extends Fragment {
                                         alertDialog.dismiss();
                                         Log.e(TAG, "Wrong credentials");
                                         wrongUserPassword();
-                                        Toast.makeText(getContext(), "Wrong credentials", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), "Pogresne informacije", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
                 } else {
                     Log.e(TAG, "Wrong input format");
-                    Toast.makeText(getContext(), "Wrong credentials", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Pogresne informacije", Toast.LENGTH_SHORT).show();
                 }
             }
         });

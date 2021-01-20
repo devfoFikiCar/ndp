@@ -61,7 +61,7 @@ public class ClassesStudentFragment extends Fragment {
                 classItems.clear();
             }
             for (int i = 0; i < hashMaps.size(); i++) {
-                classItems.add(new ClassItem(hashMaps.get(i).get("classTitle"), "Class code: " + hashMaps.get(i).get("classID")));
+                classItems.add(new ClassItem(hashMaps.get(i).get("classTitle"), "Kod odeljenja: " + hashMaps.get(i).get("classID")));
             }
             adapter.notifyDataSetChanged();
         }
@@ -88,24 +88,23 @@ public class ClassesStudentFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-                alertDialog.setTitle("Join class");
+                alertDialog.setTitle("Prijavi se u odeljenje");
 
                 final EditText classID = new EditText(getActivity());
                 classID.setMaxLines(1);
-                classID.setHint("Class code");
+                classID.setHint("Kod odeljenja");
                 alertDialog.setView(classID);
 
-                alertDialog.setPositiveButton("Join", new DialogInterface.OnClickListener() {
+                alertDialog.setPositiveButton("Udji", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mViewModel.joinClass(firestore, classID.getText().toString(), getContext());
                     }
                 });
 
-                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                alertDialog.setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Cancel joining class", Toast.LENGTH_SHORT).show();
                     }
                 });
 

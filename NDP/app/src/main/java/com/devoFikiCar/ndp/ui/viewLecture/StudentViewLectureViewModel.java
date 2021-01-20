@@ -48,7 +48,7 @@ public class StudentViewLectureViewModel extends ViewModel {
     public void loadData(FirebaseFirestore db, Context context, int classPosition, Context context1) {
         AlertDialog alertDialog = new SpotsDialog.Builder()
                 .setContext(context)
-                .setMessage("Loading lecture")
+                .setMessage("Ucitavanje lekcije")
                 .setCancelable(false)
                 .build();
 

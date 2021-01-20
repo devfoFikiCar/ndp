@@ -94,7 +94,7 @@ public class CreateAssignmentTeacherFragment extends Fragment {
         btHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Look at assignment section on info page.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Pogledaj kako se prave testovi na info!", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -103,13 +103,13 @@ public class CreateAssignmentTeacherFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                alert.setTitle("Confirmation");
-                alert.setMessage("After clicking ok you won't be able to delete or alter assignment in any way.\nAre you sure you are done?");
+                alert.setTitle("Potvrdi");
+                alert.setMessage("Kada kliknete ok necete moci da promenite test na bilo koji naci.\nDa li ste sigurni da ste gotovi?");
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (TimeStorage.wrongDate()) {
-                            Toast.makeText(getContext(), "Wrong date format", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Pogresan datum", Toast.LENGTH_SHORT).show();
                         } else {
                             mViewModel.createAssignment(firestore, getContext(), etTitle.getText().toString(), etMarkdown.getText().toString(), getActivity());
                         }
@@ -130,7 +130,7 @@ public class CreateAssignmentTeacherFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                alert.setTitle("Preview");
+                alert.setTitle("Prikaz");
 
                 final MarkdownView markdownView = new MarkdownView(getContext());
                 markdownView.addStyleSheet(new Github());

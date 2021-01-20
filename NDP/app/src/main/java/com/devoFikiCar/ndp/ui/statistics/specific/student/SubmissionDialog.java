@@ -43,7 +43,7 @@ public class SubmissionDialog extends AppCompatDialogFragment {
         Bundle bundle = this.getArguments();
 
         builder.setView(view)
-                .setTitle("Task submission.")
+                .setTitle("Poslato resenje.")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

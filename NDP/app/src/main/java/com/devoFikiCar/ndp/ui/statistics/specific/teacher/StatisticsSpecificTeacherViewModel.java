@@ -95,7 +95,7 @@ public class StatisticsSpecificTeacherViewModel extends ViewModel {
                                                 }
                                                 tmp.add(new TaskStatsItem(student.getValue().get(i), calculatePoints(points)));
                                             } else {
-                                                tmp.add(new TaskStatsItem(student.getValue().get(i), "Did not finish"));
+                                                tmp.add(new TaskStatsItem(student.getValue().get(i), "Nije zavrsio."));
                                             }
                                         }
                                         taskStatsItemMutableLiveData.setValue(tmp);

@@ -47,7 +47,7 @@ public class StatisticsTeacherOverallViewModel extends ViewModel {
                             ArrayList<String> students = (ArrayList<String>) documentSnapshot.get("students");
                             ArrayList<UserStatsItem> tmp = new ArrayList<>();
                             for (int i = 0; i < students.size(); i++) {
-                                tmp.add(new UserStatsItem(students.get(i), "Click for more info."));
+                                tmp.add(new UserStatsItem(students.get(i), "Za vise imformacija klikni."));
                             }
                             setUserStatsItemMutableLiveData(tmp);
                         } else {

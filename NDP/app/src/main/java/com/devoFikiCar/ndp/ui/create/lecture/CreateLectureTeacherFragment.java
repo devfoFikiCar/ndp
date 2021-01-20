@@ -109,7 +109,7 @@ public class CreateLectureTeacherFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                alert.setTitle("Preview");
+                alert.setTitle("Prikaz");
 
                 final MarkdownView markdownView = new MarkdownView(getContext());
                 markdownView.addStyleSheet(new Github());
@@ -132,8 +132,8 @@ public class CreateLectureTeacherFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                alert.setTitle("Confirmation");
-                alert.setMessage("After clicking ok you won't be able to delete or alter lecture in any way.\nAre you sure you are done?");
+                alert.setTitle("Potvrdi");
+                alert.setMessage("Kada kliknete ok necete moci da promenite lekciju na bilo koji naci.\nDa li ste sigurni da ste gotovi?");
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -125,7 +125,7 @@ public class TaskListStudentFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                alert.setTitle("Confirmation");
+                alert.setTitle("Potvrdi");
                 alert.setMessage("After clicking ok you won't be able to delete or alter your submission in any way, also you submission code will be tested in last selected language.\nAre you sure you are done?");
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override

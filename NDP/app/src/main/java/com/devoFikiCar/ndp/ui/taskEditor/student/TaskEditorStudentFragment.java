@@ -133,7 +133,7 @@ public class TaskEditorStudentFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                alert.setTitle("Input");
+                alert.setTitle("Ulaz");
 
                 final EditText input = new EditText(getActivity());
                 input.setMaxLines(5);
@@ -144,14 +144,14 @@ public class TaskEditorStudentFragment extends Fragment {
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         mViewModel.setInputData(input.getText().toString());
-                        Toast.makeText(getActivity(), "Input saved", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Ulaz sacuvan", Toast.LENGTH_SHORT).show();
                     }
                 });
 
                 alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         mViewModel.getInputData().clear();
-                        Toast.makeText(getActivity(), "Input deleted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Ulaz obrisan", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -196,7 +196,7 @@ public class TaskEditorStudentFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                alert.setTitle("Task text");
+                alert.setTitle("Postavka");
 
                 final MarkdownView markdownView = new MarkdownView(getContext());
                 markdownView.addStyleSheet(new Github());
@@ -381,7 +381,7 @@ public class TaskEditorStudentFragment extends Fragment {
         protected void onPreExecute() {
             alertDialog = new SpotsDialog.Builder()
                     .setContext(getContext())
-                    .setMessage("Executing code")
+                    .setMessage("Izvrsavanje koda")
                     .setCancelable(false)
                     .build();
             alertDialog.show();

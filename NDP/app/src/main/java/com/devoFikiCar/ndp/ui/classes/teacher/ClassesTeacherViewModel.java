@@ -102,7 +102,7 @@ public class ClassesTeacherViewModel extends ViewModel {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         System.out.println("ERROR");
-                        Toast.makeText(context, "Network error has occurred", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Greska!", Toast.LENGTH_SHORT).show();
                         alertDialog.dismiss();
                     }
                 });
@@ -142,11 +142,11 @@ public class ClassesTeacherViewModel extends ViewModel {
                         System.out.println(classSave.classes.toString());
                         setChange();
                     } else {
-                        Toast.makeText(context, "Error has occurred.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Greska!", Toast.LENGTH_SHORT).show();
                         alertDialog.dismiss();
                     }
                 } else {
-                    Toast.makeText(context, "Network error has occurred", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Greska!", Toast.LENGTH_SHORT).show();
                     alertDialog.dismiss();
                 }
             }

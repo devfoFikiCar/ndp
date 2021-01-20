@@ -46,7 +46,7 @@ public class TimeDateDialog extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.datetime_dialog, null);
 
         builder.setView(view)
-                .setTitle("Time")
+                .setTitle("Vreme")
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -57,7 +57,7 @@ public class TimeDateDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (TimeStorage.wrongDate()) {
-                            Toast.makeText(getContext(), "Wrong date format", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Pogresno vreme", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

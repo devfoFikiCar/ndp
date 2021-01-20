@@ -49,7 +49,7 @@ public class CreateLectureTeacherViewModel extends ViewModel {
     public void createLecture(FirebaseFirestore db, Context context, String title, String lecture, FragmentActivity activity) {
         AlertDialog alertDialog = new SpotsDialog.Builder()
                 .setContext(context)
-                .setMessage("Creating lecture")
+                .setMessage("Lekcija se pravi")
                 .setCancelable(false)
                 .build();
 
@@ -81,7 +81,7 @@ public class CreateLectureTeacherViewModel extends ViewModel {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         System.out.println("ERROR");
-                        Toast.makeText(context, "Network error has occurred", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Greska!", Toast.LENGTH_SHORT).show();
                         alertDialog.dismiss();
                     }
                 });

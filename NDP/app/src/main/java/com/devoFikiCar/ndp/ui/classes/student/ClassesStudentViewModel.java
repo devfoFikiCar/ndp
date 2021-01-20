@@ -97,12 +97,12 @@ public class ClassesStudentViewModel extends ViewModel {
                         setIdTitles(user.getEnrolledIn());
                     } else {
                         System.out.println("Wrong id");
-                        Toast.makeText(context, "Wrong id", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Pogresan kod odeljenja", Toast.LENGTH_SHORT).show();
                         alertDialog.dismiss();
                     }
                 } else {
                     System.out.println("ERROR");
-                    Toast.makeText(context, "Network error has occurred", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Greska!", Toast.LENGTH_SHORT).show();
                     alertDialog.dismiss();
                 }
             }

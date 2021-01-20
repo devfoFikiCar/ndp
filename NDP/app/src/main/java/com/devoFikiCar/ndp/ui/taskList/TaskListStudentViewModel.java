@@ -123,7 +123,7 @@ public class TaskListStudentViewModel extends ViewModel {
     public void loadTasks(FirebaseFirestore db, Context context, int assignmentPosition, FragmentActivity activity) {
         AlertDialog alertDialog = new SpotsDialog.Builder()
                 .setContext(context)
-                .setMessage("Loading tasks")
+                .setMessage("Ucitavanje zadataka")
                 .setCancelable(false)
                 .build();
 
@@ -235,7 +235,7 @@ public class TaskListStudentViewModel extends ViewModel {
         protected void onPreExecute() {
             alertDialog = new SpotsDialog.Builder()
                     .setContext(context)
-                    .setMessage("Submitting code")
+                    .setMessage("Izvrsavanje koda")
                     .setCancelable(false)
                     .build();
             alertDialog.show();
@@ -256,7 +256,7 @@ public class TaskListStudentViewModel extends ViewModel {
         protected void onPostExecute(String[] output) {
             System.out.println("POST EXECUTE");
 
-            alertDialog.setTitle("Calculating score");
+            alertDialog.setTitle("Ocenjivanje");
             double[] results = new double[output.length];
             for (int i = 0; i < output.length; i++) {
                 results[i] = StringSimilarityApproximation.similarity(tempStorage.tasks.get(i).getOutputTask(), output[i]) * 100;
@@ -269,7 +269,7 @@ public class TaskListStudentViewModel extends ViewModel {
             }
             String pointsToDB = points.toString();
 
-            alertDialog.setTitle("Saving submissions and scores");
+            alertDialog.setTitle("Cuvanje koda i rezultata");
 
             String assignmentID = classes.getAssignmentsIDs().get(tempStorage.assignmentPosition).get("assignmentID");
             DocumentReference docRef = db.collection("assignments").document(assignmentID);
@@ -311,7 +311,7 @@ public class TaskListStudentViewModel extends ViewModel {
                                     } else {
                                         alertDialog.dismiss();
                                         System.out.println("ERROR");
-                                        Toast.makeText(context, "Error has occurred try again!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, "Greska!", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -319,12 +319,12 @@ public class TaskListStudentViewModel extends ViewModel {
                         } else {
                             alertDialog.dismiss();
                             System.out.println("ERROR");
-                            Toast.makeText(context, "Error has occurred try again!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Greska!", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         alertDialog.dismiss();
                         System.out.println("ERROR");
-                        Toast.makeText(context, "Error has occurred try again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Greska!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

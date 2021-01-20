@@ -61,7 +61,7 @@ public class ClassesTeacherFragment extends Fragment {
                 classItems.clear();
             }
             for (int i = 0; i < strings.size(); i++) {
-                classItems.add(new ClassItem(strings.get(i).get("classTitle"), "Class code: " + strings.get(i).get("classID")));
+                classItems.add(new ClassItem(strings.get(i).get("classTitle"), "Kod odeljenja: " + strings.get(i).get("classID")));
             }
             adapter.notifyDataSetChanged();
         }
@@ -88,24 +88,23 @@ public class ClassesTeacherFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-                alertDialog.setTitle("Create new class");
+                alertDialog.setTitle("Napravi odeljenje");
 
                 final EditText classTitle = new EditText(getActivity());
                 classTitle.setMaxLines(1);
-                classTitle.setHint("Class title");
+                classTitle.setHint("Naziv odeljenja");
                 alertDialog.setView(classTitle);
 
-                alertDialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                alertDialog.setPositiveButton("Napravi", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mViewModel.createClass(firestore, classTitle.getText().toString(), getContext());
                     }
                 });
 
-                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                alertDialog.setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Cancel class creation", Toast.LENGTH_SHORT).show();
                     }
                 });
 

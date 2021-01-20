@@ -41,7 +41,7 @@ public class LecturesTeacherFragment extends Fragment {
         @Override
         public void onChanged(String s) {
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-            alert.setTitle("Preview");
+            alert.setTitle("Prikaz");
 
             final MarkdownView markdownView = new MarkdownView(getContext());
             markdownView.addStyleSheet(new Github());

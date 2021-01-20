@@ -85,7 +85,7 @@ public class StatisticsStudentOverallViewModel extends ViewModel {
                                     }
                                 }
                                 if (!flag) {
-                                    arrayList.add(new UserStatsItem(title, "Did not finish."));
+                                    arrayList.add(new UserStatsItem(title, "Nije zavrsio."));
                                 }
                             }
                             for (int i = 0; i < arrayList.size(); i++) {
