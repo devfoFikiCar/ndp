@@ -26,6 +26,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Objects;
 
 public class StatisticsSpecificStudentViewModel extends ViewModel {
     private  MutableLiveData<ArrayList<TaskStatsItem>> taskStatsItemMutableLiveData = new MutableLiveData<>();
@@ -58,7 +60,7 @@ public class StatisticsSpecificStudentViewModel extends ViewModel {
     }
 
     public String getTaskExpectedOutput(int position) {
-        return tasks.getValue().get(position).getOutputTask();
+        return tasks.getValue().get(tasks.getValue().size() - position - 1).getOutputTask();
     }
 
     public MutableLiveData<ArrayList<SubmissionCore>> getSubmissions() {
