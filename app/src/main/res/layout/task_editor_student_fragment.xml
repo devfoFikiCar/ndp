@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) devfoFikiCar - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Filip Obradović <fiki.obradovic@gmail.com> [2020-2021]
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/task_editor_student"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".ui.taskEditor.student.TaskEditorStudentFragment">
+
+    <Button
+        android:id="@+id/btInputT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/ulaz"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
+        app:layout_constraintBottom_toTopOf="@+id/spLanguagesT"
+        app:layout_constraintEnd_toStartOf="@+id/btRunT"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="1" />
+
+    <Button
+        android:id="@+id/btRunT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/pokreni"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/btInputT"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.brackeys.ui.editorkit.widget.TextProcessor
+        android:id="@+id/etCodeT"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="top|left"
+        android:inputType="textMultiLine"
+        android:minLines="1"
+        android:scrollbars="vertical|horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/etOutputT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spLanguagesT"
+        app:layout_constraintVertical_weight="6" />
+
+    <EditText
+        android:id="@+id/etOutputT"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:focusable="false"
+        android:gravity="top|left"
+        android:textColor="@color/buttonColor"
+        android:backgroundTint="@color/colorAccent"
+        android:inputType="textMultiLine"
+        android:minLines="1"
+        android:scrollbars="vertical|horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/btOkCodeT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etCodeT"
+        app:layout_constraintVertical_weight="2" />
+
+    <Spinner
+        android:id="@+id/spLanguagesT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/spinner_style_pl"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/etCodeT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btInputT"
+        app:layout_constraintVertical_weight="1" />
+
+    <Button
+        android:id="@+id/btOkCodeT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/zavrsi"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btTaskTextT"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etOutputT"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/btTaskTextT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/postavka"
+        android:textColor="@color/userInput"
+        android:background="@drawable/custom_button_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btOkCodeT"
+        app:layout_constraintTop_toBottomOf="@+id/etOutputT"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

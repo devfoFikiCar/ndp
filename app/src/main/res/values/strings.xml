@@ -1,0 +1,51 @@
+<!--
+  ~ Copyright (C) devfoFikiCar - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Filip Obradović <fiki.obradovic@gmail.com> [2020-2021]
+  -->
+
+<resources>
+    <string name="app_name">NDP</string>
+    <string name="full_app_name">NaučiDaProgramiraš</string>
+    <string name="devfofikicar_copyright">© devoFikiCar</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="napravi_test">Napravi test</string>
+    <string name="dodaj_odeljenje">Dodaj odeljenje</string>
+    <string name="napravi_odeljenje">Napravi odeljenje</string>
+    <string name="prikaz">Prikaz</string>
+    <string name="pomoc">Pomoć</string>
+    <string name="napravi">Napravi</string>
+    <string name="naziv_testa">Naziv testa</string>
+    <string name="vreme">Vreme</string>
+    <string name="naziv_lekcije">Naziv lekcije</string>
+    <string name="pocetak">Pocetak</string>
+    <string name="kraj">Kraj</string>
+    <string name="lekcije">Lekcije</string>
+    <string name="testovi">Testovi</string>
+    <string name="statistika">Statistika</string>
+    <string name="napravi_lekciju">Napravi lekciju</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="profesor">Profesor</string>
+    <string name="log_in">Log in</string>
+    <string name="don_t_have_an_account_register">Nemaš akaunt? <b><u>Registruj se</u></b></string>
+    <string name="ulaz">Ulaz</string>
+    <string name="pokreni">Pokreni</string>
+    <string name="puno_ime">Puno ime</string>
+    <string name="potvrdi_pasword">Potvrdi pasword</string>
+    <string name="kolski_kod">Školski kod</string>
+    <string name="imam_kolski_kod">Imam školski kod</string>
+    <string name="izaberi_temu">Izaberi temu:</string>
+    <string name="zavrsi">Završi</string>
+    <string name="postavka">Postavka</string>
+    <string name="predaj_test">Predaj test</string>
+    <string name="kod">Kod</string>
+    <string name="izlaz">Izlaz</string>
+    <string name="tačan_izlaz">Tačan izlaz</string>
+    <string name="info">Info</string>
+    <string name="igrali_te">Igralište</string>
+    <string name="odeljenje">Odeljenje</string>
+    <string name="pode_avanja">Podešavanja</string>
+</resources>
