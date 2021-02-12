@@ -8,7 +8,7 @@
 <resources>
     <string name="app_name">NDP</string>
     <string name="full_app_name">NaučiDaProgramiraš</string>
-    <string name="devfofikicar_copyright">© devoFikiCar</string>
+    <string name="devfofikicar_copyright">© devfoFikiCar</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="napravi_test">Napravi test</string>
